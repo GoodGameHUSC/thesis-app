@@ -1,30 +1,79 @@
-import ExampleScreen from 'App/Containers/Example/ExampleScreen'
-import SplashScreen from 'App/Containers/SplashScreen/SplashScreen'
-import { createAppContainer, createBottomTabNavigator } from 'react-navigation'
+import ExampleScreen from 'App/Screens/Example/ExampleScreen';
+import SplashScreen from 'App/Screens/SplashScreen/SplashScreen';
+import React from 'react';
+import IconAnt from 'react-native-vector-icons/AntDesign';
+import IconFeather from 'react-native-vector-icons/Feather';
+import { createAppContainer, createBottomTabNavigator } from 'react-navigation';
+import TabBar from './TabBar';
 
+const iconStyle = {
+  size: 20,
+  marginBottom: 0
+}
 
-/**
- * The root screen contains the application's navigation.
- *
- * @see https://reactnavigation.org/docs/en/hello-react-navigation.html#creating-a-stack-navigator
- */
-const StackNavigator = createBottomTabNavigator(
-  {
-    // Create the application routes here (the key is the route name, the value is the target screen)
-    // See https://reactnavigation.org/docs/en/stack-navigator.html#routeconfigs
-    SplashScreen: SplashScreen,
-    // The main application screen is our "ExampleScreen". Feel free to replace it with your
-    // own screen and remove the example.
-    MainScreen: ExampleScreen,
+//https://oblador.github.io/react-native-vector-icons/
+const navigationConfig = {
+  home: {
+    screen: ExampleScreen,
+    navigationOptions: {
+      tabBarLabel: 'Home',
+      tabBarIcon: ({ tintColor }) => (
+        <IconAnt name="home" color={tintColor} {...iconStyle} />
+      )
+    }
   },
-  {
-    // By default the application will show the splash screen
-    initialRouteName: 'SplashScreen',
-    // See https://reactnavigation.org/docs/en/stack-navigator.html#stacknavigatorconfig
-    headerMode: 'none',
-  }
-)
+  cart: {
+    screen: SplashScreen,
+    navigationOptions: {
+      tabBarLabel: 'Cart',
+      tabBarIcon: ({ tintColor }) => (
+        <IconFeather name="shopping-bag" color={tintColor} {...iconStyle} />
+      )
+    }
+  },
+
+  feeds: {
+    screen: SplashScreen,
+    navigationOptions: {
+      tabBarLabel: 'Feeds',
+      tabBarIcon: ({ tintColor }) => (
+        <IconFeather name="rss" color={tintColor} {...iconStyle} />
+      )
+    }
+  },
+  chat: {
+    screen: SplashScreen,
+    navigationOptions: {
+      tabBarLabel: 'Chat',
+      tabBarIcon: ({ tintColor }) => (
+        <IconFeather name="message-square" color={tintColor} {...iconStyle} />
+      )
+    }
+  },
+
+  profile: {
+    screen: SplashScreen,
+    navigationOptions: {
+      tabBarLabel: 'Profile',
+      tabBarIcon: ({ tintColor }) => (
+        <IconFeather name="user" color={tintColor} {...iconStyle} />
+      )
+    }
+  },
 
 
 
-export default createAppContainer(StackNavigator)
+};
+
+
+const splashConfig = {
+  initialRouteName: 'home',
+  headerMode: 'none',
+  tabBarComponent: props => <TabBar {...props} />,
+
+};
+
+
+const AppNavigator = createBottomTabNavigator(navigationConfig, splashConfig)
+
+export default createAppContainer(AppNavigator)
