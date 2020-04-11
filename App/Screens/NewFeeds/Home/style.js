@@ -1,13 +1,19 @@
-import { Colors } from 'App/Theme'
-import { StyleSheet } from 'react-native'
+import { StyleSheet } from 'react-native';
+import Colors from '../../../Theme/Colors';
 
 export default StyleSheet.create({
   container: {
+    flex: 1,
+    paddingTop: 0,
     backgroundColor: Colors.white,
   },
-  logo: {
-    backgroundColor: Colors.white,
-    height: 70,
-    width: 70,
+
+  scrollView: {
+    paddingHorizontal: 10,
+    paddingVertical: 10,
+    backgroundColor: Colors.lynxWhite
   },
-})
+  text: {
+    fontSize: 42,
+  },
+});
