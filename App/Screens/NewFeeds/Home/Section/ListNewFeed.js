@@ -1,8 +1,9 @@
 // import Colors from 'App/Theme/Colors';
 import React from 'react';
-import { FlatList, Image, Text, View } from 'react-native';
+import { FlatList, Image, Text, TextInput, View } from 'react-native';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { Avatar } from 'react-native-ui-lib';
+import Icon from 'react-native-vector-icons/Feather';
 import Colors from '../../../../Theme/Colors';
 
 export default class ListNewFeed extends React.Component {
@@ -33,27 +34,81 @@ export default class ListNewFeed extends React.Component {
 
             }}>
               <View style={{ flex: 1, flexDirection: 'row' }}>
-                <Avatar containerStyle={{ marginVertical: 5 }} {...example} onPress={() => this.onAvatarPress(example)} />
-                <View style={{ height: 35, marginLeft: 8, marginTop: 5 }}>
-                  <Text style={{ fontWeight: 'bold', marginBottom: -2 }}> {item.author}  </Text>
-                  <Text style={{ fontSize: 12, color: Colors.grey }}> {item.time} </Text>
+                <View style={{ flex: 1, flexDirection: 'row' }}>
+                  <Avatar containerStyle={{ marginVertical: 5 }} {...example} onPress={() => this.onAvatarPress(example)} />
+                  <View style={{ height: 35, marginLeft: 8, marginTop: 5 }}>
+                    <Text style={{ fontWeight: 'bold', marginBottom: -2 }}> {item.author}  </Text>
+                    <Text style={{ fontSize: 12, color: Colors.grey }}> {item.time} </Text>
+                  </View>
+                </View>
+                <View style={{ flexDirection: 'column', justifyContent: 'center' }}>
+                  <Icon name="more-horizontal" size={20} style={{ padding: 5 }} onPress={() => alert("Click on more ")}></Icon>
                 </View>
               </View>
               <View>
-                <Text> {item.text} </Text>
+                <View>
+                  <Text> {item.text} </Text>
+                </View>
+                <View style={{ marginVertical: 5 }}>
+                  <Image
+                    style={{
+                      width: '100%',
+                      height: undefined,
+                      aspectRatio: 1,
+                    }}
+                    source={item.image}
+                  />
+                </View>
               </View>
-              <View style={{ marginVertical: 5 }}>
-                <Image
-                  style={{
-                    width: '100%',
-                    height: undefined,
-                    aspectRatio: 1,
-                  }}
-                  source={item.image}
-                />
+              <View style={{ flex: 1, flexDirection: 'row' }}>
+                <View style={{ flex: 1, flexDirection: 'row', marginVertical: 10 }}>
+                  <View style={{ flexDirection: 'row', alignItems: "center" }}>
+                    <Icon name="thumbs-up" size={20} style={{ padding: 5, paddingRight: 0 }} onPress={() => alert("Click on more ")}></Icon>
+                    <Text style={{ marginLeft: 0, color: Colors.grey }}> 401 </Text>
+                  </View>
+                  <View style={{ flexDirection: 'row', alignItems: "center" }}>
+                    <Icon name="message-square" size={20} style={{ padding: 5, paddingRight: 0 }} onPress={() => alert("Click on more ")}></Icon>
+                    <Text style={{ marginLeft: 0, color: Colors.grey }}> 20 </Text>
+                  </View>
+                  <View style={{ flexDirection: 'row', alignItems: "center" }}>
+                    <Icon name="eye" size={20} style={{ padding: 5, paddingRight: 0 }} onPress={() => alert("Click on more ")}></Icon>
+                    <Text style={{ marginLeft: 0, color: Colors.grey }}> 2020 </Text>
+                  </View>
+                </View>
+                {/* <View style={{ flexDirection: 'row', alignItems: "center" }}>
+                  <Text style={{ marginLeft: 0, color: Colors.grey }}> Share </Text>
+                  <Icon name="corner-up-right" size={20} style={{ padding: 5, paddingRight: 0 }} onPress={() => alert("Click on more ")}></Icon>
+                </View> */}
+              </View>
+              <View style={{ borderTopWidth: 1, borderTopColor: Colors.lynxWhite }}>
+                <View style={{
+                  flexDirection: 'row',
+                  alignContent: 'center',
+                  alignItems: 'center',
+                  justifyContent: 'flex-start',
+                  backgroundColor: Colors.white,
+                  overflow: 'hidden',
+                  borderRadius: 5,
+                  padding: 5,
+                  // marginBottom: 10
+                }}>
+                  <Avatar containerStyle={{ marginVertical: 5 }} {...example} onPress={() => this.onAvatarPress(example)} />
+                  <View style={{ paddingHorizontal: 10 }}>
+
+                    <TextInput
+                      style={{
+                        height: 40, textAlignVertical: 'center', marginLeft: 10, width: 250
+                      }}
+                      placeholder="Write your comment..."
+                      onChangeText={() => { }}
+                    // defaultValue={"Write something"
+                    />
+                  </View>
+                  <Icon style={{ backgroundColor: Colors.lynxWhite, borderRadius: 50, padding: 5 }} name="send" color={Colors.grey} size={20} onPress={() => alert("Chưa có làm, bấm chi mà bấm")}></Icon>
+                </View>
               </View>
             </View>
-          </TouchableWithoutFeedback>
+          </ TouchableWithoutFeedback>
         }
         // horizontal={true}
         showsHorizontalScrollIndicator={false}
@@ -67,12 +122,12 @@ export default class ListNewFeed extends React.Component {
 const example = {
   title: 'Monitored Avatar (see logs)',
   // ribbonLabel: 'New',
-  // badgeProps: { size: 'pimpleBig', backgroundColor: Colors.green30 },
+  // badgeProps: {size: 'pimpleBig', backgroundColor: Colors.green30 },
   // badgePosition: 'TOP_RIGHT',
-  size: 35,
+  size: 30,
   // source: require("../../../../Assets/Images/defaults/icons-user.png")
   source: {
-    uri: 'https://scontent.fsgn2-2.fna.fbcdn.net/v/t1.0-1/c0.32.320.320a/p320x320/44993500_506978453115866_3902158207107203072_o.jpg?_nc_cat=103&_nc_sid=7206a8&_nc_oc=AQlirD-_hClYF8AdI2YEkT0jK1G1KEMqpDrSTtDgLEFtUr9rLb27nqyy-kfNN9Mxzbs&_nc_ht=scontent.fsgn2-2.fna&oh=f388d514cfc42717678cd8a99b00e1e4&oe=5EB8312F'
+    uri: 'https://scontent.fsgn2-2.fna.fbcdn.net/v/t1.0-1/c80.0.320.320a/p320x320/76914826_2371633566387374_1623907536681828352_o.jpg?_nc_cat=103&_nc_sid=7206a8&_nc_oc=AQnuM4KoCWp1wkkWPAdN4Vvv-O378x769PPArGEuRIJ2KIKFV684glYedMx80Tqh104&_nc_ht=scontent.fsgn2-2.fna&oh=0ff0d8837c32705113369ca3a301405e&oe=5EB99705'
     // uri: 'https://scontent.fsgn2-4.fna.fbcdn.net/v/t31.0-1/p320x320/21543796_1473036992765827_8312056627909317286_o.png?_nc_cat=1&_nc_sid=1eb0c7&_nc_oc=AQnutia-x-2isK3prFWvg3S9B-1QvDuZvzj5KIvxiibef-RJ3Z9V2xRFavc8Gso_7iQ&_nc_ht=scontent.fsgn2-4.fna&oh=5a9dc41ac5083af9d2a5ffe2d15004dd&oe=5EB6CED2'
   }
 }

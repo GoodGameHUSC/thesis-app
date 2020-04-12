@@ -25,6 +25,7 @@ export default function NewFeedHomeScreenUI() {
     <SafeAreaView style={styles.container}>
       <NewFeedsCategory />
       <ScrollView style={styles.scrollView}
+        nestedScrollEnable={true}
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }

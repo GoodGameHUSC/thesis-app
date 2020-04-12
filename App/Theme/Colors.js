@@ -4,6 +4,10 @@
  * Define color here instead of duplicating them throughout the components.
  * That allows to change them more easily later on.
  * https://flatuicolors.com/palette/gb
+ * https://www.freelogodesign.org/preview?lang=EN&name=Shopping%20ME&logo=b830c794-e6af-45a4-9653-c86c8aa4df5e
+ * https://www.freelogodesign.org/preview?lang=EN&name=Shopping%20ME&logo=b830c794-e6af-45a4-9653-c86c8aa4df5e
+ * 
+ * https://dribbble.com/shots/6047022-Playground-Animated-tab-bar
  */
 
 export default {

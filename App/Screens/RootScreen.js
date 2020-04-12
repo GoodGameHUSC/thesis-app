@@ -1,6 +1,6 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
-import SplashScreen from 'App/Screens/SplashScreen/SplashScreen';
+import HomeScreen from 'App/Screens/Home/index';
 import { PropTypes } from 'prop-types';
 import React, { Component } from 'react';
 import 'react-native-gesture-handler';
@@ -26,8 +26,8 @@ class RootScreen extends Component {
             showIcon: true,
           }}
         >
-          <Tab.Screen name="Home" component={SplashScreen} options={{
-            tabBarLabel: 'Home',
+          <Tab.Screen name="Home" component={HomeScreen} options={{
+            tabBarLabel: 'Shop',
             tabBarIcon: ({ color }) => {
               return <IconFeather name="home" color={color} {...iconStyle} />
             }
