@@ -1,5 +1,5 @@
-import { StyleSheet } from 'react-native'
 import { Colors } from 'App/Theme'
+import { StyleSheet } from 'react-native'
 
 export default StyleSheet.create({
   backgroundReset: {
@@ -169,4 +169,22 @@ export default StyleSheet.create({
   textRight: {
     textAlign: 'right',
   },
+  imageFluid: {
+    width: '100%',
+    height: undefined,
+    aspectRatio: 1,
+  },
+  headerStyle: {
+    backgroundColor: 'white',
+    // ios
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
+    shadowOffset: {
+      height: 0,
+      width: 0
+    },
+    // android
+    borderBottomWidth: 0,
+    elevation: 1,
+  }
 })

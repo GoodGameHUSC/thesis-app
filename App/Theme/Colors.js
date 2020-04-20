@@ -8,6 +8,12 @@
  * https://www.freelogodesign.org/preview?lang=EN&name=Shopping%20ME&logo=b830c794-e6af-45a4-9653-c86c8aa4df5e
  * 
  * https://dribbble.com/shots/6047022-Playground-Animated-tab-bar
+ * 
+ * https://www.figma.com/file/XJZAX9IkO47UOAS9ERzJ8r/Figma-iOS-kit-demo?node-id=6604%3A12
+ * 
+ * animator
+ * pixeltrue.com/free-illustrations?8e1335ed_page=6
+ * https://www.uistore.design/items/80-streamline-illustrations/
  */
 
 export default {
@@ -25,5 +31,6 @@ export default {
   redOrange: '#e84118',
   mathPurple: '#8c7ae6',
   magazineBlue: '#273c75',
-  seaRock: '#487eb0'
+  seaRock: '#487eb0',
+  yellowTint: '#ffce2d'
 }

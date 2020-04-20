@@ -1,6 +1,8 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
+import ChatScreenStack from 'App/Screens/Chat/index';
 import HomeScreen from 'App/Screens/Home/index';
+import ProfileScreen from 'App/Screens/Profile/index';
 import { PropTypes } from 'prop-types';
 import React, { Component } from 'react';
 import 'react-native-gesture-handler';
@@ -44,13 +46,13 @@ class RootScreen extends Component {
               <IconFeather name="rss" color={color} {...iconStyle} />
             )
           }} />
-          <Tab.Screen name="Chats" component={NewFeedsStack} options={{
+          <Tab.Screen name="Chats" component={ChatScreenStack} options={{
             tabBarLabel: 'Chats',
             tabBarIcon: ({ color }) => (
               <IconFeather name="message-square" color={color} {...iconStyle} />
             )
           }} />
-          <Tab.Screen name="Profile" component={NewFeedsStack} options={{
+          <Tab.Screen name="Profile" component={ProfileScreen} options={{
             tabBarLabel: 'Profile',
             tabBarIcon: ({ color }) => (
               <IconFeather name="user" color={color} {...iconStyle} />
