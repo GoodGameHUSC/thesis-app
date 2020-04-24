@@ -6,6 +6,7 @@ import { View } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import Colors from '../../Theme/Colors';
 import HomeScreen from './HomeScreen';
+import SearchHeader from './HomeScreen/Component/SearchHeader';
 
 const Stack = createStackNavigator();
 
@@ -14,17 +15,19 @@ export default function HomeScreenStack() {
     <Stack.Navigator
       screenOptions={{
         title: null,
+        // headerShown: false,
+
         headerStyle: Helpers.headerStyle,
       }}
     >
       <Stack.Screen name="NewFeeds.Home" component={HomeScreen}
         options={{
-          headerLeft: () => <HeaderTitle iconName={'home'} title={'Shop'} />,
-          headerRight: () => (
-            <View style={style.searchContainer} >
-              <Icon name="search" style={style.searchButton} onPress={() => alert('This is a button!')} />
-            </View>
-          ),
+          headerTransparent: true,
+          headerStyle: {
+            height: 50,
+          },
+          headerLeft: () => <SearchHeader />,
+          headerRight: null,
         }}
       />
 

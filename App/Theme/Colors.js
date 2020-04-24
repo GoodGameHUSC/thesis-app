@@ -28,6 +28,7 @@ export default {
   navbarTintActive: '#007bff',
   grey: '#7f8fa6',
   blueNight: '#353b48',
+  red: '#f00302',
   redOrange: '#e84118',
   mathPurple: '#8c7ae6',
   magazineBlue: '#273c75',

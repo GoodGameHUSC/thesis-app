@@ -1,89 +1,62 @@
-import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import ReactNativeParallaxHeader from 'react-native-parallax-header';
-import Icon from 'react-native-vector-icons/MaterialIcons';
-
-// https://medium.com/@Daniel.Merrill/build-a-custom-tab-bar-with-a-menu-button-in-react-navigation-in-20-minutes-f7d721551ef
-
-// const IS_IPHONE_X = SCREEN_HEIGHT === 812 || SCREEN_HEIGHT === 896;
-const IS_IPHONE_X = false;
-const STATUS_BAR_HEIGHT = Platform.OS === 'ios' ? (IS_IPHONE_X ? 44 : 20) : 0;
-const HEADER_HEIGHT = Platform.OS === 'ios' ? (IS_IPHONE_X ? 88 : 64) : 64;
-const NAV_BAR_HEIGHT = HEADER_HEIGHT - STATUS_BAR_HEIGHT;
-
-const images = {
-  background: require('../../Assets/Images/defaults/mobile-shopping.jpg'), // Put your own image here
-};
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  contentContainer: {
-    flexGrow: 1,
-  },
-  navContainer: {
-    height: HEADER_HEIGHT,
-    marginHorizontal: 10,
-  },
-  statusBar: {
-    height: STATUS_BAR_HEIGHT,
-    backgroundColor: 'transparent',
-  },
-  navBar: {
-    height: NAV_BAR_HEIGHT,
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    flexDirection: 'row',
-    backgroundColor: 'transparent',
-  },
-  titleStyle: {
-    color: 'white',
-    fontWeight: 'bold',
-    fontSize: 18,
-  },
-});
-
-renderNavBar = () => (
-  <View style={styles.navContainer}>
-    <View style={styles.statusBar} />
-    <View style={styles.navBar}>
-      <TouchableOpacity style={styles.iconLeft} onPress={() => { }}>
-        <Icon name="add" size={25} color="#fff" />
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.iconRight} onPress={() => { }}>
-        <Icon name="search" size={25} color="#fff" />
-      </TouchableOpacity>
-    </View>
-  </View>
-)
-renderContent = () => (
-  <View style={{ height: 2000 }}>
-    <Text>Content</Text>
-  </View>
-)
+import { createStackNavigator } from '@react-navigation/stack';
+import HeaderTitle from 'App/Screens/Component/Header/HeaderTitle';
+import ProfileHomeScreen from 'App/Screens/Profile/Screens/Home/index';
+import Helpers from 'App/Theme/Helpers';
+import React, { useEffect } from 'react';
+import { Alert } from 'react-native';
+import RightButton from '../Component/Header/RightButton';
+import client from 'App/Share/GraphqClient';
+import { gql, useQuery } from '@apollo/client';
+const Stack = createStackNavigator();
 
 export default function ProfileScreen() {
 
-  return <View style={styles.container}>
-    <ReactNativeParallaxHeader
-      headerMinHeight={HEADER_HEIGHT}
-      headerMaxHeight={200}
-      extraScrollHeight={20}
-      navbarColor="#3498db"
-      title=""
-      titleStyle={styles.titleStyle}
-      backgroundImage={images.background}
-      backgroundImageScale={1.2}
-      renderNavBar={renderNavBar}
-      renderContent={renderContent}
-      containerStyle={styles.container}
-      contentContainerStyle={styles.contentContainer}
-      innerContainerStyle={styles.container}
-      scrollViewProps={{
-        // onScrollBeginDrag: () => console.log('onScrollBeginDrag'),
-        // onScrollEndDrag: () => console.log('onScrollEndDrag'),
+  useEffect(() => {
+    console.log("start")
+    client.query({
+      query: gql`
+        {
+          books{ 
+            title
+            author
+            description
+            publisher
+          }
+        }
+    `
+    })
+      .then(result => {
+        console.log(result.data.books)
+      }
+      )
+      .catch(error => console.log(error));
+  }, []);
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        title: null,
+        headerStyle: Helpers.headerStyle,
       }}
-    />
-  </View>
+    >
+      <Stack.Screen name="Profile.Home" component={ProfileHomeScreen}
+        options={{
+          headerLeft: () => <HeaderTitle iconName={''} title={'Tài khoản của tôi'} />,
+          headerRight: () => <RightButton iconName={'log-out'} onPress={() => (
+            Alert.alert(
+              "Shopping Me thông báo",
+              "Bạn có chắc chắn muốn đăng xuất ?",
+              [
+                {
+                  text: "Huỷ bỏ",
+                  onPress: () => console.log("Cancel Pressed"),
+                },
+                { text: "Đồng ý", onPress: () => console.log("OK Pressed"), style: "cancel" }
+              ],
+              { cancelable: true }
+            ))
+          } />,
+        }}
+      />
+    </Stack.Navigator>
+  )
 }

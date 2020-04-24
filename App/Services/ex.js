@@ -28,7 +28,7 @@ const userApiClient = axios.create({
 function fetchUser() {
   // Simulate an error 50% of the time just for testing purposes
   if (Math.random() > 0.5) {
-    return new Promise(function (resolve, reject) {
+    return new Promise(function(resolve, reject) {
       resolve(null)
     })
   }
@@ -43,8 +43,6 @@ function fetchUser() {
     return null
   })
 }
-
-// https://hasura.io/blog/tutorial-fullstack-react-native-with-graphql-and-authentication-18183d13373a/
 
 export const userService = {
   fetchUser,
