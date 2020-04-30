@@ -163,19 +163,21 @@ const style = {
   recordContainer: {
     flex: 0,
     height: 'auto',
-    width: 'auto',
-    padding: 50,
+    width: '100%',
+    padding: 40,
     bottom: 50,
     position: 'absolute',
     justifyContent: 'flex-end',
     alignItems: 'center',
-    // backgroundColor: 'red'
+    backgroundColor: 'white',
+    borderRadius: 5,
+    elevation: 1
   },
   recordButton: {
     color: Colors.grey,
     fontSize: 30,
     textAlign: 'center',
-    backgroundColor: 'white',
+    backgroundColor: Colors.lynxWhite,
     width: 60,
     height: 60,
     lineHeight: 60,

@@ -5,32 +5,10 @@ import Helpers from 'App/Theme/Helpers';
 import React, { useEffect } from 'react';
 import { Alert } from 'react-native';
 import RightButton from '../Component/Header/RightButton';
-import client from 'App/Share/GraphqClient';
-import { gql, useQuery } from '@apollo/client';
 const Stack = createStackNavigator();
 
 export default function ProfileScreen() {
 
-  useEffect(() => {
-    console.log("start")
-    client.query({
-      query: gql`
-        {
-          books{ 
-            title
-            author
-            description
-            publisher
-          }
-        }
-    `
-    })
-      .then(result => {
-        console.log(result.data.books)
-      }
-      )
-      .catch(error => console.log(error));
-  }, []);
   return (
     <Stack.Navigator
       screenOptions={{

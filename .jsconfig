@@ -12,5 +12,6 @@
     "module": "commonjs",
     "allowSyntheticDefaultImports": false,
     "baseUrl": "./",
+    "experimentalDecorators": true,
   }
 }
