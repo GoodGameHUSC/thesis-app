@@ -1,28 +1,39 @@
+import Colors from 'App/Theme/Colors';
 import React, { useEffect, useState } from 'react';
-import { Text, View, ScrollView, RefreshControl } from 'react-native';
-import QuickService from './Component/QuickService';
-import CarouselBanner from './Component/CarouselBanner';
-import HottestProduct from './Component/HottestProduct';
-import HomeProducts from './Component/HomeProducts';
-import CategoryList from './Component/CategoryList';
+import { RefreshControl, ScrollView } from 'react-native';
 import { useAPICreator } from '../../../Shared/API';
+import CarouselBanner from './Component/CarouselBanner';
+import CategoryList from './Component/CategoryList';
+import HomeProducts from './Component/HomeProducts';
+import HottestProduct from './Component/HottestProduct';
+import QuickService from './Component/QuickService';
+import TopLiveVideo from './Component/TopLiveVideo';
 
 export default function HomeScreen() {
 
-  const [refreshing, setRefreshing] = React.useState(false);
+  const [refreshing, setRefreshing] = useState(false);
   const [categories, setCategories] = useState([]);
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState({ data: [], pagination: {}, loading: false });
 
   const fetchCategory = useAPICreator('category/get', (response) => { setCategories(response.data); }, 'get', { limit: 12 })
-  const fetchProduct = useAPICreator('product/get', (response) => { setProducts(response.data); }, 'get', { limit: 20 })
 
-  useEffect(async () => {
-    fetchCategory();
-    let data = await fetchProduct();
-    console.log(data)
-    return () => { };
+  const fetchProduct = useAPICreator('product/get', (response) => {
+    setProducts({ data: response.data, pagination: response.pagination, loading: false });
+  }, 'get', { limit: 20, page: 1, select: 'name gallery price rating' })
+
+  const fetchMoreProduct = useAPICreator('product/get', (response) => {
+    setProducts({ data: products.data.concat(...response.data), pagination: response.pagination });
+  }, 'get', { limit: 20, page: products.pagination.page + 1, select: 'name gallery price rating' })
+
+  useEffect(() => {
+    load()
+    return () => { }
   }, [])
 
+  const load = async () => {
+    fetchCategory();
+    fetchProduct();
+  }
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
     fetchCategory();
@@ -30,17 +41,31 @@ export default function HomeScreen() {
     setRefreshing(false);
   }, [refreshing]);
 
+  function isCloseToBottom({ layoutMeasurement, contentOffset, contentSize }) {
+    return layoutMeasurement.height + contentOffset.y
+      >= contentSize.height - 50;
+  }
+
   return (
     <ScrollView
       refreshControl={
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }
+      onScroll={({ nativeEvent }) => {
+        if (isCloseToBottom(nativeEvent) && products.pagination.hasNextPage && !products.loading) {
+          setProducts({ ...products, loading: true })
+          fetchMoreProduct()
+        }
+      }}
+      style={{ backgroundColor: Colors.lynxWhite }}
     >
+
       <CarouselBanner />
       <QuickService />
       <HottestProduct />
+      <TopLiveVideo />
       <CategoryList categories={categories} />
-      <HomeProducts products={products} />
+      <HomeProducts products={products.data} hasMore={products.pagination.hasNextPage} />
     </ScrollView>
   )
 }

@@ -40,7 +40,7 @@ function CategoryList({ categories }) {
               </View>
             )
           }}
-          keyExtractor={item => item.id}
+          keyExtractor={item => item._id}
           showsHorizontalScrollIndicator={false}
         />
       </ScrollView>

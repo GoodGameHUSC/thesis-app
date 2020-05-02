@@ -7,6 +7,7 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest --detectOpenHandles",
+    "clean-android": "cd android && ./gradlew clean",
     "dev-tool": "react-devtools",
     "prettier-fix": "prettier --write **/*.js",
     "prettier-check": "prettier --list-different **/*.js",
@@ -31,6 +32,7 @@
     "prop-types": "^15.7.2",
     "react": "16.9.0",
     "react-native": "0.61.5",
+    "react-native-fast-image": "^8.1.5",
     "react-native-gesture-handler": "^1.6.1",
     "react-native-gifted-chat": "^0.13.0",
     "react-native-indicators": "^0.17.0",
@@ -39,11 +41,13 @@
     "react-native-reanimated": "^1.8.0",
     "react-native-safe-area-context": "^0.7.3",
     "react-native-screens": "^2.4.0",
+    "react-native-skeleton-content": "^1.0.13",
     "react-native-snap-carousel": "^3.9.0",
     "react-native-tab-view": "^2.14.0",
     "react-native-ui-lib": "^5.5.4",
     "react-native-vector-icons": "^6.6.0",
-    "react-navigation": "^3.11.2"
+    "react-navigation": "^3.11.2",
+    "recyclerlistview": "^3.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.6.2",

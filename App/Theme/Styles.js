@@ -6,7 +6,7 @@ export const Section = StyleSheet.create({
     backgroundColor: Colors.transparent,
     padding: 10,
     backgroundColor: 'white',
-    marginBottom: 5
+    marginBottom: 10
   },
   flexRow: {
     display: 'flex',

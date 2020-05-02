@@ -1,13 +1,14 @@
-import { CardStyleInterpolators, createStackNavigator } from '@react-navigation/stack';
+import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/stack';
+
 import Helpers from 'App/Theme/Helpers';
 import React from 'react';
 import Colors from '../../Theme/Colors';
-import HomeScreen from './HomeScreen';
-import SearchHeader from './HomeScreen/Component/SearchHeader';
-
+import Header from './Component/Header';
+import ProductDetailIndex from './IndexScreen';
+import GalleryScreen from './GalleryScreen/index';
 
 const Stack = createStackNavigator();
-export default function HomeScreenStack() {
+export default function ProductDetailStack() {
   return (
     <Stack.Navigator
       screenOptions={{
@@ -18,24 +19,24 @@ export default function HomeScreenStack() {
         cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS
       }}
     >
-      <Stack.Screen name="Root.Home" component={HomeScreen}
+      <Stack.Screen name="Index" component={ProductDetailIndex}
         options={{
           headerTransparent: true,
           headerStyle: {
             height: 50,
           },
-          headerLeft: () => <SearchHeader />,
+          headerLeft: () => <Header />,
           headerRight: null,
         }}
       />
-      <Stack.Screen name="Root.Search" component={HomeScreen}
+      <Stack.Screen name="Gallery"
+        component={GalleryScreen}
         options={{
           headerTransparent: true,
-          headerStyle: {
-            height: 50,
+          titleStyle: {
+            color: 'white'
           },
-          headerLeft: () => <SearchHeader />,
-          headerRight: null,
+          headerTintColor: 'white'
         }}
       />
 

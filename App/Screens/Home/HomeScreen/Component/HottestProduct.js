@@ -12,7 +12,7 @@ const list_dump_prod = [
     text: "Iphone 11",
     size: 65,
     action: () => {
-      alert("Hhaa")
+      alert("Chưa làm :v")
     }
   },
   {
@@ -21,7 +21,7 @@ const list_dump_prod = [
     text: "Đồng hồ Luminox",
     size: 60,
     action: () => {
-      alert("Hhaa")
+      alert("Chưa làm :v")
     }
   },
   {
@@ -30,7 +30,7 @@ const list_dump_prod = [
     text: "Áo khoác da",
     // size: 40,
     action: () => {
-      alert("Hhaa")
+      alert("Chưa làm :v")
     }
   },
   {
@@ -38,7 +38,7 @@ const list_dump_prod = [
     icon_file: require('../../../../Assets/Images/defaults/dress.jpg'),
     text: "Đầm dạ hội hot 2020",
     action: () => {
-      alert("Hhaa")
+      alert("Chưa làm :v")
     }
   },
   {
@@ -46,7 +46,7 @@ const list_dump_prod = [
     icon_file: require('../../../../Assets/Images/defaults/mask.jpg'),
     text: "Khẩu trang Pitta Nhật Bản",
     action: () => {
-      alert("Hhaa")
+      alert("Chưa làm :v")
     }
   },
   {
@@ -55,7 +55,7 @@ const list_dump_prod = [
     text: "Tai nghe Beast Pro",
     size: 50,
     action: () => {
-      alert("Hhaa")
+      alert("Chưa làm :v")
     }
   },
 ]

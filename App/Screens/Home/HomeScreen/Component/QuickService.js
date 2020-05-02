@@ -12,7 +12,7 @@ const list_icon = [
     text: "Quà Tặng",
     size: 40,
     action: () => {
-      alert("Hhaa")
+      alert("Chưa làm :v")
     }
   },
   {
@@ -21,7 +21,7 @@ const list_icon = [
     text: "Live Stream",
     size: 50,
     action: () => {
-      alert("Hhaa")
+      alert("Chưa làm :v")
     }
   },
   {
@@ -30,7 +30,7 @@ const list_icon = [
     text: "Giảm giá",
     size: 40,
     action: () => {
-      alert("Hhaa")
+      alert("Chưa làm :v")
     }
   },
   {
@@ -38,7 +38,7 @@ const list_icon = [
     icon_file: require('../../../../Assets/Icons/chat-box.png'),
     text: "Trò chuyện",
     action: () => {
-      alert("Hhaa")
+      alert("Chưa làm :v")
     }
   },
   {
@@ -46,7 +46,7 @@ const list_icon = [
     icon_file: require('../../../../Assets/Icons/deposit.png'),
     text: "Tiết kiệm",
     action: () => {
-      alert("Hhaa")
+      alert("Chưa làm :v")
     }
   },
   {
@@ -55,7 +55,7 @@ const list_icon = [
     text: "Mã quà tặng",
     size: 50,
     action: () => {
-      alert("Hhaa")
+      alert("Chưa làm :v")
     }
   },
 
@@ -65,7 +65,7 @@ const list_icon = [
     text: "Ví của tôi",
     size: 45,
     action: () => {
-      alert("Hhaa")
+      alert("Chưa làm :v")
     }
   },
   {
@@ -74,7 +74,7 @@ const list_icon = [
     text: "Tổng đài HT",
     size: 45,
     action: () => {
-      alert("Hhaa")
+      alert("Chưa làm :v")
     }
   },
 

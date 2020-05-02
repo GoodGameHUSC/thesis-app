@@ -1,13 +1,14 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
-import ChatScreenStack from 'App/Screens/Chat/index';
-import HomeScreen from 'App/Screens/Home/index';
-import ProfileScreen from 'App/Screens/Profile/index';
+import ChatScreenStack from 'App/Screens/Chat';
+import HomeScreen from 'App/Screens/Home';
+import ProfileScreen from 'App/Screens/Profile';
 import { PropTypes } from 'prop-types';
 import React, { Component } from 'react';
 import 'react-native-gesture-handler';
 import IconFeather from 'react-native-vector-icons/Feather';
-import NewFeedsStack from '../Screens/NewFeeds/index';
+import NewFeedsStack from './NewFeeds/index';
+import ProductDetail from './ProductDetail';
 
 const Tab = createBottomTabNavigator();
 
@@ -32,7 +33,15 @@ class RootScreen extends Component {
             tabBarLabel: 'Shop',
             tabBarIcon: ({ color }) => {
               return <IconFeather name="home" color={color} {...iconStyle} />
-            }
+            },
+          }} />
+
+          <Tab.Screen name="ProductDetail" component={ProductDetail} options={{
+            // hide from tab bar
+            tabBarButton: (routeName, onPress) => {
+              return null;
+            },
+            tabBarVisible: false
           }} />
           <Tab.Screen name="Cart" component={NewFeedsStack} options={{
             tabBarLabel: 'Cart',

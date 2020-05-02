@@ -1,14 +1,7 @@
 import * as React from 'react';
-import {
-  Text,
-  View,
-  SafeAreaView,
-  Dimensions,
-  Image
-} from 'react-native';
-
+import { Dimensions, Image, View } from 'react-native';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
-import Helpers from 'App/Theme/Helpers';
+
 
 export default class CarouselBanner extends React.Component {
 
@@ -104,6 +97,7 @@ export default class CarouselBanner extends React.Component {
     return (
       <View style={{ position: 'relative' }}>
         <Carousel
+          loop={true}
           layout={"default"}
           autoplay={true}
           inactiveSlideScale={1}
