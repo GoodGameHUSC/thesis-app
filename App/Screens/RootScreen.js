@@ -1,14 +1,17 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
-import ChatScreenStack from 'App/Screens/Chat';
-import HomeScreen from 'App/Screens/Home';
-import ProfileScreen from 'App/Screens/Profile';
 import { PropTypes } from 'prop-types';
 import React, { Component } from 'react';
 import 'react-native-gesture-handler';
 import IconFeather from 'react-native-vector-icons/Feather';
+import ChatScreenStack from './Chat';
+import HomeScreen from './Home';
 import NewFeedsStack from './NewFeeds/index';
 import ProductDetail from './ProductDetail';
+import ProfileScreen from './Profile';
+import SearchScreenStack, { SearchRouteName } from './Search';
+import CategoryStack from './Category';
+import AuthStack from './Auth';
 
 const Tab = createBottomTabNavigator();
 
@@ -36,13 +39,6 @@ class RootScreen extends Component {
             },
           }} />
 
-          <Tab.Screen name="ProductDetail" component={ProductDetail} options={{
-            // hide from tab bar
-            tabBarButton: (routeName, onPress) => {
-              return null;
-            },
-            tabBarVisible: false
-          }} />
           <Tab.Screen name="Cart" component={NewFeedsStack} options={{
             tabBarLabel: 'Cart',
             tabBarIcon: ({ color }) => (
@@ -67,6 +63,35 @@ class RootScreen extends Component {
               <IconFeather name="user" color={color} {...iconStyle} />
             )
           }} />
+
+          {/* Non-display from tab bar */}
+          <Tab.Screen name="ProductDetail" component={ProductDetail} options={{
+            tabBarButton: (routeName, onPress) => {
+              return null;
+            },
+            tabBarVisible: false
+          }} />
+
+          <Tab.Screen name={SearchRouteName._} component={SearchScreenStack} options={{
+            tabBarButton: (routeName, onPress) => {
+              return null;
+            },
+            tabBarVisible: false
+          }} />
+
+          <Tab.Screen name={"Category"} component={CategoryStack} options={{
+            tabBarButton: (routeName, onPress) => {
+              return null;
+            },
+            tabBarVisible: false
+          }} />
+          <Tab.Screen name={"Auth"} component={AuthStack} options={{
+            tabBarButton: (routeName, onPress) => {
+              return null;
+            },
+            tabBarVisible: false
+          }} />
+
         </Tab.Navigator>
       </NavigationContainer>
     )

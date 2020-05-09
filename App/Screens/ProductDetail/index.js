@@ -36,7 +36,8 @@ export default function ProductDetailStack() {
           titleStyle: {
             color: 'white'
           },
-          headerTintColor: 'white'
+          headerTintColor: 'white',
+          headerTitle: 'Thư viện ảnh'
         }}
       />
 

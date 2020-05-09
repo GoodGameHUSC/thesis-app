@@ -24,6 +24,7 @@ export default {
   text: '#212529',
   primary: '#007bff',
   success: '#28a745',
+  active: '#3c94ee',
   error: '#dc3545',
   navbarTintActive: '#007bff',
 
@@ -34,7 +35,8 @@ export default {
   redOrange: '#e84118',
   blackLight: '#2f3640',
 
-
+  bg: '#eff0f1',
+  bgDark: '#c6c7c7',
   mathPurple: '#8c7ae6',
   magazineBlue: '#273c75',
   seaRock: '#487eb0',

@@ -5,6 +5,7 @@ import { Text, View } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import Colors from 'App/Theme/Colors';
 import { useNavigation, useRoute } from '@react-navigation/native';
+import RippleButton from 'App/Screens/Component/UIElement/RippleButton';
 export default function Header({ }) {
 
   const navigation = useNavigation();
@@ -12,13 +13,17 @@ export default function Header({ }) {
   const { product } = route.params;
   return (<>
     <View style={style.container}>
-      <Icon name="arrow-left" style={style.backButton} onPress={() => navigation.goBack()} />
+      <RippleButton
+        style={style.backButton}
+        onPress={() => navigation.goBack()}
+        icon_name={'arrow-left'}
+      />
       <View style={{ overflow: 'hidden', flexDirection: 'row' }}>
         <Text style={{ color: Colors.blackLight, fontSize: 16, width: ScreenWidth - 150, textAlign: 'left' }} numberOfLines={1}>{product.name}</Text>
         <View style={{ flexDirection: 'row' }}>
           <Icon name="shopping-cart" style={style.rightButton} />
           <Icon name="share-2" style={style.rightButton} />
-          <Icon name="video" style={style.rightButton} />
+          {/* <Icon name="video" style={style.rightButton} /> */}
         </View>
       </View>
     </View>

@@ -14,16 +14,23 @@ export default function HomeScreen() {
   const [refreshing, setRefreshing] = useState(false);
   const [categories, setCategories] = useState([]);
   const [products, setProducts] = useState({ data: [], pagination: {}, loading: false });
+  const [topProducts, setTopProducts] = useState({ data: [], pagination: {}, loading: false });
+  const product_field = 'name gallery price rating discount';
 
   const fetchCategory = useAPICreator('category/get', (response) => { setCategories(response.data); }, 'get', { limit: 12 })
 
+  const fetchTopProduct = useAPICreator('product/top_product', (response) => {
+    setTopProducts({ data: response.data, pagination: response.pagination, loading: false })
+  }, 'get', { limit: 6, page: 1, select: 'name gallery' })
+
   const fetchProduct = useAPICreator('product/get', (response) => {
     setProducts({ data: response.data, pagination: response.pagination, loading: false });
-  }, 'get', { limit: 20, page: 1, select: 'name gallery price rating' })
+  }, 'get', { limit: 20, page: 1, select: product_field })
 
   const fetchMoreProduct = useAPICreator('product/get', (response) => {
     setProducts({ data: products.data.concat(...response.data), pagination: response.pagination });
-  }, 'get', { limit: 20, page: products.pagination.page + 1, select: 'name gallery price rating' })
+  }, 'get', { limit: 20, page: products.pagination.page + 1, select: product_field })
+
 
   useEffect(() => {
     load()
@@ -33,11 +40,11 @@ export default function HomeScreen() {
   const load = async () => {
     fetchCategory();
     fetchProduct();
+    fetchTopProduct();
   }
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
-    fetchCategory();
-    fetchProduct();
+    load();
     setRefreshing(false);
   }, [refreshing]);
 
@@ -62,7 +69,7 @@ export default function HomeScreen() {
 
       <CarouselBanner />
       <QuickService />
-      <HottestProduct />
+      <HottestProduct topProducts={topProducts.data} />
       <TopLiveVideo />
       <CategoryList categories={categories} />
       <HomeProducts products={products.data} hasMore={products.pagination.hasNextPage} />

@@ -1,11 +1,23 @@
 
 import Colors from 'App/Theme/Colors';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { ImageBackground, ScrollView, Text, TouchableOpacity, View, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
+import { useNavigation } from '@react-navigation/native';
+import AsyncStore from '../../../Shared/AsyncStorage';
 const image = { uri: "https://reactjs.org/logo-og.png" };
-// const image = { source: require('../../../Assets/Images/screens/Profile/bg_header.png') };
-export default function RequireLogin() {
+export default function BasicInfo() {
+
+  const navigation = useNavigation();
+  const [user, setUser] = useState();
+  useEffect(() => {
+    // load();
+  }, [])
+
+  async function load() {
+    const savedUser = await AsyncStore.getData(AsyncStore.VAR.USER)
+    setUser(savedUser);
+  }
   return <ScrollView
     style={{
       paddingBottom: 5
@@ -30,9 +42,15 @@ export default function RequireLogin() {
             >
               <Icon name="user" size={24} color="grey" />
             </View>
-            <TouchableOpacity style={{ height: 20, marginRight: 20 }}>
+            <TouchableOpacity style={{ height: 20, marginRight: 20 }} onPress={() => navigation.navigate('Auth')}
+            >
               <View>
-                <Text style={{ fontSize: 16, fontWeight: 'bold', color: Colors.white }}>Đăng nhập/Đăng kí </Text>
+                <Text style={{ fontSize: 16, fontWeight: 'bold', color: Colors.white }}>
+                  {
+                    user ? user.username :
+                      'Đăng nhập/Đăng kí'
+                  }
+                </Text>
               </View>
             </TouchableOpacity>
           </View>

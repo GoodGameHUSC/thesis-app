@@ -38,6 +38,10 @@ target 'Boilerplate' do
 
   pod 'RNFastImage', :path => '../node_modules/react-native-fast-image'
 
+  pod 'react-native-video', :path => '../node_modules/react-native-video'
+
+  pod 'react-native-image-picker', :path => '../node_modules/react-native-image-picker'
+
   target 'BoilerplateTests' do
     inherit! :search_paths
     # Pods for testing

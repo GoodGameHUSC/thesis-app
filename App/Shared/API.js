@@ -36,6 +36,7 @@ export const useAPIOnceTime = (path_uri, method = "get") => {
 
 export const callAPI = (path_uri, method = "get", params = {}, onSuccess = null, onFail = null) => {
   return new Promise((res, rej) => {
+    console.log("Call API:", path_uri, "; Parameter: ", params)
     if (method == 'get') return APIRequest.get(path_uri, params)
       .then(response => {
         if (onSuccess) onSuccess(response.data);
@@ -48,11 +49,11 @@ export const callAPI = (path_uri, method = "get", params = {}, onSuccess = null,
     else return APIRequest.post(path_uri, params)
       .then(response => {
         if (onSuccess) onSuccess(response.data);
-        return res(response.data)
+        else return res(response.data)
       })
       .catch(err => {
-        if (onFail) onFail(err)
-        return rej(err);
+        if (onFail) onFail(JSON.parse(err.response.request._response))
+        else return rej(JSON.parse(err.response.request._response));
       })
   });
 }

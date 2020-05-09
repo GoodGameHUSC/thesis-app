@@ -2,9 +2,10 @@ import { useRoute } from '@react-navigation/native';
 import Colors from 'App/Theme/Colors';
 import { ScreenWidth } from 'App/Theme/Dimension';
 import React, { useState } from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, TouchableWithoutFeedback } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import Carousel from 'react-native-snap-carousel';
+import VideoControl from 'App/Screens/Component/UIElement/Video';
 
 export default function GalleryScreen({ }) {
   const route = useRoute();
@@ -64,14 +65,19 @@ export default function GalleryScreen({ }) {
       }}
         key={item._id}
       >
-        <FastImage
-          style={{ width: undefined, height: undefined, aspectRatio: 1 }}
-          source={{
-            uri: item.link,
-            priority: FastImage.priority.high,
-          }}
-          resizeMode={FastImage.resizeMode.center}
-        />
+        {
+          item.type == "video" ?
+            <VideoControl video_uri={item.link} />
+            :
+            <FastImage
+              style={{ width: undefined, height: undefined, aspectRatio: 1 }}
+              source={{
+                uri: item.link,
+                priority: FastImage.priority.high,
+              }}
+              resizeMode={FastImage.resizeMode.center}
+            />
+        }
       </View>
 
     )

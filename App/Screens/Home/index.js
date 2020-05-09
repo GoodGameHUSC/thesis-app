@@ -3,7 +3,7 @@ import Helpers from 'App/Theme/Helpers';
 import React from 'react';
 import Colors from '../../Theme/Colors';
 import HomeScreen from './HomeScreen';
-import SearchHeader from './HomeScreen/Component/SearchHeader';
+import SearchHeader from './Component/SearchHeader';
 
 
 const Stack = createStackNavigator();
@@ -28,17 +28,6 @@ export default function HomeScreenStack() {
           headerRight: null,
         }}
       />
-      <Stack.Screen name="Root.Search" component={HomeScreen}
-        options={{
-          headerTransparent: true,
-          headerStyle: {
-            height: 50,
-          },
-          headerLeft: () => <SearchHeader />,
-          headerRight: null,
-        }}
-      />
-
     </Stack.Navigator>
   )
 }

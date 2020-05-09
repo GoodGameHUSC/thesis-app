@@ -6,8 +6,22 @@ import Colors from '../../../../Theme/Colors';
 import { Section } from '../../../../Theme/Styles.js';
 
 import Figure from 'App/Screens/Component/UIElement/Figure';
+import { useNavigation } from '@react-navigation/native';
 
 function CategoryList({ categories }) {
+
+  const navigation = useNavigation();
+
+  function openDetail(item) {
+    navigation.navigate('Category', {
+      screen: 'Index',
+      params: {
+        id: item._id,
+        data: item
+      },
+    });
+  }
+
   return (
     <View
       // style={style.container}
@@ -29,7 +43,7 @@ function CategoryList({ categories }) {
           renderItem={({ item }) => {
             return (
               <View>
-                <TouchableOpacity key={item._id} onPress={item.action} activeOpacity={0.7}>
+                <TouchableOpacity key={item._id} onPress={() => openDetail(item)} activeOpacity={0.7}>
                   <View style={style.icon_container} >
                     <View style={{ overflow: "hidden", borderRadius: 50 }}>
                       <Figure uri={item.image} height={65} width={65} />
