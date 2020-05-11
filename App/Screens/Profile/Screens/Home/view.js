@@ -1,15 +1,32 @@
+import BasicInfo from './Components/BasicInfo';
+import OrderMenu from './Components/OrderMenu';
+import ProfileMenu from './Components/ProfileMenu';
+import ShopMenu from './Components/ShopMenu';
 import React from 'react';
-import { View, ScrollView } from 'react-native';
-import OrderMenu from 'App/Screens/Profile/Components/OrderMenu';
-import BasicInfo from 'App/Screens/Profile/Components/BasicInfo';
-import ProfileMenu from 'App/Screens/Profile/Components/ProfileMenu';
-import ShopMenu from 'App/Screens/Profile/Components/ShopMenu';
+import { ScrollView, RefreshControl } from 'react-native';
+import UserBehavior from 'App/Services/User';
 
 
 export default class ProfileHomeUI extends React.Component {
 
+  constructor(props) {
+    super(props)
+    this.state = {
+      refreshing: false
+    }
+  }
+
+  refresh = () => {
+    UserBehavior.refresh();
+  }
+
   render() {
-    return <ScrollView>
+    const { refreshing } = this.state;
+    return <ScrollView
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={this.refresh} />
+      }
+    >
       <BasicInfo />
       <OrderMenu />
       <ShopMenu />

@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import UserBehavior from 'App/Services/User';
+import { callAPI } from 'App/Shared/API';
 import { ButtonControl, TextInputControl, Toast } from '../../../Component/UIElement';
-import AsyncStorage from '@react-native-community/async-storage';
-import { callAPI } from '../../../../Shared/API';
-import AsyncStore from '../../../../Shared/AsyncStorage';
+import { useDispatch } from 'react-redux'
+
 export default function Login({ route, navigation }) {
   const [credential, setCredential] = useState('hung@gmail.com');
   const [password, setPassword] = useState('password');
-
   async function login() {
     if (!credential) { Toast.show("Vui lòng nhập tên đăng nhập/email"); return }
     if (!password) { Toast.show("Vui lòng nhập mật khẩu"); return }
@@ -16,10 +16,10 @@ export default function Login({ route, navigation }) {
       password
     })
       .then(async (res) => {
-        await AsyncStore.storeData(AsyncStore.VAR.AUTH_CREDENTIAL, res.data.token)
-        await AsyncStore.storeData(AsyncStore.VAR.USER, res.data.user)
+        // dispatch(loginRedux({ payload: { user: res.data.user } }))
+        UserBehavior.login(res.data);
         Toast.show("Login Success")
-        navigation.navigate("Home")
+        navigation.navigate("Profile")
       })
       .catch((err) => {
         Toast.show(err.message)
