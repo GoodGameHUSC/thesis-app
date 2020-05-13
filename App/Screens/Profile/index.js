@@ -1,11 +1,11 @@
-import { createStackNavigator } from '@react-navigation/stack';
-import HeaderTitle from 'App/Screens/Component/Header/HeaderTitle';
-import ProfileHomeScreen from 'App/Screens/Profile/Screens/Home/index';
+import { CardStyleInterpolators, createStackNavigator } from '@react-navigation/stack';
+import { NormalHeaderOption } from 'App/Screens/Component/Header/NormaHeader';
+import AddressSetting from 'App/Screens/Profile/Addresses/index';
+import ProfileHomeScreen from 'App/Screens/Profile/Home/index';
+import SettingScreen from 'App/Screens/Profile/Setting/index';
 import Helpers from 'App/Theme/Helpers';
-import React, { useEffect, useState } from 'react';
-import { Alert } from 'react-native';
-import RightButton from '../Component/Header/RightButton';
-import AsyncStore, { useAsyncStorage } from '../../Shared/AsyncStorage'
+import React from 'react';
+
 const Stack = createStackNavigator();
 
 export default function ProfileScreen() {
@@ -15,41 +15,22 @@ export default function ProfileScreen() {
       screenOptions={{
         title: null,
         headerStyle: Helpers.headerStyle,
+        gestureDirection: 'vertical',
+        cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS
       }}
     >
-      <Stack.Screen name="Profile.Home" component={ProfileHomeScreen}
+      <Stack.Screen name="Index" component={ProfileHomeScreen}
         options={{
-          // headerLeft: () => <HeaderTitle iconName={''} title={'Quản Lý Tài Khoản'} />,
-          // headerRight: () => <RightButton iconName={'log-out'} onPress={() => (
-          //   Alert.alert(
-          //     "Shopping Me thông báo",
-          //     "Bạn có chắc chắn muốn đăng xuất ?",
-          //     [
-          //       {
-          //         text: "Huỷ bỏ",
-          //         onPress: () => console.log("Cancel Pressed"),
-          //       },
-          //       {
-          //         text: "Đồng ý", onPress: () => { }
-          //         , style: "cancel"
-          //       }
-          //     ],
-          //     { cancelable: true }
-          //   ))
-          // } />,
           headerTransparent: true,
-          headerTintColor: '#273c75',
-          // headerTitle: 'Quản Lý Tài Khoản',
-          headerStyle: {
-            // height: 50,
-          },
-          headerTitleStyle: {
-            fontWeight: 'normal',
-            fontSize: 14,
-            textTransform: 'uppercase',
-          },
-          // headerTitleAlign: 'center'
         }}
+      />
+
+      <Stack.Screen name="Address" component={AddressSetting}
+        options={NormalHeaderOption('Địa chỉ của bạn')}
+      />
+
+      <Stack.Screen name="Setting" component={SettingScreen}
+        options={NormalHeaderOption('Cài đặt')}
       />
     </Stack.Navigator>
   )

@@ -38,8 +38,8 @@ export default function BasicInfo() {
         <Text style={{ color: Colors.redOrange, fontWeight: 'bold' }}>Bán Hàng <Icon name={'chevron-right'} size={14} /></Text>
       </TouchableOpacity>
       <View style={{ flexDirection: 'row', width: 90, justifyContent: 'space-between', color: 'white', marginHorizontal: 10 }}>
-        <Icon style={{ color: 'white' }} name={'shopping-cart'} size={20} onPress={() => { alert("haha") }} />
-        <Icon style={{ color: 'white' }} name={'settings'} size={20} />
+        <Icon style={{ color: 'white' }} name={'shopping-cart'} size={20} onPress={() => navigation.navigate('Cart')} />
+        <Icon style={{ color: 'white' }} name={'settings'} size={20} onPress={() => navigation.navigate('Profile', { screen: 'Setting' })} />
         <Icon style={{ color: 'white' }} name={'log-out'} size={20} onPress={_logout} />
       </View>
     </View>
@@ -77,7 +77,6 @@ export default function BasicInfo() {
 
   return <ScrollView
     style={{
-      paddingBottom: 5
     }}
   >
     <View style={{

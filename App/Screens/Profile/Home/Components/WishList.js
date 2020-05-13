@@ -1,17 +1,25 @@
-import { useNavigation } from '@react-navigation/native';
 import { ScreenWidth } from 'App/Theme/Dimension.js';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { FlatList, Text, TouchableOpacity, View } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import { getAttr } from '../../../../Utils/_';
 import Colors from '../../../../Theme/Colors';
 import { Section } from '../../../../Theme/Styles.js';
+import { useNavigation } from '@react-navigation/native';
+import { useAPICreator } from 'App/Shared/API';
 
-export default function HottestProduct({ topProducts }) {
+export default function WishList({ }) {
+  const [topProducts, setTopProducts] = useState({ data: [], pagination: {}, loading: false });
+  const fetchTopProduct = useAPICreator('product/top_product', (response) => {
+    setTopProducts({ data: response.data, pagination: response.pagination, loading: false })
+  }, 'get', { limit: 4, page: 1, select: 'name gallery' })
+
+  useEffect(() => {
+    fetchTopProduct();
+  }, [])
 
   const navigation = useNavigation();
   function openProduct(item) {
-    console.log(item)
     navigation.navigate('ProductDetail', {
       screen: 'Index',
       params: {
@@ -22,17 +30,11 @@ export default function HottestProduct({ topProducts }) {
   }
 
   return (
-    <View style={[Section.container]}>
-      <View style={[Section.flexRow]}>
-        <Text style={[Section.title]}> Tìm kiếm hàng đầu </Text>
-        <TouchableOpacity>
-          <Text style={[Section.view_more]}> Xem thêm</Text>
-        </TouchableOpacity>
-      </View>
-      <View style={{ marginTop: 10 }}>
+    <View style={[Section.container, { flex: 1 }]}>
+      <View style={{}}>
         <FlatList
-          data={topProducts}
-          numColumns={3}
+          data={topProducts.data}
+          numColumns={4}
           renderItem={({ item }) => {
             return (
               <TouchableOpacity style={[style.icon_container, { backgroundColor: Colors.lynxWhite }]} key={item._id} onPress={() => openProduct(item)} activeOpacity={0.9}>

@@ -1,33 +1,46 @@
 import React from 'react';
-import { Text, View } from 'react-native';
-import Colors from 'App/Theme/Colors';
+import { Text, View, TouchableOpacity } from 'react-native';
+import Colors from '../../../Theme/Colors';
 import IconSimple from 'react-native-vector-icons/SimpleLineIcons';
 import IconCommunity from 'react-native-vector-icons/MaterialCommunityIcons';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { useNavigation } from '@react-navigation/native';
+import { useSelector } from 'react-redux';
 
+export default function SettingScreen() {
 
-
-export default function ProfileMenu() {
+  const navigation = useNavigation();
+  const user = useSelector(state => state.user.user);
 
   return <View style={{
     backgroundColor: 'white',
-    paddingVertical: 10,
+    // paddingVertical: 10,
     paddingHorizontal: 10,
     marginBottom: 5
   }}>
-    <View style={{ justifyContent: 'space-between', flexDirection: 'row', alignContent: 'center', marginBottom: 10 }}>
-      <Text style={{ fontWeight: 'bold', fontSize: 16 }}>Quản lý tài khoản</Text>
-      {/* <Text style={{ fontSize: 12, color: Colors.redOrange }}>Xem tất cả đơn hàng</Text> */}
-    </View>
+    {/* <View style={{ justifyContent: 'space-between', flexDirection: 'row', alignContent: 'center', }}>
+      <Text style={{ fontSize: 16, color: Colors.darkGrey }}>Quản lý tài khoản</Text>
+      <Text style={{ fontSize: 12, color: Colors.redOrange }}></Text>
+    </View> */}
 
     <View>
-      <View style={style.item_container}>
-        <View style={style.item} >
-          <IconCommunity size={18} name="home-city-outline" style={{ marginRight: 10 }} />
-          <Text>Địa chỉ giao hàng</Text>
+      <TouchableOpacity
+        activeOpacity={0.8}
+        style={style.item_container}
+        onPress={() => {
+
+          navigation.navigate('Profile', {
+            screen: 'Address'
+          })
+        }}
+      >
+        <View style={[style.item, { color: Colors.grey }]} >
+          <IconCommunity size={22} name="home-city-outline" style={{ marginRight: 10, color: Colors.magazineBlue }} />
+          <Text style={{ color: Colors.blackLight, fontSize: 16 }}>Địa chỉ giao hàng</Text>
         </View>
-        <IconSimple size={16} name="arrow-right" />
-      </View>
+        <IconSimple size={14} name="arrow-right" style={{ color: Colors.redOrange }} />
+      </TouchableOpacity>
+
       <View style={style.item_container}>
         <View style={style.item} >
           <IconCommunity size={18} name="coin" style={{ marginRight: 10 }} />

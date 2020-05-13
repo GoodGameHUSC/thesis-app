@@ -40,5 +40,7 @@ export default {
   mathPurple: '#8c7ae6',
   magazineBlue: '#273c75',
   seaRock: '#487eb0',
-  yellowTint: '#ffce2d'
+  yellowTint: '#ffce2d',
+
+  textDark: '#2d3436'
 }

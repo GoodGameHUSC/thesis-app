@@ -2,6 +2,16 @@ import { Colors } from 'App/Theme'
 import { StyleSheet } from 'react-native'
 
 export default StyleSheet.create({
+  flexRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  flexColumn: {
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
   backgroundReset: {
     backgroundColor: Colors.transparent,
   },

@@ -8,7 +8,8 @@ import { Section } from '../../../../Theme/Styles.js';
 const list_dump_prod = [
   {
     id: 4,
-    icon_file: "https://chanhuy.com/wp-content/uploads/2018/10/bo-dung-cu-live-stream-3-in-1.jpg",
+    // icon_file: "https://chanhuy.com/wp-content/uploads/2018/10/bo-dung-cu-live-stream-3-in-1.jpg",
+    icon_file: "https://www.sapo.vn/blog/wp-content/uploads/2019/12/cach-live-stream-tren-shopee-1.jpg",
     text: "Live bán hàng tồn kho, sale đậm Hè, 2020",
     size: 65,
     action: () => {
@@ -17,7 +18,8 @@ const list_dump_prod = [
   },
   {
     id: 3,
-    icon_file: "https://www.chotot.com/kinhnghiem/wp-content/uploads/2019/11/thue-nguoi-livestream-1.jpg",
+    // icon_file: "https://www.chotot.com/kinhnghiem/wp-content/uploads/2019/11/thue-nguoi-livestream-1.jpg",
+    icon_file: "https://www-dacast-com.exactdn.com/wp-content/uploads/2018/03/Article-size-800-x-600-2020-02-13T123654.087.jpg?strip=all&lossy=1&ssl=1",
     text: "Mua 2 tặng 1 lấy tiền 3, stream bán hàng hot nhất maidzo",
     size: 60,
     action: () => {

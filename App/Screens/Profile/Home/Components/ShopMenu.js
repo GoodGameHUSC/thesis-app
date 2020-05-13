@@ -3,7 +3,7 @@ import { Text, View } from 'react-native';
 import Colors from 'App/Theme/Colors';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import IconCommunity from 'react-native-vector-icons/MaterialCommunityIcons';
-
+import { HeaderSection, shared_styles } from './Shared';
 
 
 export default function ShopMenu() {
@@ -13,10 +13,11 @@ export default function ShopMenu() {
     paddingVertical: 10, paddingHorizontal: 10,
     marginBottom: 5
   }}>
-    <View style={{ justifyContent: 'space-between', flexDirection: 'row', alignContent: 'center', marginBottom: 10 }}>
-      <Text style={{ fontWeight: 'bold', fontSize: 16 }}>Cửa hàng của tôi</Text>
-      <Text style={{ fontSize: 12, color: Colors.redOrange }}>Xem tất cả đơn hàng</Text>
-    </View>
+    <HeaderSection
+      leftText={'Tình Trạng Đơn Hàng'}
+      rightText={'Xem thêm'}
+      icon={<IconCommunity name="shopping" style={{ fontSize: 24, color: '#E91E63', marginHorizontal: 10 }} />}
+    />
     <View style={{ justifyContent: 'space-between', flexDirection: 'row', alignContent: 'center' }}>
       <View style={style.menu_order_item} >
         <IconCommunity name="arrow-up-bold-box-outline" style={style.menu_order_icon} />
