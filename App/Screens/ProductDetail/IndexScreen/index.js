@@ -1,21 +1,12 @@
 import { useFocusEffect } from '@react-navigation/native';
 import { useAPICreator } from 'App/Shared/API';
-import { ScreenWidth } from 'App/Theme/Dimension.js';
 import React, { useState } from 'react';
 import { RefreshControl, ScrollView, View } from 'react-native';
 import { BarIndicator } from 'react-native-indicators';
 import Colors from '../../../Theme/Colors';
 import ProductGallery from '../Component/ProductGallery';
-import BasicInfo from './Partials/BasicInfo';
-import Describe from './Partials/Describe';
-import Feature from './Partials/Feature';
-import QnA from './Partials/QnA';
-import Rating from './Partials/Rating';
-import ShipMethod from './Partials/ShipMethod';
-import ShopInfo from './Partials/ShopInfo';
-import Recommendation from './Partials/Recommendation';
-import VideoControl from 'App/Screens/Component/UIElement/Video';
-import Video from 'react-native-video';
+import { BasicInfo, Describe, Feature, QnA, Rating, Recommendation, ShipMethod, ShopInfo, BuyAction } from './Partials';
+
 export default function ProductDetailIndex({ route, navigation }) {
   const [refreshing, setRefreshing] = useState(false);
   const [product, setProduct] = useState({});
@@ -52,23 +43,23 @@ export default function ProductDetailIndex({ route, navigation }) {
   }, [refreshing]);
 
   return (
-    <ScrollView
-      refreshControl={
-        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-      }
-      style={{
-        backgroundColor: Colors.lynxWhite,
-        paddingTop: 50,
-        paddingBottom: 30
-      }}
-    >
-      {
-        loading ?
+    loading ?
+      <View style={{ flex: 1, marginTop: 150 }}>
+        <BarIndicator color={Colors.grey} count={10} size={15} />
+      </View> :
+      <View>
+        <ScrollView
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          }
+          style={{
+            backgroundColor: Colors.lynxWhite,
+            paddingTop: 50,
+            paddingBottom: 30,
 
-          <View style={{ flex: 1, marginTop: 150 }}>
-            <BarIndicator color={Colors.grey} count={10} size={15} />
-          </View> :
-          <>
+          }}
+        >
+          <View style={{ position: 'relative' }}>
             <ProductGallery gallery={product.gallery} />
             <BasicInfo product={product} />
             <ShipMethod product={product} />
@@ -79,9 +70,10 @@ export default function ProductDetailIndex({ route, navigation }) {
             <Describe product={product} />
             <Recommendation product={product} />
             <View style={{ height: 50 }}></View>
-          </>
-      }
-    </ScrollView>
+          </View>
+        </ScrollView>
+        <BuyAction product={product} />
+      </View>
   )
 }
 

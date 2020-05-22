@@ -196,5 +196,6 @@ export default StyleSheet.create({
     // android
     borderBottomWidth: 0,
     elevation: 1,
+    height: 50,
   }
 })

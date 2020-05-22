@@ -5,6 +5,7 @@ import AppModal from './Modal';
 import TextInputControl from './TextInput';
 import VideoControl from './Video';
 import CarouselControl from './CarouselControl';
+import TouchableArea from './TouchableArea';
 import ButtonControl, { CheckBoxControl, RadioButton } from './Button';
 import Toast from './Toast';
 export {
@@ -18,5 +19,6 @@ export {
   ButtonControl,
   CheckBoxControl,
   RadioButton,
-  Toast
+  Toast,
+  TouchableArea
 }

@@ -54,5 +54,5 @@ const style = {
   icon_text: {
     // fontSize: 12,
     color: Colors.blackLight
-  }
+  },
 }

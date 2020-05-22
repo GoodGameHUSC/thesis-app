@@ -29,16 +29,16 @@ export const shared_styles = StyleSheet.create({
 })
 
 
-export function HeaderSection({ icon, leftText, rightText }) {
+export function HeaderSection({ icon, leftText, rightText, style, styleRightText, showArrow = true }) {
   return (
-    <View style={[shared_styles.section_header]}>
+    <View style={[shared_styles.section_header, style]}>
       <View style={Helpers.flexRow}>
         {icon}
         <Text style={{ fontSize: 15, color: Colors.textDark }}>{leftText}</Text>
       </View>
       <TouchableOpacity activeOpacity={0.8} style={Helpers.flexRow}>
-        <Text style={{ fontSize: 12, color: Colors.redOrange, marginRight: 5 }}>{rightText}</Text>
-        <IconSimple size={12} name="arrow-right" style={{ color: Colors.redOrange }} />
+        <Text style={{ fontSize: 12, color: Colors.redOrange, marginRight: 5, ...styleRightText }}>{rightText}</Text>
+        {showArrow && <IconSimple size={12} name="arrow-right" style={{ color: Colors.redOrange }} />}
       </TouchableOpacity>
     </View>
   )

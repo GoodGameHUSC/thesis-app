@@ -1,5 +1,5 @@
 
-export function NormalHeaderOption(title) {
+export function NormalHeaderOption(title, buttonRight) {
   return {
     headerTintColor: '#273c75',
     headerTitle: title || 'Shopping Me',
@@ -11,6 +11,7 @@ export function NormalHeaderOption(title) {
       fontSize: 14,
       textTransform: 'uppercase',
     },
-    headerTitleAlign: 'center'
+    headerTitleAlign: 'center',
+    headerRight: buttonRight
   }
 }

@@ -27,7 +27,7 @@ const style = {
   title: {
     color: Colors.seaRock,
     fontWeight: "600",
-    fontSize: 19,
+    fontSize: 18,
     marginLeft: 5,
     textAlignVertical: "bottom",
   },

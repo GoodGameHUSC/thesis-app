@@ -5,6 +5,7 @@ import ProfileHomeScreen from 'App/Screens/Profile/Home/index';
 import SettingScreen from 'App/Screens/Profile/Setting/index';
 import Helpers from 'App/Theme/Helpers';
 import React from 'react';
+import UploadProduct from './UploadProduct';
 
 const Stack = createStackNavigator();
 
@@ -25,9 +26,14 @@ export default function ProfileScreen() {
         }}
       />
 
+      <Stack.Screen name="UploadProduct" component={UploadProduct}
+        options={NormalHeaderOption('Đăng bán sản phẩm')}
+      />
+
       <Stack.Screen name="Address" component={AddressSetting}
         options={NormalHeaderOption('Địa chỉ của bạn')}
       />
+
 
       <Stack.Screen name="Setting" component={SettingScreen}
         options={NormalHeaderOption('Cài đặt')}

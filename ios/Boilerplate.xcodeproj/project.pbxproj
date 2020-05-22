@@ -41,6 +41,7 @@
 		F976301E4D6947019D43F1ED /* Fontisto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E96509AE799041338625B57F /* Fontisto.ttf */; };
 		FAF447E294954773B502B258 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BF1BD63BDAA0492BA6397496 /* MaterialIcons.ttf */; };
 		FC6B0B3386D846658FDC299C /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F1942B2CFBB24622B588DEBA /* FontAwesome5_Regular.ttf */; };
+		E65A8B88147F434C9A9110A0 /* libOAuthManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FE975C7D3A648F0A43F571B /* libOAuthManager.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -107,6 +108,8 @@
 		F1942B2CFBB24622B588DEBA /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Regular.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; };
 		FB800E05AFB04A97491C501A /* Pods-Boilerplate-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Boilerplate-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-Boilerplate-tvOS/Pods-Boilerplate-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		FFAFEEA25BB64CE0990DCC8A /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
+		2AB3E7F189E644E3AC9743B3 /* OAuthManager.xcodeproj */ = {isa = PBXFileReference; name = "OAuthManager.xcodeproj"; path = "../node_modules/react-native-oauth/ios/OAuthManager.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		4FE975C7D3A648F0A43F571B /* libOAuthManager.a */ = {isa = PBXFileReference; name = "libOAuthManager.a"; path = "libOAuthManager.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +128,7 @@
 				ED297163215061F000B7C4FE /* JavaScriptCore.framework in Frameworks */,
 				BEDAA4C29F2A455594DDC00A /* libRNGestureHandler.a in Frameworks */,
 				298566B4182437FDC9416AAA /* libPods-Boilerplate.a in Frameworks */,
+				E65A8B88147F434C9A9110A0 /* libOAuthManager.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -222,6 +226,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				2AB3E7F189E644E3AC9743B3 /* OAuthManager.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -696,12 +701,14 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)..\node_modules\neact-native-gesture-handlerios/**",
+					"$(SRCROOT)/../node_modules/react-native-oauth/ios/OAuthManager/**",
 				);
 				INFOPLIST_FILE = BoilerplateTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
@@ -724,12 +731,14 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)..\node_modules\neact-native-gesture-handlerios/**",
+					"$(SRCROOT)/../node_modules/react-native-oauth/ios/OAuthManager/**",
 				);
 				INFOPLIST_FILE = BoilerplateTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
@@ -753,6 +762,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)..\node_modules\neact-native-gesture-handlerios/**",
+					"$(SRCROOT)/../node_modules/react-native-oauth/ios/OAuthManager/**",
 				);
 				INFOPLIST_FILE = Boilerplate/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -776,6 +786,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)..\node_modules\neact-native-gesture-handlerios/**",
+					"$(SRCROOT)/../node_modules/react-native-oauth/ios/OAuthManager/**",
 				);
 				INFOPLIST_FILE = Boilerplate/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -806,11 +817,13 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)..\node_modules\neact-native-gesture-handlerios/**",
+					"$(SRCROOT)/../node_modules/react-native-oauth/ios/OAuthManager/**",
 				);
 				INFOPLIST_FILE = "Boilerplate-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
@@ -842,11 +855,13 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)..\node_modules\neact-native-gesture-handlerios/**",
+					"$(SRCROOT)/../node_modules/react-native-oauth/ios/OAuthManager/**",
 				);
 				INFOPLIST_FILE = "Boilerplate-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
@@ -877,11 +892,13 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)..\node_modules\neact-native-gesture-handlerios/**",
+					"$(SRCROOT)/../node_modules/react-native-oauth/ios/OAuthManager/**",
 				);
 				INFOPLIST_FILE = "Boilerplate-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
@@ -912,11 +929,13 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)..\node_modules\neact-native-gesture-handlerios/**",
+					"$(SRCROOT)/../node_modules/react-native-oauth/ios/OAuthManager/**",
 				);
 				INFOPLIST_FILE = "Boilerplate-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);

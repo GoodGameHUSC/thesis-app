@@ -11,7 +11,6 @@ export default function HottestProduct({ topProducts }) {
 
   const navigation = useNavigation();
   function openProduct(item) {
-    console.log(item)
     navigation.navigate('ProductDetail', {
       screen: 'Index',
       params: {

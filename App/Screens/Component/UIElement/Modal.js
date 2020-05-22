@@ -7,7 +7,8 @@ import Modal from 'react-native-modal';
 export default function AppModal({
   modalVisible,
   setModalVisible,
-  children
+  children,
+  style
 }) {
   return (
     <Modal
@@ -19,7 +20,8 @@ export default function AppModal({
       animationOutTiming={200}
       hideModalContentWhileAnimating={true}
       style={{
-        alignItems: 'center'
+        alignItems: 'center',
+        ...style
       }}
     >
       {children}

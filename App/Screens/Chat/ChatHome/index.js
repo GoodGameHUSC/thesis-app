@@ -7,6 +7,8 @@ import Animated from 'react-native-reanimated';
 import IconFontAwesome from 'react-native-vector-icons/FontAwesome5';
 import IconFontisto from 'react-native-vector-icons/Fontisto';
 import BotChatScreen from '../BotChatScreen';
+import Conversation from '../Conversation';
+import ChatHelper from '../ChatHelper';
 
 const Tab = createMaterialTopTabNavigator();
 export default class HomeChatScreen extends React.Component {
@@ -14,32 +16,27 @@ export default class HomeChatScreen extends React.Component {
     return (
       <Tab.Navigator
         tabBarOptions={{
-          activeTintColor: '#e91e63',
-          labelStyle: { fontSize: 12 },
-          style: { backgroundColor: 'powderblue' },
-          showIcon: true,
-          labelStyle: {
-            color: 'red'
-          }
+          activeTintColor: Colors.magazineBlue,
+          labelStyle: { fontSize: 14, fontWeight: 'bold' },
+          style: {
+            backgroundColor: 'white',
+            position: 'relative',
+            shadowOpacity: 0,
+            elevation: 0,
+            borderBottomWidth: 0,
+          },
+
         }}
-        tabBar={props => <MyTabBar {...props} />}
+        swipeEnabled={false}
       >
-        {/* <Tab.Screen name="Home" options={{
-          tabBarLabel: 'Friend',
-          activeTintColor: Colors.grey,
-          tabBarIcon: <IconFontAwesome name="user-friends" style={{ fontSize: 14 }} />
-        }} component={HomeScreen} /> */}
-        <Tab.Screen name="Shop" options={{
-          tabBarLabel: 'Shop Agent',
-          activeTintColor: Colors.grey,
-          tabBarIcon: <IconFontisto name="shopping-store" style={{ fontSize: 12 }} />
-        }} component={SplashScreen} />
-        <Tab.Screen name="Bot" options={{
-          tabBarLabel: 'Bot Helper',
-          activeTintColor: Colors.grey,
-          tabBarIcon: <IconFontAwesome name="robot" style={{ fontSize: 14 }} />
-        }} component={BotChatScreen} />
+        <Tab.Screen name="Buy" options={{
+          tabBarLabel: 'Trò Chuyện',
+        }} component={Conversation} />
+        <Tab.Screen name="Sell" options={{
+          tabBarLabel: 'Hỗ trợ khách hàng',
+        }} component={ChatHelper} />
       </Tab.Navigator>
+
     )
   }
 }

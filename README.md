@@ -1,3 +1,5 @@
+https://www.flaticon.com/authors/coloring/flat
+
 <div align="center">
     <img src="App/Assets/Images/TOM-Legend.png" alt="Logo" width="100%">
 </div>

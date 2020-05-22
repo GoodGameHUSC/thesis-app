@@ -5,6 +5,7 @@ import React from 'react';
 import { RefreshControl, ScrollView } from 'react-native';
 import BasicInfo from './Components/BasicInfo';
 import OrderMenu from './Components/OrderMenu';
+import ShopMenu from '../Shop/ShopMenu';
 const Tab = createMaterialTopTabNavigator();
 
 export default class ProfileHomeScreen extends React.Component {
@@ -49,7 +50,7 @@ export default class ProfileHomeScreen extends React.Component {
         }} component={OrderMenu} />
         <Tab.Screen name="Sell" options={{
           tabBarLabel: 'Bán Hàng',
-        }} component={OrderMenu} />
+        }} component={ShopMenu} />
       </Tab.Navigator>
       {/* <OrderMenu />
       <ShopMenu /> */}

@@ -33,7 +33,7 @@ export default {
   blueNight: '#353b48',
   red: '#f00302',
   redOrange: '#e84118',
-  blackLight: '#2f3640',
+  darkGreyblackLight: '#2f3640',
 
   bg: '#eff0f1',
   bgDark: '#c6c7c7',

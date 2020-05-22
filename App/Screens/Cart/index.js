@@ -5,14 +5,13 @@ import React from 'react';
 import { View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Colors from '../../Theme/Colors';
-import RightButton from '../Component/Header/RightButton';
-import HomeChatScreen from './ChatHome';
-import BotChatScreen from './BotChatScreen';
-import { NormalHeaderOption } from 'App/Screens/Component/Header/NormaHeader';
+import CartIndexScreen from './Home/index';
+import OrderScreen from './Order/index';
+
 
 const Stack = createStackNavigator();
 
-export default function ChatScreenStack() {
+export default function CartStack() {
   return (
     <Stack.Navigator
       screenOptions={{
@@ -22,32 +21,37 @@ export default function ChatScreenStack() {
         cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS
       }}
     >
-      <Stack.Screen name="Home" component={HomeChatScreen}
+      <Stack.Screen name="Index" component={CartIndexScreen}
         options={
           ({ navigation, route }) => ({
             headerTitleStyle: {
               fontSize: 18
             },
             headerTintColor: Colors.seaRock,
-            headerTitle: 'Tin Nhắn',
+            headerTitle: 'Giỏ Hàng',
             headerRight: () => (
               <View style={style.searchContainer} >
-                <Icon name="comment-plus-outline" style={style.searchButton} onPress={() => navigation.navigate('Cart', { screen: 'Order' })} />
+                <Icon name="arrow-right" style={style.searchButton} onPress={() => navigation.navigate('Cart', { screen: 'Order' })} />
               </View>
             ),
           })}
       />
 
-      <Stack.Screen name="Bot" component={BotChatScreen}
-        options={NormalHeaderOption('Chat Bot')}
+      <Stack.Screen name="Order" component={OrderScreen}
+        options={{
+          headerTitleStyle: {
+            fontSize: 18
+          },
+          headerTintColor: Colors.seaRock,
+          headerTitle: 'Xác Nhận Đặt Hàng',
+          headerTitleAlign: 'center'
+        }}
       />
 
-      <Stack.Screen name="HelpDesk" component={BotChatScreen}
-        options={NormalHeaderOption('Nhân viên tư vấn')}
-      />
     </Stack.Navigator>
   )
 }
+
 
 const style = {
   searchButton: {
