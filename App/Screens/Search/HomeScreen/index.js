@@ -9,7 +9,7 @@ import HottestProduct from './Component/HottestProduct';
 import QuickService from './Component/QuickService';
 import TopLiveVideo from './Component/TopLiveVideo';
 
-export default function HomeScreen() {
+export default function IndexScreen() {
 
   const [refreshing, setRefreshing] = useState(false);
   const [categories, setCategories] = useState([]);

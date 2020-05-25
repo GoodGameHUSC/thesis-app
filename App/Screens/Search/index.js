@@ -2,14 +2,14 @@ import { CardStyleInterpolators, createStackNavigator } from '@react-navigation/
 import Helpers from 'App/Theme/Helpers';
 import React from 'react';
 import Colors from '../../Theme/Colors';
-import HomeScreen from './HomeScreen';
-import SearchHeader from './HomeScreen/Component/SearchHeader';
+import IndexScreen from './HomeScreen';
+import SearchHeader from './Sections/SearchHeader';
 
 
 const Stack = createStackNavigator();
 export const SearchRouteName = {
   _: 'Search',
-  Home: 'Home'
+  Home: 'Index'
 }
 export default function SearchScreenStack() {
 
@@ -23,7 +23,7 @@ export default function SearchScreenStack() {
         cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS
       }}
     >
-      <Stack.Screen name={SearchRouteName.Home} component={HomeScreen}
+      <Stack.Screen name={"Index"} component={IndexScreen}
         options={{
           headerTransparent: true,
           headerStyle: {

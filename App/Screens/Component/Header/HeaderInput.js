@@ -1,12 +1,10 @@
-import RecordSpeech from 'App/Screens/Home/HomeScreen/Component/RecordSpeech';
-import { ScreenWidth } from 'App/Theme/Dimension.js';
-import React, { useState } from 'react';
-import { Text, View, Share } from 'react-native';
-import Icon from 'react-native-vector-icons/Feather';
-import Colors from 'App/Theme/Colors';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import RippleButton from 'App/Screens/Component/UIElement/RippleButton';
-import CartButton from 'App/Screens/Component/Product/CartButton';
+import Colors from 'App/Theme/Colors';
+import { ScreenWidth } from 'App/Theme/Dimension.js';
+import React from 'react';
+import { Share, Text, View } from 'react-native';
+import Icon from 'react-native-vector-icons/Feather';
 
 export default function Header({ }) {
 
@@ -42,8 +40,9 @@ export default function Header({ }) {
       <View style={{ overflow: 'hidden', flexDirection: 'row' }}>
         <Text style={{ color: Colors.blackLight, fontSize: 16, width: ScreenWidth - 150, textAlign: 'left' }} numberOfLines={1}>{product.name}</Text>
         <View style={{ flexDirection: 'row' }}>
-          <CartButton />
+          <Icon name="shopping-cart" onPress={goCart} style={style.rightButton} />
           <Icon name="share-2" onPress={share} style={style.rightButton} />
+          {/* <Icon name="video" style={style.rightButton} /> */}
         </View>
       </View>
     </View>

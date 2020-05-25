@@ -49,12 +49,12 @@ class RootScreen extends Component {
               )
             }}
           />
-          <Tab.Screen name="NewFeeds" component={NewFeedsStack} options={{
+          {/* <Tab.Screen name="NewFeeds" component={NewFeedsStack} options={{
             tabBarLabel: 'Bảng Tin',
             tabBarIcon: ({ color }) => (
               <IconFeather name="rss" color={color} {...iconStyle} />
             )
-          }} />
+          }} /> */}
           <Tab.Screen name="Chats" component={ChatScreenStack} options={{
             tabBarLabel: 'Trò Chuyện',
             tabBarIcon: ({ color }) => (

@@ -2,8 +2,9 @@ import { CardStyleInterpolators, createStackNavigator } from '@react-navigation/
 import Helpers from 'App/Theme/Helpers';
 import React from 'react';
 import Colors from '../../Theme/Colors';
+import HomeSearchHeader from './Component/HomeSearchHeader';
 import HomeScreen from './HomeScreen';
-import SearchHeader from './Component/SearchHeader';
+import SearchScreen from './SearchScreen/';
 
 
 const Stack = createStackNavigator();
@@ -24,8 +25,15 @@ export default function HomeScreenStack() {
           headerStyle: {
             height: 50,
           },
-          headerLeft: () => <SearchHeader />,
+          headerLeft: () => <HomeSearchHeader />,
           headerRight: null,
+        }}
+      />
+
+      <Stack.Screen name="Search" component={SearchScreen}
+        options={{
+          headerTransparent: true,
+          headerLeft: null,
         }}
       />
     </Stack.Navigator>

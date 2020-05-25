@@ -70,7 +70,7 @@ export default function HomeScreen() {
       <CarouselBanner />
       <QuickService />
       <HottestProduct topProducts={topProducts.data} />
-      <TopLiveVideo />
+      {/* <TopLiveVideo /> */}
       <CategoryList categories={categories} />
       <HomeProducts products={products.data} hasMore={products.pagination.hasNextPage} />
     </ScrollView>

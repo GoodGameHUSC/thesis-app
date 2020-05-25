@@ -1,8 +1,8 @@
 import { CardStyleInterpolators, createStackNavigator } from '@react-navigation/stack';
 import { NormalHeaderOption } from 'App/Screens/Component/Header/NormaHeader';
-import AddressSetting from 'App/Screens/Profile/Addresses/index';
-import ProfileHomeScreen from 'App/Screens/Profile/Home/index';
-import SettingScreen from 'App/Screens/Profile/Setting/index';
+import AddressSetting from './Addresses/index';
+import ProfileHomeScreen from './Home/index';
+import SettingScreen from './Setting/index';
 import Helpers from 'App/Theme/Helpers';
 import React from 'react';
 import UploadProduct from './UploadProduct';
