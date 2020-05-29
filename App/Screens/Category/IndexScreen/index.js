@@ -67,22 +67,22 @@ export default function CategoryDetail({ route, navigation }) {
           </View> :
           <>
             <CarouselControl control={true} carouselItems={carousel_dump_data} />
-            <View >
+            {/* <View >
               <View style={{ backgroundColor: 'white', width: '100%', padding: 15, marginTop: 5 }}>
                 <Text style={[style.icon_text], {
                   overflow: 'hidden', marginBottom: 10, fontSize: 14,
                   color: Colors.darkGrey
                 }}> </Text>
               </View>
-            </View>
-            <View >
-              {/* <View style={{ backgroundColor: 'white', width: '100%', padding: 15, marginTop: 5 }}>
+            </View> */}
+            {/* <View >
+              <View style={{ backgroundColor: 'white', width: '100%', padding: 15, marginTop: 5 }}>
                 <Text style={[style.icon_text], {
                   overflow: 'hidden', marginBottom: 10, fontSize: 14,
                   color: Colors.darkGrey
                 }}>Top bán chạy </Text>
-              </View> */}
-            </View>
+              </View>
+            </View> */}
             <View style={{ backgroundColor: 'white', width: '100%', marginTop: 5 }} >
               <Tab.Navigator
                 tabBarOptions={{

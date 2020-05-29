@@ -20,14 +20,19 @@ export default function HomeSearchHeader() {
   }
   function onSpeechTextFail(event) {
     setText(null);
-    console.log(event);
   }
   function onSpeechPartialResults(text_list) {
     let text = text_list[0];
     if (text && text_search !== text) {
       setText(text);
+      // navigation.navigate('Home', { screen: 'Search', params: { text } })
     }
   }
+
+  function onSubmit() {
+    navigation.navigate('Home', { screen: 'Search', params: { text_search } })
+  }
+
   return (<>
     <View style={style.container}>
       <Icon name="search" style={style.searchButton} onPress={() => navigation.navigate("Home", {
@@ -38,6 +43,8 @@ export default function HomeSearchHeader() {
         placeholder="Nhập tên sản phẩm"
         onChangeText={text => setText(text)}
         defaultValue={text_search}
+        onSubmitEditing={onSubmit}
+        returnKeyLabel={'Tìm'}
       />
       <IconIonicons name="ios-mic"
         style={style.actionButton}

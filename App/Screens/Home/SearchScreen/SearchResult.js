@@ -6,10 +6,10 @@ import { StyleSheet, View, Text } from 'react-native';
 import ListProduct from 'App/Screens/Component/Product/ListProduct';
 
 
-export default function SearchResult({ products }) {
+export default function SearchResult({ products, pagination }) {
   return (<>
     <View style={style.container}>
-      <Text style={{ marginTop: 20, marginBottom: 10, paddingHorizontal: 10 }}>Kết quả tìm kiếm ({products.length} sản phẩm)</Text>
+      <Text style={{ marginTop: 20, marginBottom: 10, paddingHorizontal: 10 }}>Kết quả tìm kiếm ({pagination.totalDocs} sản phẩm)</Text>
       <ListProduct products={products} hasMore={false} infinite={false} />
     </View>
   </>

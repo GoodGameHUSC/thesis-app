@@ -35,7 +35,7 @@ export function CheckBoxControl(props) {
   return (
     <CheckBox
       {...props}
-      style={[props.style, { flex: 1, paddingVertical: 20 }]}
+      style={[props.style]}
       leftTextStyle={[styles.checkBoxText, props.leftTextStyle,]}
       rightTextStyle={[styles.checkBoxText, props.rightTextStyle,]}
       checkBoxColor={Colors.active}
@@ -49,7 +49,6 @@ export function RadioButton({ opTions, onChangeOption, textStyle }) {
   const [activeIndex, setActiveIndex] = useState(null);
   return (
     <View>
-
       {
         opTions.map((opTion, index) => {
           <CheckBoxControl

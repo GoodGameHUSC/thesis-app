@@ -6,7 +6,7 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Colors from '../../../../Theme/Colors';
 import { getAttr, toLocaleString } from 'App/Utils/_';
-export default function OrderAction({ carts }) {
+export default function OrderAction({ carts, order }) {
 
   const [total, setTotal] = useState(0)
   const navigation = useNavigation();
@@ -43,7 +43,7 @@ export default function OrderAction({ carts }) {
           </View>
         </View>
 
-        <TouchableArea style={style.buyButton}>
+        <TouchableArea style={style.buyButton} onPress={order}>
           <Text style={{ color: 'white', fontSize: 16, textAlign: 'center' }}>Xác Nhận</Text>
         </TouchableArea>
       </View>

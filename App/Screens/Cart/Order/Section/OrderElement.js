@@ -98,7 +98,9 @@ const style = StyleSheet.create({
     backgroundColor: 'white',
     // paddingHorizontal: 10,
     // paddingVertical: 10,
-    marginBottom: 5
+    // marginBottom: 5,
+    borderBottomWidth: 1,
+    borderBottomColor: Colors.lynxWhite
   },
   icon_container: {
     marginRight: 5,

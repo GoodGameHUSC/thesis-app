@@ -1,29 +1,15 @@
 import { useNavigation } from '@react-navigation/native';
+import { TextInputControl } from 'App/Screens/Component/UIElement';
 import RippleButton from 'App/Screens/Component/UIElement/RippleButton';
 import { ScreenWidth } from 'App/Theme/Dimension.js';
-import React, { useState } from 'react';
-import {
-  View, Text, StyleSheet
-} from 'react-native';
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
 import IconIonicons from 'react-native-vector-icons/Ionicons';
-import Icon from 'react-native-vector-icons/Feather';
 import Colors from '../../../Theme/Colors';
-import { TextInputControl } from 'App/Screens/Component/UIElement';
-import { useAPICreator } from 'App/Shared/API';
 
 export default function SearchDetailHeader({ text, setText, loading, onSubmit }) {
 
-  // const [text, setText] = useState(null)
-  const [product, setProduct] = useState([]);
-  // const [loading, setLoading] = useState([]);
-
-  const navigation = useNavigation();
-  const getSearchResult = useAPICreator('product/search', (response) => {
-    setProduct(response.data);
-    // setLoading(false)
-    console.log(response)
-  }, 'get', { keyword: text })
-
+  const navigation = useNavigation()
   const changeText = (text) => {
     setText(text)
   }
@@ -41,7 +27,7 @@ export default function SearchDetailHeader({ text, setText, loading, onSubmit })
           placeholder="Nhập nội dung tìm kiếm"
           onSubmitEditing={onSubmit}
           returnKeyLabel={'Tìm'}
-          autoFocus={true}
+          // autoFocus={true}
           onChangeText={changeText}
           value={text}
         />
