@@ -50,7 +50,7 @@ export default function HomeSearchHeader() {
         style={style.actionButton}
         onPress={() => set_is_open_recording(!is_open_recording)}
       />
-      <IconIonicons name="ios-qr-scanner" style={style.actionButton} />
+      {/* <IconIonicons name="ios-qr-scanner" style={style.actionButton} /> */}
 
       <View>
         {is_open_recording &&
@@ -99,7 +99,9 @@ const style = {
     color: Colors.grey,
     height: 36,
     padding: 0,
-    textAlignVertical: 'center', marginLeft: 10, width: ScreenWidth - 150,
+    textAlignVertical: 'center', marginLeft: 10,
+    // width: ScreenWidth - 150,
+    width: ScreenWidth - 112,
     borderRightWidth: 1,
     borderRightColor: Colors.lynxWhite,
   }

@@ -1,6 +1,7 @@
 import axios from 'axios'
-// const baseAPI = 'http://192.168.1.196:8001/api/';
-const baseAPI = 'http://192.168.0.108:8001/api/';
+import store from '../Stores/index';
+const baseAPI = 'http://192.168.1.196:8001/api/';
+// const baseAPI = 'http://192.168.0.108:8001/api/';
 
 export const Axios = axios.create({
   baseURL: baseAPI
@@ -13,7 +14,8 @@ export const APIRequest = {
   async get(url, params) {
     let queryString = convertToQueryString(params);
     url = url + "?" + queryString;
-    return Axios.get(url);
+
+    return Axios.get(url, config());
   },
 
   /**
@@ -36,7 +38,7 @@ export const APIRequest = {
   async post(url, params) {
     return new Promise((res, rej) => {
       try {
-        let response = Axios.post(url, params)
+        let response = Axios.post(url, params, config())
         return res(response);
       } catch (error) {
         rej(error)
@@ -58,6 +60,14 @@ export const APIRequest = {
     });
   }
 
+}
+
+function config() {
+  if (store.getState().user.token)
+    return {
+      headers: { Authorization: `${store.getState().user.token.access_token}` }
+    };
+  return {};
 }
 
 function convertToQueryString(params) {

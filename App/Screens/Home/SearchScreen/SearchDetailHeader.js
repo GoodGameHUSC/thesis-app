@@ -5,6 +5,7 @@ import { ScreenWidth } from 'App/Theme/Dimension.js';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import IconIonicons from 'react-native-vector-icons/Ionicons';
+import IconFeather from 'react-native-vector-icons/Feather';
 import Colors from '../../../Theme/Colors';
 
 export default function SearchDetailHeader({ text, setText, loading, onSubmit }) {
@@ -31,11 +32,11 @@ export default function SearchDetailHeader({ text, setText, loading, onSubmit })
           onChangeText={changeText}
           value={text}
         />
-        <IconIonicons name="ios-mic"
+        <IconFeather name="list"
           style={style.actionButton}
           onPress={() => set_is_open_recording(!is_open_recording)}
         />
-        <IconIonicons name="ios-qr-scanner" style={style.actionButton} />
+        {/* <IconIonicons name="ios-qr-scanner" style={style.actionButton} /> */}
       </View>
     </View>
   </>
@@ -71,7 +72,7 @@ const style = StyleSheet.create({
     borderRadius: 20
   },
   textInput: {
-    width: ScreenWidth - 135,
+    width: ScreenWidth - 100,
     borderBottomWidth: 0,
     paddingHorizontal: 10,
     // height: 30,

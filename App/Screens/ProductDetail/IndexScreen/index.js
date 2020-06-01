@@ -62,11 +62,11 @@ export default function ProductDetailIndex({ route, navigation }) {
           <View style={{ position: 'relative' }}>
             <ProductGallery gallery={product.gallery} />
             <BasicInfo product={product} />
-            <ShipMethod product={product} />
+            {/* <ShipMethod product={product} /> */}
             <Feature product={product} />
-            <ShopInfo product={product} />
             <Rating product={product} />
-            <QnA product={product} />
+            {/* <QnA product={product} /> */}
+            <ShopInfo product={product} />
             <Describe product={product} />
             <Recommendation product={product} />
             <View style={{ height: 50 }}></View>

@@ -1,11 +1,66 @@
 import { toLocaleString } from 'App/Utils/_';
+import { callAPI } from 'App/Shared/API';
 import Colors from 'App/Theme/Colors';
 import { ScreenWidth } from 'App/Theme/Dimension.js';
-import React from 'react';
-import { Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { Text, View, ToastAndroid } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
+import { useSelector } from 'react-redux';
 import Stars from '../../../Component/UIElement/Stars';
+import Toast from 'App/Screens/Component/UIElement/Toast';
+
 export default function BasicInfo({ product }) {
+
+  const user = useSelector(state => state.user.user);
+  const [loading, setLoading] = useState(false);
+
+  const presenter = {
+    /**
+     * 
+     */
+    addToWishList: async () => {
+      if (loading) return;
+      try {
+        setLoading(true);
+        await callAPI('order/add-wishlist', 'post', {
+          product_id: product._id
+        })
+        setLoading(false);
+        Toast.show(`Đã thêm ${product.name} vào danh mục yêu thích`)
+      } catch (error) {
+        alert(error);
+        setLoading(false);
+      }
+    },
+    /**
+     * 
+     */
+    removeFromWishList: async () => {
+      if (loading) return;
+      try {
+        setLoading(true);
+        await callAPI('order/remove-wishlist', 'post', {
+          product_id: product._id
+        })
+        setLoading(false);
+        Toast.show(`Đã xoá ${product.name} khỏi danh mục yêu thích`)
+      } catch (error) {
+        alert(error);
+        setLoading(false);
+      }
+    }
+  }
+
+  const helper = {
+    checkProductInWishList: () => {
+      const wishlist = user ? user.wishlist : null;
+      if (!wishlist || !(wishlist instanceof Array)) return false;
+      let existed = false;
+      wishlist.some((element) => { if (element._id == product._id) { existed = true; return true } });
+      return existed;
+    }
+  }
+
   return (
     <View style={{ backgroundColor: 'white', width: '100%', padding: 15, paddingTop: 25, borderTopWidth: 0.5, borderTopColor: Colors.lynxWhite }}>
       <Text style={[style.icon_text], { overflow: 'hidden', marginBottom: 10, fontSize: 16, fontWeight: 'bold', color: Colors.blackLight }}>{product.name}</Text>
@@ -24,7 +79,11 @@ export default function BasicInfo({ product }) {
           }
         </View>
         <View style={{ flexDirection: 'row' }}>
-          <Icon name="heart" size={20} style={{ color: Colors.grey }} onPress={() => alert("Click on more ")}></Icon>
+          {
+            helper.checkProductInWishList()
+              ? <Icon name="heart" size={20} style={{ color: Colors.grey }} onPress={presenter.removeFromWishList}></Icon>
+              : <Icon name="heart" size={20} style={{ color: Colors.grey }} onPress={presenter.addToWishList}></Icon>
+          }
         </View>
       </View>
       <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
