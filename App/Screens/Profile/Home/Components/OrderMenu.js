@@ -9,14 +9,27 @@ import IconSimple from 'react-native-vector-icons/SimpleLineIcons';
 import Colors from '../../../../Theme/Colors';
 import Helpers from '../../../../Theme/Helpers';
 import { HeaderSection, shared_styles } from './Shared';
+import { useNavigation } from '@react-navigation/native';
+import TouchableArea from 'App/Screens/Component/UIElement/TouchableArea';
 // store-mall-directory
 export default function OrderMenu() {
+
+  const navigation = useNavigation();
+
+  const presenter = {
+    goOrderHistory: () => {
+      console.log('haha')
+      navigation.navigate('Profile', { screen: 'OrderHistory' })
+    }
+
+  }
 
   return <View style={shared_styles.page_container}>
     <View style={[shared_styles.section_container]}>
       <HeaderSection
         leftText={'Đơn Hàng'}
         rightText={'Xem thêm'}
+        rightTextOnPress={presenter.goOrderHistory}
         icon={<IconFontisto name="shopping-bag-1" style={{ fontSize: 24, color: '#0984e3', marginHorizontal: 10 }} />}
       />
       <View style={{ justifyContent: 'space-between', flexDirection: 'row', alignContent: 'center' }}>
@@ -37,12 +50,12 @@ export default function OrderMenu() {
           <Text style={style.menu_order_text}>Hoàn tất</Text>
         </View>
       </View>
-      <View>
+      <TouchableArea >
         <View style={[{ padding: 10, justifyContent: 'flex-end', flex: 1, textAlign: 'right', flexDirection: 'row' }]}>
           <Text style={{ textAlign: 'right', color: Colors.blackLight }}>Đơn hàng gần đây (5)</Text>
         </View>
         {/* <WishList /> */}
-      </View>
+      </TouchableArea>
     </View>
 
     <View style={[shared_styles.section_container]}>

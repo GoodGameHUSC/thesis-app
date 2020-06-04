@@ -1,11 +1,12 @@
 import { CardStyleInterpolators, createStackNavigator } from '@react-navigation/stack';
-import { NormalHeaderOption } from 'App/Screens/Component/Header/NormaHeader';
+import { NormalHeaderOption, HeaderWithoutShadow } from 'App/Screens/Component/Header/NormaHeader';
 import AddressSetting from './Addresses/index';
 import ProfileHomeScreen from './Home/index';
 import SettingScreen from './Setting/index';
 import Helpers from 'App/Theme/Helpers';
 import React from 'react';
 import UploadProduct from './UploadProduct';
+import OrderHistoryScreen from './OrderHistory/index';
 
 const Stack = createStackNavigator();
 
@@ -24,6 +25,10 @@ export default function ProfileScreen() {
         options={{
           headerTransparent: true,
         }}
+      />
+
+      <Stack.Screen name="OrderHistory" component={OrderHistoryScreen}
+        options={HeaderWithoutShadow('Lịch sử đơn hàng')}
       />
 
       <Stack.Screen name="UploadProduct" component={UploadProduct}

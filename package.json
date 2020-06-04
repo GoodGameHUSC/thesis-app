@@ -57,7 +57,8 @@
     "recyclerlistview": "^3.0.0",
     "redux": "^4.0.5",
     "redux-axios-middleware": "^4.0.1",
-    "redux-persist": "^6.0.0"
+    "redux-persist": "^6.0.0",
+    "socket.io-client": "^2.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.6.2",

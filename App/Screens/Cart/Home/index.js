@@ -45,8 +45,9 @@ export default function CartIndexScreen() {
             </View>
             :
             <View style={[Helpers.flexColumn, { marginTop: 200 }]}>
-              <IconFile path={require('../../../Assets/Icons/archive.png')} size={60} />
-              <Text style={{ color: Colors.textDark, marginTop: 10 }}>Bạn không có sản phẩm nào trong giỏ hàng</Text>
+              <IconFile path={require('../../../Assets/Icons/notes.png')} size={120} />
+              <Text style={{ color: Colors.grey, marginTop: 10 }}>Bạn không có   </Text>
+              <Text style={{ color: Colors.grey, marginTop: 10 }}>sản phẩm nào trong giỏ hàng</Text>
               <TouchableArea onPress={goHome} style={{ backgroundColor: Colors.mathPurple, marginTop: 20, padding: 10, borderRadius: 20, overflow: "hidden" }}>
                 <Text style={{ color: Colors.white, fontSize: 16 }}>Tiếp tục mua sắm</Text>
               </TouchableArea>
