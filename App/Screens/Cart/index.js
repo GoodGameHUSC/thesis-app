@@ -9,6 +9,7 @@ import CartIndexScreen from './Home/index';
 import OrderScreen from './Order/index';
 import ShipMethodScreen from './ShipMethod/index';
 import ResultsScreen from './Results/index';
+import PaymentMethod from './PaymentMethod/index';
 
 
 const Stack = createStackNavigator();
@@ -62,6 +63,17 @@ export default function CartStack() {
       />
 
       <Stack.Screen name="ShipMethod" component={ShipMethodScreen}
+        options={{
+          headerTitleStyle: {
+            fontSize: 18
+          },
+          headerTintColor: Colors.seaRock,
+          headerTitle: 'Chọn địa chỉ nhận hàng',
+          headerTitleAlign: 'center'
+        }}
+      />
+
+      <Stack.Screen name="PaymentMethod" component={PaymentMethod}
         options={{
           headerTitleStyle: {
             fontSize: 18

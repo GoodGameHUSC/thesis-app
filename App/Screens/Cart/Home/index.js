@@ -9,7 +9,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import IconSimple from 'react-native-vector-icons/SimpleLineIcons';
 import TouchableArea from 'App/Screens/Component/UIElement/TouchableArea';
 import { useNavigation } from '@react-navigation/native';
-import PreviewBill from 'App/Screens/Cart/Home/Section/PreviewBill';
+import PreviewBill from './Section/PreviewBill';
 import Navigator from 'App/Shared/Navigator';
 export default function CartIndexScreen() {
   const cart = useSelector(state => state.carts);

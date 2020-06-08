@@ -17,15 +17,15 @@ export default function PreviewBill({ carts, goOrder }) {
 
   useEffect(() => {
     let totalCart = 0;
+    console.log(carts);
     carts.forEach(cart => {
       totalCart += cart.product.price * cart.amount
     });
     setTotal(totalCart)
-  }, carts)
+  }, [carts])
   return (<>
     <View style={style.container}>
       <View style={{ overflow: 'hidden', flexDirection: 'row', justifyContent: 'flex-end', width: ScreenWidth, backgroundColor: 'white', paddingBottom: 5 }}>
-
         <View style={[Helpers.flexRow, { justifyContent: 'space-between', flex: 1, backgroundColor: Colors.white, marginRight: 0, paddingHorizontal: 10 }]}>
           <Text style={{
             fontSize: 14,

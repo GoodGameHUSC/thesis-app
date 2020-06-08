@@ -19,6 +19,7 @@ import Toast from 'App/Screens/Component/UIElement/Toast';
 export default function OrderScreen() {
   const [selectedAddress, setSelectedAddress] = useState(null);
   const [selectedShipMethod, setSelectedShipMethod] = useState(null);
+  const [selectedPayMethod, setSelectedPayMethod] = useState(null);
   const [loading, setLoading] = useState(false);
   const cart = useSelector(state => state.carts);
   const user = useSelector(state => state.user.user);
@@ -42,6 +43,14 @@ export default function OrderScreen() {
       }
     }),
 
+    goPaymentMethodChange: () => navigation.navigate('Cart', {
+      screen: 'PaymentMethod',
+      params: {
+        setSelectedPayMethod: (method) => { setSelectedPayMethod(method) },
+        method: selectedPayMethod
+      }
+    }),
+
     goOrderSuccess: () => navigation.navigate('Cart', {
       screen: 'Result',
       params: {
@@ -52,16 +61,27 @@ export default function OrderScreen() {
 
   async function order() {
     if (!validate()) return;
-    setLoading(true);
-    await OrderBehavior.makeOrder({ selectedAddress, selectedShipMethod, cart, user });
-    setLoading(false);
-    navigate.goOrderSuccess();
+    try {
+      setLoading(true);
+      await OrderBehavior.makeOrder({
+        address: selectedAddress,
+        ship_method: selectedShipMethod,
+        payment_method: selectedPayMethod,
+        cart, user
+      });
+      setLoading(false);
+      navigate.goOrderSuccess();
+    } catch (error) {
+      setLoading(false);
+      Toast.show(error);
+    }
   }
 
   function validate() {
     let error = null;
     if (!selectedAddress) error = 'Vui lòng chọn địa chỉ giao hàng'
     else if (!selectedShipMethod) error = 'Vui lòng chọn phương thức vận chuyển'
+    else if (!selectedPayMethod) error = 'Vui lòng chọn phương thức thanh toán'
     if (!error) return true;
     Toast.show(error);
     return false;
@@ -130,6 +150,33 @@ export default function OrderScreen() {
                     </View>
                     <IconSimple size={14} name="arrow-right" style={{ color: Colors.darkGrey }} />
                   </TouchableArea>
+                  <TouchableArea onPress={navigate.goPaymentMethodChange} style={styles.sectionContainer}>
+                    <View style={{ flexDirection: 'row', alignItems: 'baseline' }} >
+                      <IconMaterialCommunityIcons name="wallet-membership" size={20} style={styles.sectionIcon} />
+                      {
+                        selectedPayMethod ?
+                          (
+                            <View>
+                              <Text style={styles.sectionTitle}>
+                                Phương thức thanh toán
+                            </Text>
+                              <Text style={{ color: Colors.textDark, fontSize: 14, color: Colors.darkGrey }}>
+                                {selectedPayMethod.name}
+                              </Text>
+                            </View>
+                          ) : (
+                            <View>
+                              <Text style={styles.sectionTitle}>
+                                Chưa chọn phương thức thanh toán
+                            </Text>
+                            </View>
+                          )
+                      }
+                    </View>
+                    <IconSimple size={14} name="arrow-right" style={{ color: Colors.darkGrey }} />
+                  </TouchableArea>
+
+
                   <View onPress={navigate.goShipMethodChange} style={[styles.sectionContainer, { marginBottom: 0 }]}>
                     <View style={{ flexDirection: 'row', alignItems: 'baseline' }} >
                       <IconMaterialCommunityIcons name="format-list-numbered" size={20} style={styles.sectionIcon} />
