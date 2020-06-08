@@ -35,7 +35,7 @@ export default function OrderAction({ carts, order }) {
 
           <View style={[Helpers.flexColumn, { alignItems: 'flex-end' }]}>
             <Text style={{ fontSize: 14, color: Colors.magazineBlue, }}>
-              Tổng:   <Text style={{ fontSize: 16, color: Colors.redOrange, fontWeight: 'bold' }}>{toLocaleString(total)}đ</Text>
+              Tổng cộng:   <Text style={{ fontSize: 16, color: Colors.redOrange, fontWeight: 'bold' }}>{toLocaleString(total)}đ</Text>
             </Text>
             {/* <Text style={{ fontSize: 12, color: Colors.magazineBlue, }}>
               Đã giảm -14,000đ

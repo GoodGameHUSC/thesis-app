@@ -11,6 +11,7 @@ import Helpers from '../../../../Theme/Helpers';
 import { HeaderSection, shared_styles } from './Shared';
 import { useNavigation } from '@react-navigation/native';
 import TouchableArea from 'App/Screens/Component/UIElement/TouchableArea';
+import Navigator from '../../../../Shared/Navigator';
 // store-mall-directory
 export default function OrderMenu() {
 
@@ -18,8 +19,7 @@ export default function OrderMenu() {
 
   const presenter = {
     goOrderHistory: () => {
-      console.log('haha')
-      navigation.navigate('Profile', { screen: 'OrderHistory' })
+      Navigator.navigateAuth(navigation, 'Profile', { screen: 'OrderHistory' })
     }
 
   }

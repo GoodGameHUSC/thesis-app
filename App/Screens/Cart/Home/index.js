@@ -10,13 +10,14 @@ import IconSimple from 'react-native-vector-icons/SimpleLineIcons';
 import TouchableArea from 'App/Screens/Component/UIElement/TouchableArea';
 import { useNavigation } from '@react-navigation/native';
 import PreviewBill from 'App/Screens/Cart/Home/Section/PreviewBill';
+import Navigator from 'App/Shared/Navigator';
 export default function CartIndexScreen() {
   const cart = useSelector(state => state.carts);
   const carts = Object.values(cart);
   const navigation = useNavigation();
 
   const goHome = () => navigation.navigate('Home')
-  const goOrder = () => navigation.navigate('Cart', { screen: 'Order' })
+  const goOrder = () => Navigator.navigateAuth(navigation, 'Cart', { screen: 'Order' })
   return (
     <View>
       <View style={{ paddingTop: 5 }}>

@@ -6,6 +6,7 @@ import { BarIndicator } from 'react-native-indicators';
 import Colors from '../../../Theme/Colors';
 import ProductGallery from '../Component/ProductGallery';
 import { BasicInfo, Describe, Feature, QnA, Rating, Recommendation, ShipMethod, ShopInfo, BuyAction } from './Partials';
+import LoadingScreen from 'App/Screens/Component/Screen/LoadingScreen';
 
 export default function ProductDetailIndex({ route, navigation }) {
   const [refreshing, setRefreshing] = useState(false);
@@ -44,9 +45,7 @@ export default function ProductDetailIndex({ route, navigation }) {
 
   return (
     loading ?
-      <View style={{ flex: 1, marginTop: 150 }}>
-        <BarIndicator color={Colors.grey} count={10} size={15} />
-      </View> :
+      <LoadingScreen /> :
       <View>
         <ScrollView
           refreshControl={

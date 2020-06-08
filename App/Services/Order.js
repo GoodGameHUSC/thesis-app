@@ -2,7 +2,10 @@ import { callAPI } from 'App/Shared/API';
 
 class OrderBehavior {
 
-  static makeOrder(data) {
+  static async makeOrder(data) {
+
+    const { selectedAddress, selectedShipMethod, cart, user } = data;
+    debugger;
     return new Promise((res, rej) => {
       setTimeout(() => res(true), 1000)
     });

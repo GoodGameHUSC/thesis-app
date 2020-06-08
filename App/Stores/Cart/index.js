@@ -6,6 +6,7 @@ export const add_product = createAction('add_product')
 export const remove_product = createAction('remove_product')
 export const increment = createAction('increment')
 export const decrement = createAction('decrement')
+export const remove_cart = createAction('remove_cart')
 // https://reactjs.org/docs/update.html
 const removeKey = (key, { [key]: _, ...rest }) => rest;
 // Reducer
@@ -36,6 +37,9 @@ const cartReducer = createReducer(INIT_STATE, {
     const newState = { ...state };
     newState[id] = { ...state[id], amount: state[id].amount == 1 ? 1 : state[id].amount - 1 }
     return newState;
+  },
+  [remove_cart]: (state, action) => {
+    return INIT_STATE;
   },
 })
 

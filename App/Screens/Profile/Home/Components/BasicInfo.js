@@ -6,6 +6,7 @@ import Icon from 'react-native-vector-icons/Feather';
 import { useSelector } from 'react-redux';
 import Colors from 'App/Theme/Colors';
 import UserBehavior from 'App/Services/User';
+import Navigator from 'App/Shared/Navigator';
 // const image = { uri: "https://reactjs.org/logo-og.png" };
 export default function BasicInfo() {
 
@@ -34,13 +35,15 @@ export default function BasicInfo() {
 
   const Header = (
     <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between', marginVertical: 10, alignItems: 'center' }}>
-      <TouchableOpacity activeOpacity={0.8} style={{ elevation: 2, backgroundColor: 'white', paddingVertical: 4, paddingHorizontal: 8, borderTopRightRadius: 20, borderBottomRightRadius: 20 }}>
+      <TouchableOpacity
+        onPress={() => Navigator.navigateAuth(navigation, 'Profile', { screen: 'Index.Sell' })}
+        activeOpacity={0.8} style={{ elevation: 2, backgroundColor: 'white', paddingVertical: 4, paddingHorizontal: 8, borderTopRightRadius: 20, borderBottomRightRadius: 20 }}>
         <Text style={{ color: Colors.redOrange, fontWeight: 'bold' }}>Bán Hàng <Icon name={'chevron-right'} size={14} /></Text>
       </TouchableOpacity>
-      <View style={{ flexDirection: 'row', width: 90, justifyContent: 'space-between', color: 'white', marginHorizontal: 10 }}>
+      <View style={{ flexDirection: 'row', width: user ? 90 : 50, justifyContent: 'space-between', color: 'white', marginHorizontal: 10 }}>
         <Icon style={{ color: 'white' }} name={'shopping-cart'} size={20} onPress={() => navigation.navigate('Cart')} />
-        <Icon style={{ color: 'white' }} name={'settings'} size={20} onPress={() => navigation.navigate('Profile', { screen: 'Setting' })} />
-        <Icon style={{ color: 'white' }} name={'log-out'} size={20} onPress={_logout} />
+        <Icon style={{ color: 'white' }} name={'settings'} size={20} onPress={() => Navigator.navigateAuth(navigation, 'Profile', { screen: 'Setting' })} />
+        {user && <Icon style={{ color: 'white' }} name={'log-out'} size={20} onPress={_logout} />}
       </View>
     </View>
   )

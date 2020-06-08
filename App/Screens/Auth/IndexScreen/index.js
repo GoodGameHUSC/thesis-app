@@ -4,8 +4,12 @@ import { Image, StyleSheet, Text, View } from 'react-native';
 import Colors from '../../../Theme/Colors';
 import Login from './Login';
 import Signup from './Signup';
+import Toast from '../../Component/UIElement/Toast';
 const Tab = createMaterialTopTabNavigator();
 export default function AuthIndex({ route, navigation }) {
+
+  // const message = route.params?.message;
+  // if (message) Toast.show(message)
   return (
     <Tab.Navigator
       tabBarOptions={{

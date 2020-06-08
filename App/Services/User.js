@@ -7,7 +7,6 @@ class UserBehavior {
     const user = login_response.user;
     const token = login_response.token;
     const login_action = login({ user, token })
-    console.log(token);
     store.dispatch(login_action);
   }
 

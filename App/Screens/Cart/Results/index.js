@@ -1,10 +1,12 @@
-import { useNavigation, useRoute } from '@react-navigation/native';
+import { useNavigation, useRoute, useFocusEffect, CommonActions } from '@react-navigation/native';
 import React from 'react';
-import { Image, ScrollView, StyleSheet, View, Text } from 'react-native';
+import { Image, ScrollView, StyleSheet, View, Text, BackHandler } from 'react-native';
 import { useSelector } from 'react-redux';
 import Colors from '../../../Theme/Colors';
 import { TouchableArea } from 'App/Screens/Component/UIElement';
 import LottieView from 'lottie-react-native';
+import store from 'App/Stores/index';
+import { remove_cart } from 'App/Stores/Cart/index';
 
 export default function ResultsScreen() {
 
@@ -13,13 +15,34 @@ export default function ResultsScreen() {
 
   const navigate = {
     goHome: () => navigation.navigate('Home'),
+    onBackPress: () => {
+
+      const reset = state => {
+        const routes = state.routes.slice(0, 1);
+        return CommonActions.reset({
+          ...state,
+          routes,
+          index: 0,
+        });
+      }
+
+      navigation.dispatch(reset);
+
+      const remove_cart_action = remove_cart()
+      store.dispatch(remove_cart_action);
+      navigation.navigate('Home');
+
+      return true;
+    }
   }
-  const address = route.params?.address ? route.params?.address : {};
-  const listAddress = useSelector(state => state.user?.user?.address_book);
-  const selectAddress = (item) => {
-    navigation.goBack();
-    route.params?.selectAddress(item);
-  }
+  useFocusEffect(
+    React.useCallback(() => {
+      BackHandler.addEventListener('hardwareBackPress', navigate.onBackPress);
+      return () =>
+        BackHandler.removeEventListener('hardwareBackPress', navigate.onBackPress);
+    }, [])
+  );
+
   return (
     <View>
       <View style={{}}>
@@ -44,7 +67,7 @@ export default function ResultsScreen() {
                   </Text>
                 </View>
 
-                <TouchableArea onPress={navigate.goHome} style={{ backgroundColor: Colors.mathPurple, padding: 10, borderRadius: 20, overflow: "hidden", paddingHorizontal: 15 }}>
+                <TouchableArea onPress={navigate.onBackPress} style={{ backgroundColor: Colors.mathPurple, padding: 10, borderRadius: 20, overflow: "hidden", paddingHorizontal: 15 }}>
                   <Text style={{ color: Colors.white, fontSize: 16 }}>Tiếp tục mua sắm</Text>
                 </TouchableArea>
               </View>

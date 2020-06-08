@@ -6,9 +6,8 @@ import LottieView from 'lottie-react-native';
 
 export default function LoadingScreen({ text }) {
   return <View style={styles.container}>
-    <LottieView style={{ width: 250 }} source={require('../../../Assets/Images/animation/8707-loading.json')} autoPlay loop />
+    <LottieView style={{ width: 200 }} source={require('../../../Assets/Images/animation/21462-loader-jumps.json')} autoPlay loop />
   </View>
-
 }
 
 

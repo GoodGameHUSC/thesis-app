@@ -1,18 +1,17 @@
-import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/stack';
-import HeaderTitle from 'App/Screens/Component/Header/HeaderTitle';
+import { CardStyleInterpolators, createStackNavigator } from '@react-navigation/stack';
+import { NormalHeaderOption } from 'App/Screens/Component/Header/NormaHeader';
 import Helpers from 'App/Theme/Helpers';
 import React from 'react';
 import { View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Colors from '../../Theme/Colors';
-import RightButton from '../Component/Header/RightButton';
-import HomeChatScreen from './ChatHome';
 import BotChatScreen from './BotChatScreen';
-import { NormalHeaderOption } from 'App/Screens/Component/Header/NormaHeader';
-
+import HomeChatScreen from './ChatHome';
+import { useFocusEffect } from '@react-navigation/native';
 const Stack = createStackNavigator();
 
-export default function ChatScreenStack() {
+export default function ChatScreenStack({ navigation }) {
+
   return (
     <Stack.Navigator
       screenOptions={{

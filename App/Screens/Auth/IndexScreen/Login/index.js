@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux'
 export default function Login({ route, navigation }) {
   const [credential, setCredential] = useState('hung@gmail.com');
   const [password, setPassword] = useState('password');
+
   async function login() {
     if (!credential) { Toast.show("Vui lòng nhập tên đăng nhập/email"); return }
     if (!password) { Toast.show("Vui lòng nhập mật khẩu"); return }

@@ -12,6 +12,8 @@ import Colors from '../../../Theme/Colors';
 import OrderAction from './Section/OrderAction';
 import OrderElement from './Section/OrderElement';
 import OrderBehavior from '../../../Services/Order';
+import LoadingScreen from 'App/Screens/Component/Screen/LoadingScreen';
+import Toast from 'App/Screens/Component/UIElement/Toast';
 
 
 export default function OrderScreen() {
@@ -19,6 +21,7 @@ export default function OrderScreen() {
   const [selectedShipMethod, setSelectedShipMethod] = useState(null);
   const [loading, setLoading] = useState(false);
   const cart = useSelector(state => state.carts);
+  const user = useSelector(state => state.user.user);
   const carts = Object.values(cart);
   const navigation = useNavigation();
 
@@ -27,14 +30,14 @@ export default function OrderScreen() {
     goAddressChange: () => navigation.navigate('Cart', {
       screen: 'Address',
       params: {
-        selectAddress: (address) => { debugger; setSelectedAddress(address) },
+        selectAddress: (address) => { setSelectedAddress(address) },
         address: selectedAddress
       }
     }),
     goShipMethodChange: () => navigation.navigate('Cart', {
       screen: 'ShipMethod',
       params: {
-        selectShipMethod: (method) => { debugger; setSelectedShipMethod(method) },
+        selectShipMethod: (method) => { setSelectedShipMethod(method) },
         method: selectedShipMethod
       }
     }),
@@ -48,14 +51,24 @@ export default function OrderScreen() {
   }
 
   async function order() {
+    if (!validate()) return;
     setLoading(true);
-    await OrderBehavior.makeOrder({});
-    // setLoading(false);
+    await OrderBehavior.makeOrder({ selectedAddress, selectedShipMethod, cart, user });
+    setLoading(false);
     navigate.goOrderSuccess();
   }
 
+  function validate() {
+    let error = null;
+    if (!selectedAddress) error = 'Vui lòng chọn địa chỉ giao hàng'
+    else if (!selectedShipMethod) error = 'Vui lòng chọn phương thức vận chuyển'
+    if (!error) return true;
+    Toast.show(error);
+    return false;
+  }
+
   return (
-    loading ? <Text>Loading</Text>
+    loading ? <LoadingScreen />
       : <View>
         <View style={{}}>
           {

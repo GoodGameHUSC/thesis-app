@@ -24,7 +24,7 @@ export default function PreviewBill({ carts, goOrder }) {
   }, carts)
   return (<>
     <View style={style.container}>
-      <View style={{ overflow: 'hidden', flexDirection: 'row', justifyContent: 'flex-end', width: ScreenWidth, backgroundColor: 'white' }}>
+      <View style={{ overflow: 'hidden', flexDirection: 'row', justifyContent: 'flex-end', width: ScreenWidth, backgroundColor: 'white', paddingBottom: 5 }}>
 
         <View style={[Helpers.flexRow, { justifyContent: 'space-between', flex: 1, backgroundColor: Colors.white, marginRight: 0, paddingHorizontal: 10 }]}>
           <Text style={{
