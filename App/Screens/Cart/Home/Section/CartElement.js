@@ -57,7 +57,7 @@ export default function CartElement({ item }) {
         <View style={[Helpers.flexRow, { borderBottomWidth: 0.5, borderBottomColor: Colors.bg, paddingVertical: 8, paddingHorizontal: 15 }]}>
           <View style={[Helpers.flexRow, { color: Colors.darkGrey }]}>
             <IconFile path={require('../../../../Assets/Images/screens/ic_launcher_round.png')} size={20} />
-            <Text style={{ fontSize: 14, color: Colors.magazineBlue, marginLeft: 5, fontWeight: 'bold' }}>{product.shop || 'Được bán bởi Shopping Me'}</Text>
+            <Text style={{ fontSize: 14, color: Colors.magazineBlue, marginLeft: 5, fontWeight: 'bold' }}>{product.shop?.name || 'Được bán bởi Shopping Me'}</Text>
           </View>
           <IconSimple size={10} name="arrow-right" style={{ color: Colors.textDark }} />
         </View>

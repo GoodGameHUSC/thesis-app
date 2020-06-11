@@ -14,7 +14,7 @@ export default function ProductDetailIndex({ route, navigation }) {
   const [loading, setLoading] = useState(true);
 
   const fetchProduct = useAPICreator('product/detail', (response) => {
-    setProduct(response.data);
+    setProduct({ ...response.data.product, list_rating: response.data.rating });
     setLoading(false)
   }, 'get', { id: route.params.id })
 

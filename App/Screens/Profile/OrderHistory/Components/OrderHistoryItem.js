@@ -12,6 +12,7 @@ import { HeaderSection, shared_styles } from './Shared';
 // store-mall-directory
 export default function OrderHistoryItem({ order }) {
 
+  console.log(order)
   return <View style={shared_styles.page_container}>
     <View style={[shared_styles.section_container]}>
       <HeaderSection

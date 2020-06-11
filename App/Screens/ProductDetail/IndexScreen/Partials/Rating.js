@@ -6,6 +6,7 @@ import IconFile from '../../../Component/UIElement/IconFile';
 import Stars from 'App/Screens/Component/UIElement/Stars';
 import TouchableArea from 'App/Screens/Component/UIElement/TouchableArea';
 import FastImage from 'react-native-fast-image';
+import { useNavigation } from '@react-navigation/native';
 
 const data = [
   {
@@ -31,9 +32,10 @@ const data = [
 ];
 
 export default function Rating({ product }) {
-  console.log(product);
 
+  const list_rating = product.list_rating;
 
+  const navigation = useNavigation();
   return (
     <View style={{ backgroundColor: 'white', width: '100%', padding: 15, marginTop: 5 }}>
       <Text style={[style.icon_text], {
@@ -41,48 +43,65 @@ export default function Rating({ product }) {
         fontWeight: 'bold', color: Colors.magazineBlue
       }}>Đánh giá và nhận xét</Text>
       {
-        data.length > 0 ?
+        list_rating.length > 0 ?
           (
             <View>
               <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' }}>
                 <Stars numberStar={product.rating} />
                 <Text style={{ color: Colors.darkGrey, fontSize: 15, marginLeft: 10 }}>
-                  {product.rating}/5 (192 đánh giá)
+                  {product.rating}/5
+                  {/* (192 đánh giá) */}
                 </Text>
               </View>
 
               <FlatList
-                data={data}
+                data={list_rating}
                 keyExtractor={item => item._id}
                 renderItem={({ item }) => <View style={{ flexDirection: 'row', paddingVertical: 10, borderTopWidth: 1, borderTopColor: Colors.lynxWhite, marginTop: 10 }}>
-                  <FastImage
-                    style={{ width: 20, height: undefined, aspectRatio: 1, borderRadius: 20 }}
-                    source={{
-                      uri: item.user.avatar,
-                      priority: FastImage.priority.high,
-                    }}
-                    resizeMode={FastImage.resizeMode.center}
-                  />
+                  {
+                    item.user.avatar ?
+                      <FastImage
+                        style={{ width: 20, height: undefined, aspectRatio: 1, borderRadius: 20 }}
+                        source={{
+                          uri: item.user.avatar,
+                          priority: FastImage.priority.high,
+                        }}
+                        resizeMode={FastImage.resizeMode.center}
+                      />
+                      : <Image
+                        source={require('../../../../Assets/Images/screens/man.png')}
+                        style={{ width: 20, height: undefined, aspectRatio: 1, borderRadius: 20 }}
+                      />
+                  }
                   <View style={{ marginLeft: 10 }}>
-                    <Text style={{ color: Colors.textDark, fontWeight: 'bold', fontSize: 13, marginBottom: 10 }}>{item.user.name}</Text>
+                    <Text style={{ color: Colors.textDark, fontWeight: 'bold', fontSize: 13, marginBottom: 10 }}>{item.user.username}</Text>
                     <Text style={{ color: Colors.darkGrey }}>
                       {item.content}
                     </Text>
                     <View style={{ marginTop: 10, }}>
                       {/* <Text style={{ color: Colors.darkGrey, fontSize: 12 }}>{item.createdAt.toLocaleDateString("en-US", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</Text> */}
-                      <Text style={{ color: Colors.darkGrey, fontSize: 12 }}>{item.createdAt.toDateString()}</Text>
+                      {
+                        item.created_at &&
+                        <Text style={{ color: Colors.darkGrey, fontSize: 12 }}>{(new Date(item.created_at)).toLocaleDateString("vi-VN")}</Text>
+                      }
                     </View>
                   </View>
 
                 </View>}
               />
-              <TouchableArea style={{ borderTopWidth: 1, borderTopColor: Colors.lynxWhite, paddingTop: 10, marginTop: 15 }}>
+              <TouchableArea style={{ borderTopWidth: 1, borderTopColor: Colors.lynxWhite, paddingTop: 10, marginTop: 15 }}
+                onPress={() => navigation.navigate('ProductDetail', {
+                  screen: "Rating"
+                })}
+              >
 
                 <Text style={{
                   overflow: 'hidden', fontSize: 14, fontWeight: 'bold',
                   textAlign: 'center', color: Colors.redOrange,
 
-                }}>Xem tất cả (192 đánh giá)</Text>
+                }}>Xem tất cả đánh giá
+                  {/* (192 đánh giá) */}
+                </Text>
               </TouchableArea>
             </View>
           ) : <Text>Hiện chưa có đánh giá nào</Text>

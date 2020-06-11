@@ -7,7 +7,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Colors from '../../Theme/Colors';
 import BotChatScreen from './BotChatScreen';
 import HomeChatScreen from './ChatHome';
-import { useFocusEffect } from '@react-navigation/native';
+import NormalChatScreens from './NormalChatScreen';
 const Stack = createStackNavigator();
 
 export default function ChatScreenStack({ navigation }) {
@@ -42,7 +42,11 @@ export default function ChatScreenStack({ navigation }) {
       />
 
       <Stack.Screen name="HelpDesk" component={BotChatScreen}
-        options={NormalHeaderOption('Nhân viên tư vấn')}
+        options={NormalHeaderOption('Conversation')}
+      />
+
+      <Stack.Screen name="ChatRoom" component={NormalChatScreens}
+        options={({ route }) => NormalHeaderOption(route.params?.conversation?.name)}
       />
     </Stack.Navigator>
   )

@@ -6,6 +6,8 @@ import Colors from '../../Theme/Colors';
 import Header from './Component/Header';
 import ProductDetailIndex from './IndexScreen';
 import GalleryScreen from './GalleryScreen/index';
+import RatingScreen from './RatingScreen/index';
+import { NormalHeaderOption } from 'App/Screens/Component/Header/NormaHeader';
 
 const Stack = createStackNavigator();
 export default function ProductDetailStack() {
@@ -39,6 +41,11 @@ export default function ProductDetailStack() {
           headerTintColor: 'white',
           headerTitle: 'Thư viện ảnh'
         }}
+      />
+
+      <Stack.Screen name="Rating"
+        component={RatingScreen}
+        options={NormalHeaderOption("Đánh giá")}
       />
 
     </Stack.Navigator>

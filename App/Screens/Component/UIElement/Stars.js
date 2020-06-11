@@ -11,7 +11,7 @@ export default function Stars({
   return (
     <View style={{ flexDirection: 'row' }}>
       {[1, 2, 3, 4, 5].map(index => {
-        const name = index < star ? "ios-star" : index == Math.ceil(star) ? "ios-star-half" : "ios-star-outline";
+        const name = index <= star ? "ios-star" : index == Math.ceil(star) ? "ios-star-half" : "ios-star-outline";
         return <Icon name={name} size={size || 16} key={index} style={{ color: color || "#faca51", marginRight: 2 }} />
       })}
     </View>
