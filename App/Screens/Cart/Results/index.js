@@ -60,7 +60,7 @@ export default function ResultsScreen() {
                 </View>
                 <View style={{ padding: 40 }}>
                   <Text style={{ fontWeight: 'bold', textAlign: 'center', fontSize: 16, color: Colors.darkGrey }}>
-                    Đơn Hàng #12343234 của bạn đã được tạo thành công.{' '}
+                    Đơn hàng của bạn đã được tạo thành công.{' '}
                     <Text style={{ fontWeight: 'normal', fontSize: 14, color: Colors.grey }}>
                       Vui lòng theo dõi lịch sử đặt hàng để nhận hàng từ đơn vị vận chuyển.
                       </Text>

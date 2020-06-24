@@ -12,12 +12,13 @@ import IconSimple from 'react-native-vector-icons/SimpleLineIcons';
 import { decrement, increment, remove_product } from '../../../../Stores/Cart/index';
 import { Colors } from '../../../../Theme';
 
-export default function OrderElement({ item }) {
+export default function OrderElement({ item, shipMethod }) {
 
   const navigation = useNavigation();
 
   const { product, amount } = item;
 
+  console.log(shipMethod)
   const remove = () => {
     const remove_product_action = remove_product(product._id)
     store.dispatch(remove_product_action);
@@ -41,6 +42,7 @@ export default function OrderElement({ item }) {
     },
   });
 
+  const total = shipMethod ? Math.round(product.real_price * amount * (1.1 + shipMethod.percent) / 100) * 100 : product.real_price * amount;
   return (
     <View style={[style.container, { backgroundColor: Colors.white }]}>
       <TouchableOpacity key={product._id} onPress={() => openProduct(item)} activeOpacity={0.9} style={{ paddingTop: 10 }}>
@@ -72,18 +74,30 @@ export default function OrderElement({ item }) {
         <View style={[Helpers.flexRow, { paddingVertical: 15, borderTopColor: Colors.bg, borderTopWidth: 0.5 }]}>
           <Text style={{ fontSize: 14, color: Colors.darkGrey }}>Đơn giá
           </Text>
-          <Text style={{ fontSize: 14, color: Colors.redOrange, }}>{toLocaleString(product.price)} VND</Text>
+          <Text style={{ fontSize: 14, color: Colors.redOrange, }}>{toLocaleString(product.real_price)} VND</Text>
         </View>
-        <View style={[Helpers.flexRow, { paddingVertical: 15, borderTopColor: Colors.bg, borderTopWidth: 0.5 }]}>
-          <Text style={{ fontSize: 14, color: Colors.darkGrey }}>Phí vận chuyển
+
+        {
+          shipMethod &&
+          <View style={[Helpers.flexRow, { paddingVertical: 15, borderTopColor: Colors.bg, borderTopWidth: 0.5 }]}>
+            <Text style={{ fontSize: 14, color: Colors.darkGrey }}>Phí vận chuyển
           </Text>
-          <Text style={{ fontSize: 14, color: Colors.redOrange, }}>{toLocaleString(product.price * 0.1)} VND</Text>
+            <Text style={{ fontSize: 14, color: Colors.redOrange, }}>{toLocaleString(product.real_price * amount * shipMethod.percent)} VND</Text>
+          </View>
+
+        }
+
+        <View style={[Helpers.flexRow, { paddingVertical: 15, borderTopColor: Colors.bg, borderTopWidth: 0.5 }]}>
+          <Text style={{ fontSize: 14, color: Colors.darkGrey }}>Thuế
+          </Text>
+          <Text style={{ fontSize: 14, color: Colors.redOrange, }}>{toLocaleString(product.real_price * 0.1)} VND</Text>
         </View>
+
         <View style={[Helpers.flexRow, { paddingVertical: 15, borderTopColor: Colors.bg, borderTopWidth: 0.5 }]}>
           <Text style={{ fontSize: 14, color: Colors.darkGrey }}>Tổng tiền
           ({amount} sản phẩm)
           </Text>
-          <Text style={{ fontSize: 16, color: Colors.redOrange, fontWeight: 'bold' }}>{toLocaleString(product.price * amount)} VND</Text>
+          <Text style={{ fontSize: 16, color: Colors.redOrange, fontWeight: 'bold' }}>{toLocaleString(total)} VND</Text>
         </View>
       </View>
 

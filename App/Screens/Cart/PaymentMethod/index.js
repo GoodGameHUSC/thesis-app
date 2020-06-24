@@ -21,10 +21,10 @@ export default function PaymentMethod() {
       'name': 'Thanh toán khi nhận hàng',
       'id': 2,
     },
-    {
-      'name': 'Thanh toán bằng thẻ tín dụng',
-      'id': 3,
-    }
+    // {
+    //   'name': 'Thanh toán bằng thẻ tín dụng',
+    //   'id': 3,
+    // }
   ]
   const method = route.params?.method ? route.params?.method : {};
   const confirm = (item) => {
@@ -41,19 +41,7 @@ export default function PaymentMethod() {
                 <FlatList
                   keyExtractor={item => item._id}
                   data={listShipMethod}
-                  renderItem={({ item }) => (
-                    <TouchableArea style={styles.itemContainer} onPress={() => confirm(item)}>
-                      <View>
-                        <Text style={{ color: Colors.textDark, fontSize: 14, color: Colors.darkGrey }}>
-                          {item.name}
-                        </Text>
-                      </View>
-                      {
-                        method.id == item.id &&
-                        <CheckBoxControl style={{}} isChecked={method.id == item.id} />
-                      }
-                    </TouchableArea>
-                  )}
+                  renderItem={({ item }) => <Method item={item} confirm={confirm} method={method} />}
                 >
                 </FlatList>
                 {/* <Icon name="location-on" size={20} style={{ color: Colors.grey, marginLeft: 10 }} /> */}
@@ -66,6 +54,21 @@ export default function PaymentMethod() {
   )
 }
 
+function Method({ item, confirm, method }) {
+  return (
+    <TouchableArea style={styles.itemContainer} onPress={() => confirm(item)}>
+      <View>
+        <Text style={{ color: Colors.textDark, fontSize: 14, color: Colors.darkGrey }}>
+          {item.name}
+        </Text>
+      </View>
+      {
+        method.id == item.id &&
+        <CheckBoxControl style={{}} isChecked={method.id == item.id} />
+      }
+    </TouchableArea>
+  )
+}
 
 const styles = StyleSheet.create({
   container: {

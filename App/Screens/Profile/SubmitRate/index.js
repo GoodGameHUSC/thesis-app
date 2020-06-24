@@ -15,7 +15,8 @@ import ImagePicker from 'react-native-image-picker';
 export default function SubmitRateScreen({ }) {
   const route = useRoute();
   const navigation = useNavigation();
-  const { product } = route.params;
+  const { product, order } = route.params;
+  console.log(order);
   const [content, setContent] = useState('Đánh giá của Shop và sản phẩm phản ánh mức độ hài lòng cũng như trải nghiệm của người mua với sản phẩm của bạn. Với những người mua hàng tiềm năng thì đánh giá của Shop và sản phẩm giúp cung cấp những thông tin quan ');
   const [star, setStar] = useState(4)
   const [avatarSource, setAvatarSource] = useState(null);
@@ -41,6 +42,7 @@ export default function SubmitRateScreen({ }) {
       data.append("product_id", product._id)
       data.append("content", content)
       data.append("star", star)
+      data.append("order_id", order._id)
 
       debugger;
       if (photo)
@@ -129,7 +131,7 @@ export default function SubmitRateScreen({ }) {
             backgroundColor: Colors.bg, width: '100%', marginTop: 40, marginBottom: 10, borderRadius: 5, textAlign: 'center', padding: 10
           }}
         />
-        <TouchableArea onPress={method.openFilePicker} style={{ alignItems: 'center', marginTop: 10, width: '100%', borderRadius: 5, borderWidth: 1, borderColor: Colors.grey, overflow: 'hidden', padding: 20 }}>
+        {/* <TouchableArea onPress={method.openFilePicker} style={{ alignItems: 'center', marginTop: 10, width: '100%', borderRadius: 5, borderWidth: 1, borderColor: Colors.grey, overflow: 'hidden', padding: 20 }}>
           {
             avatarSource ?
               <Image source={avatarSource}
@@ -137,7 +139,7 @@ export default function SubmitRateScreen({ }) {
               /> :
               <Icon name="camera" size={40} style={{ color: Colors.grey }} />
           }
-        </TouchableArea>
+        </TouchableArea> */}
 
       </View>
       <TouchableArea onPress={method.submitReview} >

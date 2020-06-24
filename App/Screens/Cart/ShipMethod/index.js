@@ -16,10 +16,12 @@ export default function ShipMethodScreen() {
     {
       'name': 'Giao Hàng Nhanh',
       'id': 1,
+      percent: 0.15
     },
     {
       'name': 'Giao Hàng Tiết Kiệm',
       'id': 2,
+      percent: 0.1
     }
   ]
   const method = route.params?.method ? route.params?.method : {};

@@ -19,7 +19,7 @@ export default function PreviewBill({ carts, goOrder }) {
     let totalCart = 0;
     console.log(carts);
     carts.forEach(cart => {
-      totalCart += cart.product.price * cart.amount
+      totalCart += cart.product.real_price * cart.amount
     });
     setTotal(totalCart)
   }, [carts])

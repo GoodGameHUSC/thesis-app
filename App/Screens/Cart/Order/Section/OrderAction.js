@@ -6,7 +6,7 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Colors from '../../../../Theme/Colors';
 import { getAttr, toLocaleString } from 'App/Utils/_';
-export default function OrderAction({ carts, order }) {
+export default function OrderAction({ carts, order, shipMethod }) {
 
   const [total, setTotal] = useState(0)
   const navigation = useNavigation();
@@ -16,10 +16,10 @@ export default function OrderAction({ carts, order }) {
   useEffect(() => {
     let totalCart = 0;
     carts.forEach(cart => {
-      totalCart += cart.product.price * cart.amount
+      totalCart += shipMethod ? Math.round(cart.product.real_price * cart.amount * (1.1 + shipMethod.percent) / 100) * 100 : cart.product.real_price * cart.amount;
     });
     setTotal(totalCart)
-  }, carts)
+  }, [carts, shipMethod])
   return (<>
     <View style={style.container}>
       <View style={{ overflow: 'hidden', flexDirection: 'row', justifyContent: 'flex-end', width: ScreenWidth, backgroundColor: 'white' }}>

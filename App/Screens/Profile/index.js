@@ -9,6 +9,7 @@ import UploadProduct from './UploadProduct';
 import OrderHistoryScreen from './OrderHistory/index';
 import SubmitRateScreen from './SubmitRate/index';
 import ManageProduct from 'App/Screens/Profile/ManageProduct/index';
+import ShopOrderScreen from 'App/Screens/Profile/ShopOrder/index';
 
 const Stack = createStackNavigator();
 
@@ -30,7 +31,11 @@ export default function ProfileScreen() {
       />
 
       <Stack.Screen name="OrderHistory" component={OrderHistoryScreen}
-        options={HeaderWithoutShadow('Lịch sử đơn hàng')}
+        options={HeaderWithoutShadow('Lịch sử mua hàng')}
+      />
+
+      <Stack.Screen name="ShopOrder" component={ShopOrderScreen}
+        options={HeaderWithoutShadow('Quản lý đơn hàng')}
       />
 
       <Stack.Screen name="UploadProduct" component={UploadProduct}

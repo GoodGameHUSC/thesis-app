@@ -11,13 +11,12 @@ import { callAPI } from 'App/Shared/API';
 import { useSelector } from 'react-redux';
 import Toast from 'App/Screens/Component/UIElement/Toast';
 
-export default function CartElement({ item }) {
+export default function CartElement({ item, loadData }) {
 
   const navigation = useNavigation();
 
   const { product, shop, bill } = item;
 
-  console.log(item.createdAt)
   const openProduct = () => navigation.navigate('ProductDetail', {
     screen: 'Index',
     params: {
@@ -28,7 +27,7 @@ export default function CartElement({ item }) {
 
   return (
     <View style={[style.container, { backgroundColor: Colors.white }]} key={item._id}>
-
+      {/* 
       <View style={[Helpers.flexRow, { borderBottomWidth: 0.5, borderBottomColor: Colors.bg, paddingVertical: 8, paddingHorizontal: 15 }]}>
         <View style={[Helpers.flexRow, { color: Colors.darkGrey }]}>
           {
@@ -45,7 +44,7 @@ export default function CartElement({ item }) {
           }
           <Text style={{ fontSize: 14, color: Colors.magazineBlue, marginLeft: 5, fontWeight: 'bold' }}>{item.shop?.name || 'Được bán bởi Shopping Me'}</Text>
         </View>
-      </View>
+      </View> */}
 
       <View style={[{ flexDirection: 'row', justifyContent: 'flex-start', paddingHorizontal: 15, paddingVertical: 5, borderBottomWidth: 0.5, borderBottomColor: Colors.bg, }]}>
         <View style={{ flex: 1 }}>
@@ -87,12 +86,12 @@ export default function CartElement({ item }) {
         <Text style={{ fontSize: 14, fontWeight: 'bold', color: Colors.redOrange }}>{toLocaleString(bill.total)} VND</Text>
       </View>
 
-      <ItemAction item={item} />
+      <ItemAction item={item} loadData={loadData} />
     </View>
   )
 }
 
-function ItemAction({ item }) {
+function ItemAction({ item, loadData }) {
 
   const user = useSelector(state => state.user.user);
   const navigation = useNavigation()
@@ -107,8 +106,7 @@ function ItemAction({ item }) {
     goRating: () => navigation.navigate('Profile', {
       screen: 'SubmitRate',
       params: {
-        product: item.product,
-        order: item
+        product: item.product
       }
     })
   }
@@ -123,55 +121,57 @@ function ItemAction({ item }) {
         navigate.goChatWithShop(response.data)
       } else Toast.show("Hiện tại không thể liên hệ cửa hàng")
     },
-    received: async () => {
+    paymentReceived: async () => {
       const response = await callAPI('order/change-status', 'post', {
         id: item._id,
-        status: 3
+        status: 1
       })
-      // loadData()
+      loadData()
     },
+    delivering: async () => {
+      const response = await callAPI('order/change-status', 'post', {
+        id: item._id,
+        status: 2
+      })
+      loadData()
+    }
   }
 
-  console.log(item);
   switch (item.status) {
     case 0:
       return (
         <View style={style.actionContainer}>
-          <Text style={{ fontSize: 13, color: Colors.darkGrey }}>Đơn hàng chưa được xác nhận thanh toán</Text>
-          {/* <TouchableArea >
-            <Text style={style.actionBtn}>Thanh Toán</Text>
-          </TouchableArea> */}
+          <Text style={{ fontSize: 13, maxWidth: 100, color: Colors.darkGrey }}>Đơn hàng chưa thanh toán</Text>
+          <TouchableArea onPress={method.paymentReceived}>
+            <Text style={style.actionBtn}>Xác nhận đã thanh toán</Text>
+          </TouchableArea>
         </View>
       )
     case 1:
       return (
         <View style={style.actionContainer}>
-          <Text style={{ fontSize: 13, maxWidth: 100, color: Colors.darkGrey }}>Đơn hàng đang được chuẩn bị</Text>
-          <TouchableArea onPress={method.goChat}>
-            <Text style={style.actionBtn}>Liên Hệ</Text>
+          <Text style={{ fontSize: 13, maxWidth: 100, color: Colors.darkGrey }}>Đơn hàng đang chờ giao</Text>
+          <TouchableArea onPress={method.delivering}>
+            <Text style={style.actionBtn}>Đánh dấu đã giao </Text>
           </TouchableArea>
         </View>
       )
     case 2:
       return (
         <View style={style.actionContainer}>
-          <Text style={{ fontSize: 13, maxWidth: 100, color: Colors.darkGrey }}>Đơn hàng đang giao đến bạn</Text>
-          <TouchableArea onPress={method.received}>
-            <Text style={style.actionBtn}>Xác nhận đã nhận hàng</Text>
+          <Text style={{ fontSize: 13, maxWidth: 100, color: Colors.darkGrey }}>Đơn hàng đang được vận chuyển</Text>
+          <TouchableArea onPress={method.goChat}>
+            <Text style={style.actionBtn}>Liên Hệ</Text>
           </TouchableArea>
         </View>
       )
     case 3:
       return (
         <View style={style.actionContainer}>
-          <Text style={{ fontSize: 13, maxWidth: 200, color: Colors.darkGrey }}>Đơn hàng đã hoàn thành</Text>
-          {
-            !item.rating &&
-            <TouchableArea onPress={navigate.goRating}>
-              <Text style={style.actionBtn}>Đánh Giá</Text>
-            </TouchableArea>
-          }
-
+          <Text style={{ fontSize: 13, maxWidth: 500, color: Colors.darkGrey }}>Đơn hàng đã hoàn thành</Text>
+          <TouchableArea onPress={navigate.goRating}>
+            {/* <Text style={style.actionBtn}>Xem Đánh Giá</Text> */}
+          </TouchableArea>
         </View>
       )
     default: return <View></View>;
@@ -204,11 +204,7 @@ const style = StyleSheet.create({
     color: Colors.darkGrey
   },
 
-  actionContainer: {
-    flexDirection: 'row', justifyContent: 'flex-start',
-    alignItems: 'center',
-    paddingHorizontal: 15, paddingVertical: 10, borderBottomWidth: 0.5, borderBottomColor: Colors.bg, flexDirection: 'row', justifyContent: 'space-between'
-  },
+  actionContainer: { flexDirection: 'row', justifyContent: 'flex-start', paddingHorizontal: 15, paddingVertical: 10, borderBottomWidth: 0.5, borderBottomColor: Colors.bg, flexDirection: 'row', justifyContent: 'space-between' },
   actionBtn: {
     backgroundColor: Colors.redOrange,
     color: Colors.white,

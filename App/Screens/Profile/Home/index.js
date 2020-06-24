@@ -48,6 +48,7 @@ export default class ProfileHomeScreen extends React.Component {
         <Tab.Screen name="Buy" options={{
           tabBarLabel: 'Mua Hàng',
         }} component={OrderMenu} />
+
         <Tab.Screen name="Sell" options={{
           tabBarLabel: 'Bán Hàng',
         }} component={ShopMenu} />

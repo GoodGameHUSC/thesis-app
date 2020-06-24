@@ -17,14 +17,16 @@ import Toast from 'App/Screens/Component/UIElement/Toast';
 
 
 export default function OrderScreen() {
-  const [selectedAddress, setSelectedAddress] = useState(null);
+  const user = useSelector(state => state.user.user);
+  const cart = useSelector(state => state.carts);
+  const carts = Object.values(cart);
+  const navigation = useNavigation();
+
+  const [selectedAddress, setSelectedAddress] = useState(user.address_book.length > 0 ? user.address_book[0] : null);
   const [selectedShipMethod, setSelectedShipMethod] = useState(null);
   const [selectedPayMethod, setSelectedPayMethod] = useState(null);
   const [loading, setLoading] = useState(false);
-  const cart = useSelector(state => state.carts);
-  const user = useSelector(state => state.user.user);
-  const carts = Object.values(cart);
-  const navigation = useNavigation();
+
 
   const navigate = {
     goHome: () => navigation.navigate('Home'),
@@ -176,7 +178,6 @@ export default function OrderScreen() {
                     <IconSimple size={14} name="arrow-right" style={{ color: Colors.darkGrey }} />
                   </TouchableArea>
 
-
                   <View onPress={navigate.goShipMethodChange} style={[styles.sectionContainer, { marginBottom: 0 }]}>
                     <View style={{ flexDirection: 'row', alignItems: 'baseline' }} >
                       <IconMaterialCommunityIcons name="format-list-numbered" size={20} style={styles.sectionIcon} />
@@ -188,13 +189,13 @@ export default function OrderScreen() {
                   </View>
                   <FlatList
                     data={carts}
-                    renderItem={({ item }) => <OrderElement item={item} />}
+                    renderItem={({ item }) => <OrderElement item={item} shipMethod={selectedShipMethod} />}
                     keyExtractor={item => item.product._id}
                     showsHorizontalScrollIndicator={false}
                   />
                   <View style={{ height: 60 }}></View>
                 </ScrollView>
-                <OrderAction carts={carts} order={order} loading={loading} />
+                <OrderAction shipMethod={selectedShipMethod} carts={carts} order={order} loading={loading} />
               </View>
               : <EmptyCart goHome={navigate.goHome} />
           }

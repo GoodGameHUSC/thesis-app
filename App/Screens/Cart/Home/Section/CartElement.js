@@ -81,7 +81,7 @@ export default function CartElement({ item }) {
             </View>
             <View style={[Helpers.flexRow]}>
               <View>
-                <Text style={{ fontSize: 16, color: Colors.redOrange, fontWeight: 'bold' }}>{toLocaleString(product.price)} VND</Text>
+                <Text style={{ fontSize: 16, color: Colors.redOrange, fontWeight: 'bold' }}>{toLocaleString(product.real_price)} VND</Text>
                 <Text style={{ fontSize: 12, color: Colors.grey, flexWrap: 'wrap' }}>Off the TopLiveVideo</Text>
               </View>
               <View style={[Helpers.flexRow,]}>
