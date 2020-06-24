@@ -64,6 +64,7 @@ export default function Login({ route, navigation }) {
       </View>
       <ButtonControl
         onPress={login}
+        // type={"default"}
         title="Đăng Nhập"
       />
     </View>

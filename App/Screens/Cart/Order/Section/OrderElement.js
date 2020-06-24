@@ -61,7 +61,7 @@ export default function OrderElement({ item }) {
               <Text style={{ flex: 1, fontSize: 14, color: Colors.textDark, textTransform: 'uppercase', }}>
                 {product.name}
               </Text>
-              <Text style={{ fontSize: 14, color: Colors.magazineBlue, fontWeight: 'bold' }}>{product.shop || 'Được bán bởi Shopping Me'}</Text>
+              <Text style={{ fontSize: 14, color: Colors.magazineBlue, fontWeight: 'bold' }}>{product.shop?.name || 'Được bán bởi Shopping Me'}</Text>
               <Text style={{ fontSize: 12, color: Colors.grey, flexWrap: 'wrap' }}>Số lượng: {amount}</Text>
               <Text style={{ fontSize: 12, color: Colors.grey, flexWrap: 'wrap' }}>Mẫu mã: Mẫu M, size S</Text>
             </View>

@@ -18,7 +18,7 @@ export default function Delivering() {
 
   const loadData = async () => {
     setLoading(true);
-    const dataFromAPI = await OrderBehavior.loadOrder(1);
+    const dataFromAPI = await OrderBehavior.loadOrder(2);
     setData(dataFromAPI.data);
     setLoading(false);
   }
@@ -31,7 +31,7 @@ export default function Delivering() {
       data?.length > 0 ?
         <FlatList
           data={data}
-          renderItem={({ item }) => <OrderHistoryItem order={item} />}
+          renderItem={({ item }) => <OrderHistoryItem item={item} />}
           keyExtractor={(item) => item._id}
         />
         : <EmptyView />

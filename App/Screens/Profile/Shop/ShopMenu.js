@@ -11,12 +11,18 @@ import IconSimple from 'react-native-vector-icons/SimpleLineIcons';
 import Colors from '../../../Theme/Colors';
 import Helpers from '../../../Theme/Helpers';
 import { HeaderSection, shared_styles } from '../Home/Components/Shared';
+import Navigator from 'App/Shared/Navigator';
 
 
 export default function ShopMenu() {
 
   const navigation = useNavigation();
 
+  const navigate = {
+    gotoProductManage: () => {
+      Navigator.navigateAuth(navigation, 'Profile', { screen: 'ManageProduct' })
+    }
+  }
 
   return (
     <View style={shared_styles.page_container}>
@@ -24,6 +30,7 @@ export default function ShopMenu() {
         <HeaderSection
           leftText={'Sản phẩm bán chạy'}
           rightText={'Xem gian hàng'}
+          rightTextOnPress={navigate.gotoProductManage}
           icon={<MaterialIcons name="whatshot" style={{ fontSize: 24, color: '#E91E63', marginHorizontal: 10 }} />}
         />
         <WishList />

@@ -5,6 +5,7 @@ import { FlatList, StyleSheet, View } from 'react-native';
 import { EmptyView } from '../Components/Shared';
 import LoadingScreen from 'App/Screens/Component/Screen/LoadingScreen';
 import OrderBehavior from 'App/Services/Order';
+import { callAPI } from 'App/Shared/API';
 
 
 export default function Completed() {
@@ -17,7 +18,7 @@ export default function Completed() {
 
   const loadData = async () => {
     setLoading(true);
-    const dataFromAPI = await OrderBehavior.loadOrder(1);
+    const dataFromAPI = await OrderBehavior.loadOrder(3);
     setData(dataFromAPI.data);
     setLoading(false);
   }
@@ -30,7 +31,7 @@ export default function Completed() {
       data?.length > 0 ?
         <FlatList
           data={data}
-          renderItem={({ item }) => <OrderHistoryItem order={item} />}
+          renderItem={({ item }) => <OrderHistoryItem item={item} />}
           keyExtractor={(item) => item._id}
         />
         : <EmptyView />

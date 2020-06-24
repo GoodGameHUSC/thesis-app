@@ -154,7 +154,7 @@ export default function Signup({ route, navigation }) {
       </View>
       <ButtonControl
         onPress={signup}
-        type="active"
+        // type="default" 
         title="Đăng Ký"
       />
     </View>

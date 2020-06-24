@@ -99,7 +99,7 @@ export default function ShopInfo({ product }) {
             <Text style={{ fontSize: 14, color: Colors.redOrange }}> Xem gian hàng <Icon name="arrow-right" /></Text>
           </TouchableOpacity>
         </View>
-      </View >
+      </View>
       : <Text style={{ fontSize: 18, color: Colors.grey }}>Không tìm thấy thông tin cửa hàng</Text>
   )
 }

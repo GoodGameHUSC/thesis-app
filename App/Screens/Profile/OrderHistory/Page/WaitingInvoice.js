@@ -31,7 +31,7 @@ export default function WaitingInvoice() {
       data?.length > 0 ?
         <FlatList
           data={data}
-          renderItem={({ item }) => <OrderHistoryItem order={item} />}
+          renderItem={({ item }) => <OrderHistoryItem item={item} />}
           keyExtractor={(item) => item._id}
         />
         : <EmptyView />

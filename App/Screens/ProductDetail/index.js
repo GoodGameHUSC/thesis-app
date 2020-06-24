@@ -45,7 +45,7 @@ export default function ProductDetailStack() {
 
       <Stack.Screen name="Rating"
         component={RatingScreen}
-        options={NormalHeaderOption("Đánh giá")}
+        options={NormalHeaderOption("Các đánh giá về sản phẩm này")}
       />
 
     </Stack.Navigator>

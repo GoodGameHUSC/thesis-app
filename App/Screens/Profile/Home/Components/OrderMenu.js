@@ -51,9 +51,9 @@ export default function OrderMenu() {
         </View>
       </View>
       <TouchableArea >
-        <View style={[{ padding: 10, justifyContent: 'flex-end', flex: 1, textAlign: 'right', flexDirection: 'row' }]}>
+        {/* <View style={[{ padding: 10, justifyContent: 'flex-end', flex: 1, textAlign: 'right', flexDirection: 'row' }]}>
           <Text style={{ textAlign: 'right', color: Colors.blackLight }}>Đơn hàng gần đây (5)</Text>
-        </View>
+        </View> */}
         {/* <WishList /> */}
       </TouchableArea>
     </View>

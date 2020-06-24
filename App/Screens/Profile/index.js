@@ -7,6 +7,8 @@ import Helpers from 'App/Theme/Helpers';
 import React from 'react';
 import UploadProduct from './UploadProduct';
 import OrderHistoryScreen from './OrderHistory/index';
+import SubmitRateScreen from './SubmitRate/index';
+import ManageProduct from 'App/Screens/Profile/ManageProduct/index';
 
 const Stack = createStackNavigator();
 
@@ -39,10 +41,23 @@ export default function ProfileScreen() {
         options={NormalHeaderOption('Địa chỉ của bạn')}
       />
 
+      <Stack.Screen name="ManageProduct" component={ManageProduct}
+        options={NormalHeaderOption('Quản lý sản phẩm')}
+      />
+
+      <Stack.Screen name="ManageShop" component={AddressSetting}
+        options={NormalHeaderOption('Quản lý cửa hàng')}
+      />
 
       <Stack.Screen name="Setting" component={SettingScreen}
         options={NormalHeaderOption('Cài đặt')}
       />
+
+      <Stack.Screen name="SubmitRate"
+        component={SubmitRateScreen}
+        options={NormalHeaderOption("Đánh giá sản phẩm")}
+      />
+
     </Stack.Navigator>
   )
 }

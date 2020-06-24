@@ -68,7 +68,7 @@ export default function HomeScreen() {
     >
 
       <CarouselBanner />
-      <QuickService />
+      {/* <QuickService /> */}
       <HottestProduct topProducts={topProducts.data} />
       {/* <TopLiveVideo /> */}
       <CategoryList categories={categories} />

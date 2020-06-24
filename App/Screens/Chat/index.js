@@ -42,7 +42,7 @@ export default function ChatScreenStack({ navigation }) {
       />
 
       <Stack.Screen name="HelpDesk" component={BotChatScreen}
-        options={NormalHeaderOption('Conversation')}
+        options={NormalHeaderOption('Hỗ trợ')}
       />
 
       <Stack.Screen name="ChatRoom" component={NormalChatScreens}

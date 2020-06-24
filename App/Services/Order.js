@@ -15,7 +15,7 @@ class OrderBehavior {
 
         return {
           product_id: element.product._id,
-          shop_id: '5ea8f91a632821087002234b',
+          shop_id: element.shop?._id || '5ea8f91a632821087002234b',
           feature: 'Cỡ lớn',
           amount: element.amount,
           notes: "Giao hàng nhẹ tay",
@@ -31,6 +31,7 @@ class OrderBehavior {
         }
       });
 
+      debugger;
       const requestData = {
         address,
         orders,

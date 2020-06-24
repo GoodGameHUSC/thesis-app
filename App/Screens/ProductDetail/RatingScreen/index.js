@@ -9,10 +9,8 @@ import Stars from 'App/Screens/Component/UIElement/Stars';
 
 export default function RatingScreen({ }) {
   const route = useRoute();
-  const { id } = route.params;
   const [listRating, setListRating] = useState([])
   const [loading, setLoading] = useState(false)
-
 
   const fetchRating = useAPICreator('product/view-rating', (response) => {
     setListRating(response.data);

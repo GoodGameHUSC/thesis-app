@@ -12,6 +12,7 @@ export default function ButtonControl({ onPress, title, type, styleBtn, styleTex
     switch (type) {
       case 'active': setTintBg(Colors.active); setText('white'); break;
       case 'transparent': setTintBg('transparent'); setText(Colors.darkGrey); break;
+      case 'default': setTintBg(Colors.bg); setText('black'); break;
       default: setTintBg(Colors.redOrange); setText('white'); break;
     }
   }, [type])

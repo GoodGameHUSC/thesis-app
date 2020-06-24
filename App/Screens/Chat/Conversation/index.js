@@ -5,6 +5,7 @@ import Colors from '../../../Theme/Colors';
 import FastImage from 'react-native-fast-image';
 import { getAttr, toLocaleString } from 'App/Utils/_';
 import { TouchableArea } from 'App/Screens/Component/UIElement';
+import socket from 'App/Shared/WebSocket';
 
 export default class Conversation extends React.Component {
 
@@ -33,11 +34,13 @@ export default class Conversation extends React.Component {
   }
 
   componentDidMount() {
+
+
     this.setState({
       messages: [
         {
           _id: 1,
-          text: 'Hello developer',
+          text: 'Xin chào, tôi có thể giúp gì cho bạn',
           createdAt: new Date(),
           user: {
             _id: 2,
