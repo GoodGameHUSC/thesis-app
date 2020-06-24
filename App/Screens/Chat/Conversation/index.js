@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { GiftedChat } from 'react-native-gifted-chat'
 import { Text, View, Image, FlatList, StyleSheet } from 'react-native'
 import Colors from '../../../Theme/Colors';
@@ -7,76 +7,44 @@ import { getAttr, toLocaleString } from 'App/Utils/_';
 import { TouchableArea } from 'App/Screens/Component/UIElement';
 import socket from 'App/Shared/WebSocket';
 
-export default class Conversation extends React.Component {
+export default function Conversation({ }) {
 
-  constructor(props) {
-    super(props)
-    this.state = {
-      conversation: [
-        {
-          name: "shop1233",
-          _id: 'hausfkjsdl'
-        },
-        {
-          name: "shop1233",
-          _id: 'hausfkqewrjsdl'
-        },
-        {
-          name: "shop1233",
-          _id: 'ha234usfkjsdl'
-        }, {
-          name: "shop1233",
-          _id: 'haqưerusfkjsdl'
-        },
+  const [conversations, setConversations] = useState([
+    {
+      name: "shop1233",
+      _id: 'hausfkjsdl'
+    },
+    {
+      name: "shop1233",
+      _id: 'hausfkqewrjsdl'
+    },
+    {
+      name: "shop1233",
+      _id: 'ha234usfkjsdl'
+    }, {
+      name: "shop1233",
+      _id: 'haqưerusfkjsdl'
+    },
+  ])
 
-      ]
-    }
-  }
-
-  componentDidMount() {
-
-
-    this.setState({
-      messages: [
-        {
-          _id: 1,
-          text: 'Xin chào, tôi có thể giúp gì cho bạn',
-          createdAt: new Date(),
-          user: {
-            _id: 2,
-            name: 'React Native',
-            avatar: 'https://placeimg.com/140/140/any',
-          },
-        },
-      ],
-    })
-  }
-
-  onSend(messages = []) {
-    this.setState(previousState => ({
-      messages: GiftedChat.append(previousState.messages, messages),
-    }))
-  }
-
-  render() {
-    const { conversation } = this.state
-    return (
-      conversation.length == 0 ?
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-          <Image source={require('../../../Assets/Icons/consult.png')} style={{ height: 100, aspectRatio: 1 }} />
-          <Text style={{ color: Colors.grey, marginTop: 10, fontSize: 13 }}>Không có hội thoại nào</Text>
-        </View> :
-        <View style={{ flex: 1 }}>
-          <FlatList
-            data={conversation}
-            renderItem={({ item }) => <ConversationElement item={item} />}
-            keyExtractor={item => item._id}
-            showsHorizontalScrollIndicator={false}
-          />
-        </View>
-    )
-  }
+  return (
+    conversations.length == 0 ?
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Image source={require('../../../Assets/Icons/consult.png')} style={{ height: 100, aspectRatio: 1 }} />
+        <Text style={{ color: Colors.grey, marginTop: 10, fontSize: 13 }}>Không có hội thoại nào</Text>
+      </View> :
+      <View style={{ flex: 1 }}>
+        <FlatList
+          data={conversations}
+          renderItem={({ item }) => <ConversationElement item={item} />}
+          keyExtractor={item => item._id}
+          showsHorizontalScrollIndicator={false}
+        />
+      </View>
+  )
 }
+
+
 
 function ConversationElement({ item }) {
 

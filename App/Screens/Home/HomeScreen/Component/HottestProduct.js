@@ -24,9 +24,9 @@ export default function HottestProduct({ topProducts }) {
     <View style={[Section.container]}>
       <View style={[Section.flexRow]}>
         <Text style={[Section.title]}> Tìm kiếm hàng đầu </Text>
-        <TouchableOpacity>
+        {/* <TouchableOpacity>
           <Text style={[Section.view_more]}> Xem thêm</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
       <View style={{ marginTop: 10 }}>
         <FlatList

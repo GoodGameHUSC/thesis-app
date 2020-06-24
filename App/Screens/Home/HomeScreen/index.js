@@ -9,11 +9,11 @@ import HottestProduct from './Component/HottestProduct';
 import QuickService from './Component/QuickService';
 import TopLiveVideo from './Component/TopLiveVideo';
 
-export default function HomeScreen() {
+export default function HomeScreen({ navigation, route }) {
 
   const [refreshing, setRefreshing] = useState(false);
   const [categories, setCategories] = useState([]);
-  const [products, setProducts] = useState({ data: [], pagination: {}, loading: false });
+  const [products, setProducts] = useState({ data: [], pagination: {}, interested: [], loading: false });
   const [topProducts, setTopProducts] = useState({ data: [], pagination: {}, loading: false });
   const product_field = 'name gallery price rating discount';
 
@@ -24,7 +24,7 @@ export default function HomeScreen() {
   }, 'get', { limit: 6, page: 1, select: 'name gallery' })
 
   const fetchProduct = useAPICreator('product/get', (response) => {
-    setProducts({ data: response.data, pagination: response.pagination, loading: false });
+    setProducts({ data: response.data, pagination: response.pagination, interested: response.interested, loading: false });
   }, 'get', { limit: 20, page: 1, select: product_field })
 
   const fetchMoreProduct = useAPICreator('product/get', (response) => {
@@ -72,7 +72,12 @@ export default function HomeScreen() {
       <HottestProduct topProducts={topProducts.data} />
       {/* <TopLiveVideo /> */}
       <CategoryList categories={categories} />
-      <HomeProducts products={products.data} hasMore={products.pagination.hasNextPage} />
+      <HomeProducts
+        products={products.data}
+        interested={products.interested}
+        hasMore={products.pagination.hasNextPage}
+        navigation={navigation}
+      />
     </ScrollView>
   )
 }

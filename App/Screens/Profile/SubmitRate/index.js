@@ -3,13 +3,14 @@ import { getAttr } from 'App/Utils/_';
 import Stars from 'App/Screens/Component/UIElement/Stars';
 import { ScreenWidth, ScreenHeight } from 'App/Theme/Dimension';
 import React, { useState } from 'react';
-import { Text, TextInput, View, ScrollView } from 'react-native';
+import { Text, TextInput, View, ScrollView, Image } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import Colors from '../../../Theme/Colors';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import TouchableArea from 'App/Screens/Component/UIElement/TouchableArea';
 import Toast from 'App/Screens/Component/UIElement/Toast';
-import { callAPI } from 'App/Shared/API';
+import { postWithFormData } from 'App/Shared/API';
+import ImagePicker from 'react-native-image-picker';
 
 export default function SubmitRateScreen({ }) {
   const route = useRoute();
@@ -17,35 +18,77 @@ export default function SubmitRateScreen({ }) {
   const { product } = route.params;
   const [content, setContent] = useState('Đánh giá của Shop và sản phẩm phản ánh mức độ hài lòng cũng như trải nghiệm của người mua với sản phẩm của bạn. Với những người mua hàng tiềm năng thì đánh giá của Shop và sản phẩm giúp cung cấp những thông tin quan ');
   const [star, setStar] = useState(4)
+  const [avatarSource, setAvatarSource] = useState(null);
+  const [photo, setPhoto] = useState(null);
+
+  const options = {
+    title: 'Chọn ảnh',
+    // customButtons: [{ name: 'fb', title: 'Choose Photo from Facebook' }],
+    storageOptions: {
+      skipBackup: true,
+      path: 'images',
+    },
+  };
+
+
+
   const method = {
     submitReview: () => {
       if (!content) { Toast.show("Vui lòng nhập nội dung đánh giá"); return; }
       if (content.split('').length <= 50 || content.split('').length > 2000) { Toast.show("Nội dung đánh giá nên có độ dài từ 50 đến 2000 ký tự"); return; }
 
-      callAPI('product/create-rating',
-        'post',
-        { "product_id": product._id, content, star }
-      )
+      const data = new FormData();
+      data.append("product_id", product._id)
+      data.append("content", content)
+      data.append("star", star)
+
+      debugger;
+      if (photo)
+        data.append("image", {
+          name: photo.fileName,
+          type: photo.type,
+          uri: Platform.OS === "android" ? photo.uri : photo.uri.replace("file://", "")
+        });
+
+      postWithFormData('product/create-rating', data)
         .then(() => {
           Toast.show("Đánh giá thành công");
           navigation.goBack()
         })
-        .catch(() => {
+        .catch((err) => {
+          console.log(err);
           Toast.show("Đánh giá thất bại, vui lòng thử lại sau")
-          navigation.dispatch(state => {
-            debugger;
-            // Remove the home route from the stack
-            const routes = state.routes.filter(r => r.name !== 'Home');
+          // navigation.dispatch(state => {
+          //   debugger;
+          //   // Remove the home route from the stack
+          //   const routes = state.routes.filter(r => r.name !== 'Home');
 
-            return CommonActions.reset({
-              ...state,
-              routes,
-              index: 0,
-            });
-          });
+          //   return CommonActions.reset({
+          //     ...state,
+          //     routes,
+          //     index: 0,
+          //   });
+          // });
           navigation.goBack()
         })
 
+    },
+    async openFilePicker() {
+      ImagePicker.showImagePicker(options, (response) => {
+        console.log('Response = ', response);
+
+        if (response.didCancel) {
+          console.log('User cancelled image picker');
+        } else if (response.error) {
+          console.log('ImagePicker Error: ', response.error);
+        } else if (response.customButton) {
+          console.log('User tapped custom button: ', response.customButton);
+        } else {
+          const source = { uri: response.uri };
+          setPhoto(response);
+          setAvatarSource(source)
+        }
+      });
     }
   }
 
@@ -86,8 +129,14 @@ export default function SubmitRateScreen({ }) {
             backgroundColor: Colors.bg, width: '100%', marginTop: 40, marginBottom: 10, borderRadius: 5, textAlign: 'center', padding: 10
           }}
         />
-        <TouchableArea style={{ alignItems: 'center', marginTop: 10, width: '100%', borderRadius: 5, borderWidth: 1, borderColor: Colors.grey, overflow: 'hidden', padding: 20 }}>
-          <Icon name="camera" size={40} style={{ color: Colors.grey }} />
+        <TouchableArea onPress={method.openFilePicker} style={{ alignItems: 'center', marginTop: 10, width: '100%', borderRadius: 5, borderWidth: 1, borderColor: Colors.grey, overflow: 'hidden', padding: 20 }}>
+          {
+            avatarSource ?
+              <Image source={avatarSource}
+                style={{ width: 100, height: 200, overflow: 'hidden' }}
+              /> :
+              <Icon name="camera" size={40} style={{ color: Colors.grey }} />
+          }
         </TouchableArea>
 
       </View>

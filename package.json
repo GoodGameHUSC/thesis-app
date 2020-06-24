@@ -47,6 +47,7 @@
     "react-native-safe-area-context": "^0.7.3",
     "react-native-screens": "^2.4.0",
     "react-native-snap-carousel": "^3.9.0",
+    "react-native-star-rating": "^1.1.0",
     "react-native-swipeout": "^2.3.6",
     "react-native-tab-view": "^2.14.0",
     "react-native-ui-lib": "^5.5.4",

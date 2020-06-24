@@ -18,11 +18,12 @@ export default function Header({ }) {
         onPress={() => navigation.goBack()}
         icon_name={'arrow-left'}
       />
-      <View style={{ overflow: 'hidden', flexDirection: 'row' }}>
-        <Text style={{ color: Colors.blackLight, fontSize: 16, textAlign: 'center', width: ScreenWidth - 100 }} numberOfLines={1}>{category.name}</Text>
-        <View style={{ flexDirection: 'row' }}>
+      <View style={{ overflow: 'hidden', flexDirection: 'row', justifyContent: 'flex-start', marginLeft: 20, width: ScreenWidth }}>
+        <Text style={{ color: Colors.blackLight, fontSize: 16, textAlign: 'center', }} numberOfLines={1}>{category.name}</Text>
+        {/* <View style={{ flexDirection: 'row' }}>
+          <Text></Text>
           <Icon name="search" style={style.rightButton} />
-        </View>
+        </View> */}
       </View>
     </View>
   </>

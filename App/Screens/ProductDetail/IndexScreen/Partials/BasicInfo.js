@@ -68,7 +68,7 @@ export default function BasicInfo({ product }) {
         <View>
           <Text style={[style.icon_text, { color: Colors.redOrange, fontSize: 20 }]}>
             {toLocaleString(product.real_price ? product.real_price : product.price)}
-            <Text style={{ fontSize: 14, textDecorationLine: 'underline' }}>đ</Text>
+            <Text style={{ fontSize: 16, textDecorationLine: 'underline' }}>đ</Text>
           </Text>
           {
             product.discount && <Text style={[style.icon_text, { color: Colors.grey, fontSize: 14 }]}>
@@ -78,20 +78,20 @@ export default function BasicInfo({ product }) {
             </Text>
           }
         </View>
-        <View style={{ flexDirection: 'row' }}>
+        {/* <View style={{ flexDirection: 'row' }}>
           {
             helper.checkProductInWishList()
               ? <Icon name="heart" size={20} style={{ color: Colors.grey }} onPress={presenter.removeFromWishList}></Icon>
               : <Icon name="heart" size={20} style={{ color: Colors.grey }} onPress={presenter.addToWishList}></Icon>
           }
-        </View>
+        </View> */}
       </View>
       <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
         <View style={{ width: 105, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
           <Stars numberStar={product.rating} />
-          <Text style={{ color: Colors.blackLight }}>{product.rating}</Text>
+          {/* <Text style={{ color: Colors.blackLight }}>{product.rating}</Text> */}
         </View>
-        <Text style={{ color: Colors.grey }}>0 đã bán</Text>
+        {/* <Text style={{ color: Colors.grey }}>0 đã bán</Text> */}
       </View>
     </View>
 

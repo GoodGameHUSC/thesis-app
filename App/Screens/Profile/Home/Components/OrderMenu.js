@@ -58,16 +58,16 @@ export default function OrderMenu() {
       </TouchableArea>
     </View>
 
-    <View style={[shared_styles.section_container]}>
+    {/* <View style={[shared_styles.section_container]}>
       <HeaderSection
         leftText={'Yêu Thích'}
         rightText={'Xem thêm'}
         icon={<IconCommunity name="tag-heart-outline" style={{ fontSize: 24, color: '#E91E63', marginHorizontal: 10 }} />}
       />
       <WishList />
-    </View>
+    </View> */}
 
-    <View style={[shared_styles.section_container]}>
+    {/* <View style={[shared_styles.section_container]}>
       <HeaderSection
         leftText={'Ví của tôi'}
         rightText={'100 Xu'}
@@ -124,7 +124,7 @@ export default function OrderMenu() {
         </ScrollView>
       </View>
     </View>
-
+ */}
 
   </View>
 

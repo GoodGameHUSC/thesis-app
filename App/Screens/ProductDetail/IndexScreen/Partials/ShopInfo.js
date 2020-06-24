@@ -32,6 +32,14 @@ export default function ShopInfo({ product }) {
       }
     }
     ),
+
+    gotoShopDetail: () => navigation.navigate('Shop', {
+      screen: "Index",
+      params: {
+        shop
+      }
+    }
+    ),
   }
 
   const presenter = {
@@ -45,7 +53,7 @@ export default function ShopInfo({ product }) {
       } else navigate.goToLogin();
     }
   }
-
+  // console.log(shop.brand_image)
   return (
     shop ?
       <View style={{ backgroundColor: 'white', width: '100%', padding: 20, marginTop: 5, paddingBottom: 30 }} >
@@ -75,7 +83,7 @@ export default function ShopInfo({ product }) {
             <Text style={{ fontSize: 12, color: Colors.mathPurple }}>Theo dõi</Text>
           </TouchableOpacity> */}
         </View>
-        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around', marginTop: 20 }}>
+        {/* <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around', marginTop: 20 }}>
           <View style={{ alignItems: 'center', width: 80 }}>
             <Text style={{ fontSize: 18, color: Colors.grey, }}>69%</Text>
             <Text style={{ fontSize: 12, color: Colors.grey, textAlign: 'center' }}>Đánh giá hài lòng</Text>
@@ -91,11 +99,12 @@ export default function ShopInfo({ product }) {
             <Text style={{ fontSize: 12, color: Colors.grey, textAlign: 'center' }}>Phản hồi yêu cầu KH</Text>
           </View>
         </View>
+         */}
         <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around', marginTop: 25 }}>
           <TouchableArea onPress={presenter.chat} style={{ backgroundColor: Colors.mathPurple, paddingHorizontal: 11, paddingVertical: 5, borderRadius: 10 }}>
             <Text style={{ fontSize: 14, color: Colors.white }}>Liên hệ ngay <Icon name="message-circle" /></Text>
           </TouchableArea>
-          <TouchableOpacity style={{ borderColor: Colors.redOrange, borderWidth: 1, paddingHorizontal: 10, paddingVertical: 4, borderRadius: 10 }}>
+          <TouchableOpacity onPress={navigate.gotoShopDetail} style={{ borderColor: Colors.redOrange, borderWidth: 1, paddingHorizontal: 10, paddingVertical: 4, borderRadius: 10 }}>
             <Text style={{ fontSize: 14, color: Colors.redOrange }}> Xem gian hàng <Icon name="arrow-right" /></Text>
           </TouchableOpacity>
         </View>

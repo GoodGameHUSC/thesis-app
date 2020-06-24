@@ -62,7 +62,7 @@ export default function ProductDetailIndex({ route, navigation }) {
             <ProductGallery gallery={product.gallery} />
             <BasicInfo product={product} />
             {/* <ShipMethod product={product} /> */}
-            <Feature product={product} />
+            {/* <Feature product={product} /> */}
             <Rating product={product} />
             {/* <QnA product={product} /> */}
             <ShopInfo product={product} />

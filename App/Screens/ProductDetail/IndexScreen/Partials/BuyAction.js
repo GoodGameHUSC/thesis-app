@@ -8,23 +8,58 @@ import Icon from 'react-native-vector-icons/Feather';
 import Colors from '../../../../Theme/Colors';
 import store from 'App/Stores/index';
 import { add_product } from 'App/Stores/Cart/index';
+import { callAPI } from 'App/Shared/API';
+import { useSelector } from 'react-redux';
 export default function BuyAction({ product }) {
 
+  const shop = product.shop;
   const navigation = useNavigation();
-  const route = useRoute();
-
+  const user = useSelector(state => state.user.user);
   const goCart = () => {
     const add_cart_action = add_product(product)
     store.dispatch(add_cart_action);
     navigation.navigate('Cart')
   };
-  const goChat = () => navigation.navigate('Chats');
+
+  const navigate = {
+    goChatWithProduct: (conversation) => navigation.navigate('Chats', {
+      screen: 'ChatRoom',
+      params: {
+        conversation,
+        product
+      }
+    }),
+
+    goToLogin: () => navigation.navigate('Auth', {
+      screen: "Index",
+      params: {
+        message: 'Vui lòng đăng nhập để tiếp tục'
+      }
+    }
+    ),
+  }
+
+  const goChat = async () => {
+    if (user) {
+      const response = await callAPI('conversation/get-conversation', 'get', {
+        user_id: user._id,
+        shop_id: shop._id
+      })
+      navigate.goChatWithProduct(response.data)
+    } else navigate.goToLogin();
+  }
+
+  const goOrder = () => {
+    const add_cart_action = add_product(product)
+    store.dispatch(add_cart_action);
+    navigation.navigate('Cart')
+  }
 
   return (<>
     <View style={style.container}>
       <View style={{ overflow: 'hidden', flexDirection: 'row' }}>
-        <TouchableArea style={style.buyButton}>
-          <Text style={{ color: 'white', fontSize: 16, textAlign: 'center' }}> Mua Ngay</Text>
+        <TouchableArea style={style.buyButton} onPress={goOrder}>
+          <Text style={{ color: 'white', fontSize: 16, textAlign: 'center' }}> Xem Giỏ Hàng </Text>
         </TouchableArea>
         <View style={[Helpers.flexRow, { width: ScreenWidth / 2, justifyContent: 'space-around', backgroundColor: Colors.lynxWhite }]}>
           <TouchableArea onPress={goCart} style={[Helpers.flexColumn]}>

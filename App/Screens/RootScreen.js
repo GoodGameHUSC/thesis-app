@@ -13,6 +13,7 @@ import NewFeedsStack from './NewFeeds/index';
 import ProductDetail from './ProductDetail';
 import ProfileScreen from './Profile';
 import SearchScreenStack, { SearchRouteName } from './Search';
+import ShopStack from 'App/Screens/Shop/index';
 
 const Tab = createBottomTabNavigator();
 
@@ -84,6 +85,13 @@ class RootScreen extends Component {
           }} />
 
           <Tab.Screen name={"Category"} component={CategoryStack} options={{
+            tabBarButton: (routeName, onPress) => {
+              return null;
+            },
+            tabBarVisible: false
+          }} />
+
+          <Tab.Screen name={"Shop"} component={ShopStack} options={{
             tabBarButton: (routeName, onPress) => {
               return null;
             },

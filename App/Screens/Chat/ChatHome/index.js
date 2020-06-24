@@ -30,10 +30,10 @@ export default class HomeChatScreen extends React.Component {
         swipeEnabled={false}
       >
         <Tab.Screen name="Buy" options={{
-          tabBarLabel: 'Trò Chuyện',
+          tabBarLabel: 'Mua Hàng',
         }} component={Conversation} />
         <Tab.Screen name="Sell" options={{
-          tabBarLabel: 'Hỗ trợ khách hàng',
+          tabBarLabel: 'Bán Hàng',
         }} component={ChatHelper} />
       </Tab.Navigator>
 

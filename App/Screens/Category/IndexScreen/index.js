@@ -5,7 +5,7 @@ import { RefreshControl, ScrollView, View, Text } from 'react-native';
 import { BarIndicator } from 'react-native-indicators';
 import Colors from '../../../Theme/Colors';
 import CarouselControl from 'App/Screens/Component/UIElement/CarouselControl';
-import ListProduct from 'App/Screens/Component/Product/ListProduct';
+import ListProductOrderAble from 'App/Screens/Component/Product/ListProductOrderAble';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import IconFontAwesome from 'react-native-vector-icons/FontAwesome5';
 const Tab = createMaterialTopTabNavigator();
@@ -56,7 +56,7 @@ export default function CategoryDetail({ route, navigation }) {
       }
       style={{
         backgroundColor: Colors.lynxWhite,
-        paddingTop: 50,
+        paddingTop: 55,
         paddingBottom: 30
       }}
     >
@@ -75,15 +75,14 @@ export default function CategoryDetail({ route, navigation }) {
                 }}> </Text>
               </View>
             </View> */}
-            {/* <View >
-              <View style={{ backgroundColor: 'white', width: '100%', padding: 15, marginTop: 5 }}>
-                <Text style={[style.icon_text], {
-                  overflow: 'hidden', marginBottom: 10, fontSize: 14,
-                  color: Colors.darkGrey
-                }}>Top bán chạy </Text>
-              </View>
-            </View> */}
             <View style={{ backgroundColor: 'white', width: '100%', marginTop: 5 }} >
+              <Text style={[style.icon_text], {
+                overflow: 'hidden', fontSize: 16, marginVertical: 5, marginHorizontal: 20, textAlign: 'center',
+                paddingVertical: 4,
+                color: Colors.darkGrey,
+                borderRadius: 5,
+                backgroundColor: Colors.bg
+              }}> Sản Phẩm  </Text>
               <Tab.Navigator
                 tabBarOptions={{
                   activeTintColor: Colors.darkGrey,
@@ -105,31 +104,43 @@ export default function CategoryDetail({ route, navigation }) {
                 }}
               // tabBar={props => <MyTabBar {...props} />}
               >
-                <Tab.Screen name="Recommendation" options={{
+                {/* <Tab.Screen name="Recommendation" options={{
                   tabBarLabel: 'Gợi ý',
                   activeTintColor: Colors.grey,
                   // tabBarIcon: <IconFontisto name="shopping-store" style={{ fontSize: 12 }} />
                 }} component={() => <ListProduct
                   products={products}
                   hasMore={false}
-                />} />
+                />} /> */}
                 <Tab.Screen name="Hot" options={{
-                  tabBarLabel: 'Bán chạy',
+                  tabBarLabel: 'Ưa thích',
                   activeTintColor: Colors.grey,
                   // tabBarIcon: <IconFontisto name="shopping-store" style={{ fontSize: 12 }} />
-                }} component={() => <ListProduct
+                }} component={() => <ListProductOrderAble
                   products={products}
                   hasMore={false}
+                  orderBy={'rating'}
                 />} />
                 <Tab.Screen name="New" options={{
-                  tabBarLabel: 'Mới nhất',
+                  tabBarLabel: 'Tên A - Z',
                   activeTintColor: Colors.grey,
                   // tabBarIcon: <IconFontAwesome name="robot" style={{ fontSize: 14 }} />
-                }} component={() => <ListProduct
+                }} component={() => <ListProductOrderAble
                   products={products}
                   hasMore={false}
+                  orderBy={'name'}
                 />} />
-                <Tab.Screen name="Popular"
+
+                <Tab.Screen name="Price" options={{
+                  tabBarLabel: 'Giá Cao - Thấp',
+                  activeTintColor: Colors.grey,
+                  // tabBarIcon: <IconFontAwesome name="robot" style={{ fontSize: 14 }} />
+                }} component={() => <ListProductOrderAble
+                  products={products}
+                  hasMore={false}
+                  orderBy={'real_price'}
+                />} />
+                {/* <Tab.Screen name="Popular"
                   options={{
                     tabBarLabel: 'Phổ biến',
                     // tabBarLabel: () => <Text> Phổ biến <IconFontAwesome name="robot" style={{ fontSize: 14 }} /> </Text>,
@@ -138,7 +149,7 @@ export default function CategoryDetail({ route, navigation }) {
                   component={() => <ListProduct
                     products={products}
                     hasMore={false}
-                  />} />
+                  />} /> */}
               </Tab.Navigator>
             </View>
           </>

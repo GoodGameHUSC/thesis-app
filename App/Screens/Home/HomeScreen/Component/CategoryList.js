@@ -29,9 +29,9 @@ function CategoryList({ categories }) {
     >
       <View style={[Section.flexRow]}>
         <Text style={[Section.title]}> Danh mục ngành hàng </Text>
-        <TouchableOpacity>
+        {/* <TouchableOpacity>
           <Text style={[Section.view_more]}> Xem thêm</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
       <ScrollView style={{ marginTop: 10 }}
         horizontal={true}

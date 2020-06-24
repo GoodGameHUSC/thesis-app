@@ -29,9 +29,10 @@ export default function ChatScreenStack({ navigation }) {
             },
             headerTintColor: Colors.seaRock,
             headerTitle: 'Tin Nhắn',
+            headerTitleAlign: 'center',
             headerRight: () => (
               <View style={style.searchContainer} >
-                <Icon name="comment-plus-outline" style={style.searchButton} onPress={() => navigation.navigate('Cart', { screen: 'Order' })} />
+                {/* <Icon name="comment-plus-outline" style={style.searchButton} onPress={() => navigation.navigate('Cart', { screen: 'Order' })} /> */}
               </View>
             ),
           })}

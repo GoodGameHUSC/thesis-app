@@ -11,7 +11,6 @@ export default function RatingScreen({ }) {
   const route = useRoute();
   const [listRating, setListRating] = useState([])
   const [loading, setLoading] = useState(false)
-
   const fetchRating = useAPICreator('product/view-rating', (response) => {
     setListRating(response.data);
     setLoading(false)
@@ -80,7 +79,22 @@ export default function RatingScreen({ }) {
               <Text style={{ color: Colors.darkGrey }}>
                 {item.content}
               </Text>
-
+              {
+                item.image ?
+                  <View>
+                    <Text style={{ color: Colors.grey, marginTop: 10 }}>
+                      Hình ảnh
+                  </Text>
+                    <FastImage
+                      style={{ width: 100, marginTop: 5, aspectRatio: 1, borderRadius: 5 }}
+                      source={{
+                        uri: item.image,
+                        priority: FastImage.priority.high,
+                      }}
+                      resizeMode={FastImage.resizeMode.center}
+                    />
+                  </View> : <View></View>
+              }
             </View>
 
           </View>}

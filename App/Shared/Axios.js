@@ -46,6 +46,17 @@ export const APIRequest = {
     });
   },
 
+  async postFormData(url, params) {
+    return new Promise((res, rej) => {
+      try {
+        let response = Axios.post(url, params, configFormData())
+        return res(response);
+      } catch (error) {
+        rej(error)
+      }
+    });
+  },
+
   /**
    * 
    */
@@ -66,6 +77,17 @@ function config() {
   if (store.getState().user.token)
     return {
       headers: { Authorization: `${store.getState().user.token.access_token}` }
+    };
+  return {};
+}
+
+function configFormData() {
+  if (store.getState().user.token)
+    return {
+      headers: {
+        Authorization: `${store.getState().user.token.access_token}`,
+        'Content-Type': 'multipart/form-data',
+      }
     };
   return {};
 }
