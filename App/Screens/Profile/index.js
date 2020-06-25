@@ -10,6 +10,7 @@ import OrderHistoryScreen from './OrderHistory/index';
 import SubmitRateScreen from './SubmitRate/index';
 import ManageProduct from 'App/Screens/Profile/ManageProduct/index';
 import ShopOrderScreen from 'App/Screens/Profile/ShopOrder/index';
+import CreateShop from 'App/Screens/Profile/CreateShop/index';
 
 const Stack = createStackNavigator();
 
@@ -38,6 +39,9 @@ export default function ProfileScreen() {
         options={HeaderWithoutShadow('Quản lý đơn hàng')}
       />
 
+      <Stack.Screen name="CreateShop" component={CreateShop}
+        options={NormalHeaderOption('Tạo Cửa Hàng Của Bạn')}
+      />
       <Stack.Screen name="UploadProduct" component={UploadProduct}
         options={NormalHeaderOption('Đăng bán sản phẩm')}
       />

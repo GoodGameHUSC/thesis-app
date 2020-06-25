@@ -29,7 +29,7 @@ const userReducer = createReducer(INIT_STATE, {
     const data = action.payload;
     return {
       ...state,
-      user: data.user,
+      user: data,
     }
   },
 })

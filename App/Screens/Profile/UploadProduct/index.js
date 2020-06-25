@@ -1,18 +1,19 @@
+import { AppModal, Figure, TextInputControl } from 'App/Screens/Component/UIElement';
 import TouchableArea from 'App/Screens/Component/UIElement/TouchableArea';
-import React, { useState, useEffect } from 'react';
-import { FlatList, Image, Text, View, ScrollView, StyleSheet } from 'react-native';
+import { callAPI, useAPICreator, postWithFormData } from 'App/Shared/API';
+// import TextInputControl from 'App/Screens/Component/UIElement/TextInput';
+// import AppModal from 'App/Screens/Component/UIElement/Modal';
+import { ScreenHeight, ScreenWidth } from 'App/Theme/Dimension';
+import React, { useEffect, useState } from 'react';
+import { FlatList, Image, ScrollView, StyleSheet, Text, View } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import OcticonsIcon from 'react-native-vector-icons/Octicons';
 import Colors from '../../../Theme/Colors';
 import Helpers from '../../../Theme/Helpers';
 import { HeaderSection, shared_styles } from '../Home/Components/Shared';
-// import TextInputControl from 'App/Screens/Component/UIElement/TextInput';
-// import AppModal from 'App/Screens/Component/UIElement/Modal';
-import { ScreenWidth, ScreenHeight } from 'App/Theme/Dimension';
-import { useAPICreator } from 'App/Shared/API';
-import { Figure, TextInputControl, AppModal } from 'App/Screens/Component/UIElement';
+import Toast from 'App/Screens/Component/UIElement/Toast';
 
 
 
@@ -30,31 +31,75 @@ export default function UploadProduct() {
     return () => { }
   }, [])
 
+  const [loading, setLoading] = useState(false);
+
+  function createShop() {
+    console.log(info)
+    if (!images[1].source || !info.name
+      || !info.brand || !info.description
+      || !info.price_real || !info.discount
+      || !info.amount || !info.net
+      || !category
+    ) {
+      Toast.show("Vui lòng nhập đủ thông tin")
+      return;
+    }
+    if (loading) return;
+
+    debugger;
+    const data = new FormData();
+    data.append("name", info.name)
+    data.append("brand", info.brand)
+    data.append("description", info.description)
+    data.append("price_real", info.price_real)
+    data.append("discount", info.discount)
+    data.append("amount", info.amount)
+    data.append("net", info.net)
+    data.append("category_id", category._id)
+    debugger;
+    if (images)
+      data.append("images",
+        images.slice(1, images.length - 1).map(image => ({
+          name: image.fileName,
+          type: image.type,
+          uri: Platform.OS === "android" ? image.uri : image.uri.replace("file://", "")
+        }))
+      );
+
+    debugger;
+    postWithFormData('shop/create-product', data)
+      .then((data) => {
+        Toast.show("Tạo sản phẩm thành công")
+        navigation.goBack();
+        UserBehavior.refresh();
+      })
+      .catch((err) => {
+        console.log(err.message)
+        Toast.show("Tạo cửa hàng thất bại")
+        Toast.show(err.message)
+      })
+      .finally(() => setLoading(false))
+  }
+
   return (
     <ScrollView style={shared_styles.page_container}>
       <AddPhoto images={images} setImages={setImages} />
       <Information info={info} setInfo={setInfo} />
       <PickCategory categories={categories} setCategory={setCategory} category={category} />
-      <PickShipMethod />
-      <Feature />
-      <Feature />
-      <Feature />
+      <TouchableArea onPress={createShop} style={{ paddingVertical: 30, justifyContent: 'center', flexDirection: 'row' }}>
+        <View>
+          <Text style={{ textAlign: 'center', padding: 10, borderRadius: 20, color: 'white', backgroundColor: Colors.mathPurple, fontWeight: 'bold' }}>
+            {
+              loading ? "Đang tạo..." : "Đăng Bán Sản Phẩm"
+            }
+          </Text>
+        </View>
+      </TouchableArea>
     </ScrollView>
   )
 }
 
 function Information({ info, setInfo }) {
-
-
-  function Input(props) {
-    return (
-      <TextInputControl
-        {...props}
-        style={{ width: '100%', borderBottomWidth: 0, paddingHorizontal: 5, height: 30, fontSize: 14, ...props.style }}
-      // blurOnSubmit={false}
-      />
-    )
-  }
 
   const setValue = (text, key) => {
     setInfo({ ...info, [key]: text })
@@ -101,13 +146,13 @@ function Information({ info, setInfo }) {
           value={info.brand}
         />
 
-        <TextInputControl
+        {/* <TextInputControl
           style={_style.textInput}
           placeholder="Thời gian bảo hành (tháng)"
           miniHint="Thời gian bảo hành (tháng)"
           onChangeText={text => setValue(text, 'quarantine_time')}
           value={info.quarantine_time}
-        />
+        /> */}
 
         <View style={{ flexDirection: 'row' }}>
           <TextInputControl
@@ -122,10 +167,10 @@ function Information({ info, setInfo }) {
           <TextInputControl
             style={[_style.textInput]}
             containerStyle={{ width: '50%' }}
-            placeholder="Giá sale (VND)"
-            miniHint="Giá sale (VND)"
+            placeholder="Mức giảm giá (%)"
+            miniHint="Mức giảm giá (%)"
             keyboardType='numeric'
-            onChangeText={text => setValue(text, 'price_sale')}
+            onChangeText={text => setValue(text, 'discount')}
             value={info.price_sale}
           />
         </View>

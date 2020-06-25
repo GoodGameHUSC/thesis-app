@@ -74,6 +74,7 @@ export default function OrderScreen() {
       setLoading(false);
       navigate.goOrderSuccess();
     } catch (error) {
+      console.log(error);
       setLoading(false);
       Toast.show(error);
     }

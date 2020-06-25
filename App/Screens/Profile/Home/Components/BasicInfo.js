@@ -38,7 +38,7 @@ export default function BasicInfo() {
       <TouchableOpacity
         onPress={() => Navigator.navigateAuth(navigation, 'Profile', { screen: 'Index.Sell' })}
         activeOpacity={0.8} style={{ elevation: 2, backgroundColor: 'white', paddingVertical: 4, paddingHorizontal: 8, borderTopRightRadius: 20, borderBottomRightRadius: 20 }}>
-        <Text style={{ color: Colors.redOrange, fontWeight: 'bold' }}>Bán Hàng <Icon name={'chevron-right'} size={14} /></Text>
+        <Text style={{ color: Colors.redOrange, fontWeight: 'bold' }}>Trang cá nhân <Icon name={'chevron-right'} size={14} /></Text>
       </TouchableOpacity>
       <View style={{ flexDirection: 'row', width: user ? 90 : 50, justifyContent: 'space-between', color: 'white', marginHorizontal: 10 }}>
         <Icon style={{ color: 'white' }} name={'shopping-cart'} size={20} onPress={() => navigation.navigate('Cart')} />

@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux';
 import Colors from '../../../Theme/Colors';
 import BasicInfo from './Partials/BasicInfo';
 import Product from './Partials/Product';
+import Rating from './Partials/Rating';
 const Tab = createMaterialTopTabNavigator();
 
 
@@ -47,6 +48,7 @@ export default function ShopDetail({ route, navigation }) {
     ),
   }
   const fetchDetail = useAPICreator(`shop/view-shop`, (response) => {
+    console.log(response);
     setInfo(response.data.info);
     setProducts(response.data.products);
     console.log(response)
@@ -138,9 +140,9 @@ export default function ShopDetail({ route, navigation }) {
                 }}
                 component={() => <Product products={products} />}
               />
-              <Tab.Screen name="Rating" options={{
+              {/* <Tab.Screen name="Rating" options={{
                 tabBarLabel: 'Đánh giá',
-              }} component={() => <Product products={products} />} />
+              }} component={() => <Rating products={products} />} /> */}
             </Tab.Navigator>
           </View>
       }

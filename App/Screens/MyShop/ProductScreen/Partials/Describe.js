@@ -1,19 +1,20 @@
-import { toLocaleString } from 'App/Utils/_';
 import Colors from 'App/Theme/Colors';
 import { ScreenWidth } from 'App/Theme/Dimension.js';
 import React from 'react';
-import { Text, View } from 'react-native';
-import Icon from 'react-native-vector-icons/Feather';
-import Stars from '../../../Component/UIElement/Stars';
-import TouchableArea from 'App/Screens/Component/UIElement/TouchableArea';
-import ListProductManage from 'App/Screens/Component/Product/ListProductManage';
-export default function Product({ products }) {
+import { Text, View, ScrollView } from 'react-native';
+import IconFile from '../../../Component/UIElement/IconFile';
+export default function Describe({ product }) {
   return (
-    <View style={{ width: '100%', paddingTop: 5, borderTopWidth: 0.5, borderTopColor: Colors.lynxWhite, paddingBottom: 50 }}>
-      <ListProductManage
-        products={products}
-        hasMore={false}
-      />
+    <View style={{ backgroundColor: 'white', width: '100%', padding: 20, marginTop: 5, paddingBottom: 30 }}>
+      <Text style={[style.icon_text], {
+        overflow: 'hidden', marginBottom: 10, fontSize: 16,
+        fontWeight: 'bold', color: Colors.magazineBlue,
+      }}>Thông tin mô tả</Text>
+      <ScrollView>
+        <Text>
+          {product.description}
+        </Text>
+      </ScrollView>
     </View>
   )
 }

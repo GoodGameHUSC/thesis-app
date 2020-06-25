@@ -1,6 +1,7 @@
 import store from '../Stores/index';
-import { login, logout } from '../Stores/User/index';
+import { login, logout, setUser } from '../Stores/User/index';
 import { callAPI } from '../Shared/API';
+import { Toast } from 'App/Screens/Component/UIElement';
 class UserBehavior {
 
   static login(login_response = {}) {
@@ -11,17 +12,18 @@ class UserBehavior {
   }
 
   static refresh() {
-    return new Promise((res, rej) => {
-      const { token } = store.getState();
-      if (!token) return;
-      callAPI('auth/me', 'get')
-        .then((response) => {
-          debugger
-        })
-        .catch((err) => {
-          debugger
-        })
-    });
+    const { token } = store.getState().user;
+    console.log(token)
+    if (!token) return;
+    debugger;
+    callAPI('profile/me', 'get')
+      .then((response) => {
+        const setUserAction = setUser(response.data)
+        store.dispatch(setUserAction);
+      })
+      .catch((err) => {
+        Toast.show(err);
+      })
   }
 
   static logout() {

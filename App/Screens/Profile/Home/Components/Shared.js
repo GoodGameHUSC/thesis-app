@@ -15,7 +15,8 @@ export const shared_styles = StyleSheet.create({
     // paddingVertical: 10,
     paddingHorizontal: 10,
     // marginVertical: 5,
-    marginTop: 5
+    marginTop: 5,
+    paddingBottom: 10
   },
   section_header: {
     justifyContent: 'space-between',

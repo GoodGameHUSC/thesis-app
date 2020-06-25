@@ -4,6 +4,8 @@ import React from 'react';
 import Colors from '../../Theme/Colors';
 import Header from './Component/Header';
 import ShopDetail from './IndexScreen';
+import ProductDetailIndex from './ProductScreen';
+import { HeaderWithoutShadow } from 'App/Screens/Component/Header/NormaHeader';
 
 
 const Stack = createStackNavigator();
@@ -27,14 +29,9 @@ export default function MyShopStack() {
           headerLeft: () => <Header />,
           headerRight: null,
         }}
-      // options={{
-      //   // headerTransparent: true,
-      //   titleStyle: {
-      //     // color: 'white'
-      //   },
-      //   headerTintColor: 'white',
-      //   headerTitle: "Something",
-      // }}
+      />
+      <Stack.Screen name="DetailManage" component={ProductDetailIndex}
+        options={HeaderWithoutShadow('Quản lý sản phẩm')}
       />
     </Stack.Navigator>
   )

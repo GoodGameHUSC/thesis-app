@@ -1,5 +1,5 @@
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import UserBehavior from 'App/Services/User';
+import UserBehavior from '../../../Services/User';
 import Colors from 'App/Theme/Colors';
 import React from 'react';
 import { RefreshControl, ScrollView } from 'react-native';
@@ -18,7 +18,7 @@ export default class ProfileHomeScreen extends React.Component {
   }
 
   refresh = () => {
-    UserBehavior.refresh();
+    return UserBehavior.refresh();
   }
 
   render() {
