@@ -13,10 +13,10 @@ export default function ProductGallery({ gallery }) {
   const [index, setIndex] = useState(0)
 
   function zoom() {
-    navigation.navigate("Gallery", {
-      current_index: index,
-      gallery
-    })
+    // navigation.navigate("Gallery", {
+    //   current_index: index,
+    //   gallery
+    // })
   }
 
   function _renderItem({ item, index }) {

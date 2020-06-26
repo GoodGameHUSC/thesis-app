@@ -15,6 +15,7 @@ export default function AddressChangeScreen() {
 
   const address = route.params?.address ? route.params?.address : {};
   const listAddress = useSelector(state => state.user?.user?.address_book);
+  const user = useSelector(state => state.user?.user);
   const selectAddress = (item) => {
     navigation.goBack();
     route.params?.selectAddress(item);
@@ -33,10 +34,10 @@ export default function AddressChangeScreen() {
                     <TouchableArea onPress={() => selectAddress(item)} style={styles.itemContainer} >
                       <View>
                         <Text style={{ color: Colors.textDark, fontSize: 14, color: Colors.darkGrey }}>
-                          Phạm Tấn Hùng
-                      </Text>
+                          {user.username}
+                        </Text>
                         <Text style={{ color: Colors.textDark, fontSize: 14, color: Colors.darkGrey }}>
-                          (+84) {item.phone}
+                          {item.phone}
                         </Text>
                         <Text style={{ color: Colors.textDark, fontSize: 14, color: Colors.darkGrey }}>
                           {item.address}, Việt Nam

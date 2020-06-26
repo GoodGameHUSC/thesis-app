@@ -72,15 +72,15 @@ export default function BasicInfo({ product }) {
             <Text style={{ fontSize: 16, textDecorationLine: 'underline' }}>đ</Text>
           </Text>
           {
-            product.discount && <Text style={[style.icon_text, { color: Colors.grey, fontSize: 14 }]}>
+            product.discount ? <Text style={[style.icon_text, { color: Colors.grey, fontSize: 14 }]}>
               Giá gốc : <Text>{toLocaleString(product.price)}</Text>
               <Text style={{ fontSize: 10, textDecorationLine: 'underline' }}>đ</Text>
-            </Text>
+            </Text> : <Text></Text>
           }
           {
-            product.discount && <Text style={[style.icon_text, { color: Colors.grey, fontSize: 14 }]}>
+            product.discount ? <Text style={[style.icon_text, { color: Colors.grey, fontSize: 14 }]}>
               Mức giảm giá: <Text style={{ fontSize: 14, color: Colors.blackLight }}> -{product.discount}% </Text>
-            </Text>
+            </Text> : <Text></Text>
           }
         </View>
         {/* <View style={{ flexDirection: 'row' }}>

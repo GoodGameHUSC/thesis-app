@@ -74,6 +74,7 @@ class Item extends React.Component {
   }
   render() {
     const { item } = this.props;
+    console.log(item)
     return (
       <TouchableOpacity
         style={[style.icon_container, { backgroundColor: Colors.white }]}
@@ -90,9 +91,9 @@ class Item extends React.Component {
               resizeMode={FastImage.resizeMode.cover}
             />
             {
-              item.discount && <View style={{ position: 'absolute', right: 5, top: 5, backgroundColor: Colors.error, padding: 2, paddingHorizontal: 5, borderRadius: 10 }}>
+              item.discount ? <View style={{ position: 'absolute', right: 5, top: 5, backgroundColor: Colors.error, padding: 2, paddingHorizontal: 5, borderRadius: 10 }}>
                 <Text style={{ fontWeight: 'bold', fontSize: 10, color: Colors.white }}>-{item.discount}%</Text>
-              </View>
+              </View> : <Text></Text>
             }
           </View>
           <View style={{ width: '50%' }}>
@@ -106,10 +107,10 @@ class Item extends React.Component {
                   <Text style={{ fontSize: 12, textDecorationLine: 'underline' }}>đ</Text>
                 </Text>
                 {
-                  item.discount && <Text style={[style.icon_text, { color: Colors.grey, fontSize: 12 }]}>
+                  item.discount ? <Text style={[style.icon_text, { color: Colors.grey, fontSize: 12 }]}>
                     <Text style={{ textDecorationLine: 'line-through' }}>{toLocaleString(item.price)}</Text>
                     <Text style={{ fontSize: 8, textDecorationLine: 'underline' }}>đ</Text>
-                  </Text>
+                  </Text> : <Text></Text>
                 }
                 {/* </View> */}
                 {/* <Icon name={"more-horizontal"} size={16} style={[style.icon_text, { fontSize: 16, color: Colors.grey }]} /> */}
@@ -129,6 +130,7 @@ class Item extends React.Component {
               </View>
             </View>
           </View>
+
         </>
       </TouchableOpacity>
     )

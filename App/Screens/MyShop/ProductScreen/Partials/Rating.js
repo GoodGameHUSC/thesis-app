@@ -13,13 +13,17 @@ export default function Rating({ product }) {
 
   const list_rating = product.list_rating;
 
+  console.log(list_rating);
+  const positive_rate = list_rating.length > 0 ? list_rating.filter(rating => rating.sentiment != 'negative') : [];
+  const positive_rate_percent = list_rating.length > 0 ? Math.round((positive_rate.length / list_rating.length) * 100) : 0;
+  const negative_rate_percent = list_rating.length > 0 ? 100 - positive_rate_percent : 0;
   const navigation = useNavigation();
   return (
     <View style={{ backgroundColor: 'white', width: '100%', padding: 15, marginTop: 5 }}>
       <Text style={[style.icon_text], {
         overflow: 'hidden', marginBottom: 10, fontSize: 16,
         fontWeight: 'bold', color: Colors.magazineBlue
-      }}>Đánh giá và nhận xét (4 đánh giá)</Text>
+      }}>Đánh giá và nhận xét ({list_rating.length} đánh giá)</Text>
       <View style={{
         // borderTopWidth: 0.5,
         // borderTopColor: Colors.bg,
@@ -35,19 +39,19 @@ export default function Rating({ product }) {
           <View style={{ alignItems: 'center' }}>
 
             <View style={{ width: '50%', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-              <Text style={{ color: 'black', fontSize: 30 }}>56%{" "}</Text>
-              <Icon name="thumbs-up" size={30}></Icon>
+              <Text style={{ color: 'black', fontSize: 24 }}>{positive_rate_percent}%{" "}</Text>
+              <Icon name="thumbs-up" size={24}></Icon>
             </View>
-            <Text style={{ color: 'black' }}>
+            <Text style={{ color: Colors.grey }}>
               Đánh giá tích cực
             </Text>
           </View>
           <View style={{ alignItems: 'center' }}>
             <View style={{ width: '50%', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-              <Text style={{ color: 'black', fontSize: 30 }}>46%{" "}</Text>
-              <Icon name="thumbs-down" size={30}></Icon>
+              <Text style={{ color: 'black', fontSize: 24 }}>{negative_rate_percent}%{" "}</Text>
+              <Icon name="thumbs-down" size={24}></Icon>
             </View>
-            <Text style={{ color: 'black' }}>
+            <Text style={{ color: Colors.grey }}>
               Đánh giá tiêu cực
             </Text>
           </View>
@@ -58,13 +62,13 @@ export default function Rating({ product }) {
         list_rating.length > 0 ?
           (
             <View>
-              <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' }}>
+              {/* <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center' }}>
                 <Stars numberStar={product.rating} />
                 <Text style={{ color: Colors.darkGrey, fontSize: 15, marginLeft: 10 }}>
                   {product.rating}/5
-                  {/* (192 đánh giá) */}
+                  (192 đánh giá)
                 </Text>
-              </View>
+              </View> */}
 
               <FlatList
                 data={list_rating}

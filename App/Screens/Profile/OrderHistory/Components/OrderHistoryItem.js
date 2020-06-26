@@ -11,13 +11,12 @@ import { callAPI } from 'App/Shared/API';
 import { useSelector } from 'react-redux';
 import Toast from 'App/Screens/Component/UIElement/Toast';
 
-export default function CartElement({ item }) {
+export default function CartElement({ item, loadData }) {
 
   const navigation = useNavigation();
 
   const { product, shop, bill } = item;
 
-  console.log(item.createdAt)
   const openProduct = () => navigation.navigate('ProductDetail', {
     screen: 'Index',
     params: {
@@ -87,12 +86,12 @@ export default function CartElement({ item }) {
         <Text style={{ fontSize: 14, fontWeight: 'bold', color: Colors.redOrange }}>{toLocaleString(bill.total)} VND</Text>
       </View>
 
-      <ItemAction item={item} />
+      <ItemAction loadData={loadData} item={item} />
     </View>
   )
 }
 
-function ItemAction({ item }) {
+function ItemAction({ item, loadData }) {
 
   const user = useSelector(state => state.user.user);
   const navigation = useNavigation()
@@ -103,6 +102,15 @@ function ItemAction({ item }) {
         conversation
       }
     }),
+
+    goProduct: () => navigation.navigate('ProductDetail', {
+      screen: 'Index',
+      params: {
+        id: item.product._id,
+        product: item.product
+      }
+    }),
+
 
     goRating: () => navigation.navigate('Profile', {
       screen: 'SubmitRate',
@@ -128,7 +136,7 @@ function ItemAction({ item }) {
         id: item._id,
         status: 3
       })
-      // loadData()
+      loadData()
     },
   }
 
@@ -166,10 +174,13 @@ function ItemAction({ item }) {
         <View style={style.actionContainer}>
           <Text style={{ fontSize: 13, maxWidth: 200, color: Colors.darkGrey }}>Đơn hàng đã hoàn thành</Text>
           {
-            !item.rating &&
-            <TouchableArea onPress={navigate.goRating}>
-              <Text style={style.actionBtn}>Đánh Giá</Text>
-            </TouchableArea>
+            !item.rating ?
+              <TouchableArea onPress={navigate.goRating}>
+                <Text style={style.actionBtn}>Đánh Giá</Text>
+              </TouchableArea>
+              : <TouchableArea onPress={navigate.goProduct}>
+                <Text style={style.actionBtn}>Mua lại</Text>
+              </TouchableArea>
           }
 
         </View>

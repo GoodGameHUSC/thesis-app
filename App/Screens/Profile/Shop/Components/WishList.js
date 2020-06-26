@@ -13,8 +13,8 @@ export default function WishList({ products }) {
   console.log(products)
   const navigation = useNavigation();
   function openProduct(item) {
-    navigation.navigate('ProductDetail', {
-      screen: 'Index',
+    navigation.navigate('MyShop', {
+      screen: 'DetailManage',
       params: {
         id: item._id,
         product: item

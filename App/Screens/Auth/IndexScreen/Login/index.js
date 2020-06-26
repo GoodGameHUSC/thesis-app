@@ -6,8 +6,10 @@ import { ButtonControl, TextInputControl, Toast } from '../../../Component/UIEle
 import { useDispatch } from 'react-redux'
 
 export default function Login({ route, navigation }) {
-  const [credential, setCredential] = useState('hung@gmail.com');
-  const [password, setPassword] = useState('password');
+  // const [credential, setCredential] = useState('hung@gmail.com');
+  const [credential, setCredential] = useState('');
+  const [password, setPassword] = useState('');
+  // const [password, setPassword] = useState('password');
 
   async function login() {
     if (!credential) { Toast.show("Vui lòng nhập tên đăng nhập/email"); return }

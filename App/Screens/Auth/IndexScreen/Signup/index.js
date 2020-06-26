@@ -10,6 +10,7 @@ export default function Signup({ route, navigation }) {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [address, setAddress] = useState('');
   const [password_confirm, setPasswordConfirm] = useState('');
   const [phone, setPhone] = useState('+84');
   // const [checkTerm, setCheckTerm] = useState('');
@@ -25,7 +26,7 @@ export default function Signup({ route, navigation }) {
     },
   };
   function signup() {
-    validate();
+    if (!validate()) return;
 
     callAPI('auth/signup', 'post', {
       username,
@@ -33,11 +34,12 @@ export default function Signup({ route, navigation }) {
       password,
       password_confirm,
       phone,
+      address,
       avatar: avatarSource
     })
       .then((data) => {
         console.log(data)
-        Toast.show("Sign Success")
+        Toast.show("Tài khoản của bạn đã được tạo thành công, vui lòng đăng nhập")
       })
       .catch((err) => {
         console.log(err.message)
@@ -47,17 +49,18 @@ export default function Signup({ route, navigation }) {
   }
 
   function validate() {
-    if (!username) { Toast.show("Vui lòng nhập tên đăng nhập"); return }
-    if (!email) { Toast.show("Vui lòng nhập email"); return }
-    if (!phone) { Toast.show("Vui lòng nhập số điện thoại"); return }
-    if (!password) { Toast.show("Vui lòng nhập mật khẩu"); return }
-    if (!password_confirm) { Toast.show("Vui lòng xác nhận mật khẩu"); return }
-    if (password != password_confirm) { Toast.show("Vui lòng xác nhận mật khẩu"); return }
+    if (!username) { Toast.show("Vui lòng nhập tên đăng nhập"); return false }
+    if (!email) { Toast.show("Vui lòng nhập email"); return false }
+    if (!phone) { Toast.show("Vui lòng nhập số điện thoại"); return false }
+    if (!password) { Toast.show("Vui lòng nhập mật khẩu"); return false }
+    if (!password_confirm) { Toast.show("Vui lòng xác nhận mật khẩu"); return false }
+    if (password != password_confirm) { Toast.show("Vui lòng xác nhận mật khẩu"); return false }
+    if (!address) { Toast.show("Vui lòng nhập địa chỉ nhận hàng"); return false }
+    return true;
   }
 
   async function openFilePicker() {
     ImagePicker.showImagePicker(options, (response) => {
-      console.log('Response = ', response);
 
       if (response.didCancel) {
         console.log('User cancelled image picker');
@@ -137,6 +140,13 @@ export default function Signup({ route, navigation }) {
           value={password_confirm}
           passwordRules={true}
           secureTextEntry={true}
+        />
+        <TextInputControl
+          placeholder="Địa chỉ nhận hàng"
+          style={styles.text_input}
+          // returnKeyType="next"
+          onChangeText={text => setAddress(text)}
+          value={address}
         />
         <View style={{ marginTop: 30 }}></View>
         <Text style={{ fontSize: 12, color: Colors.darkGrey, textAlign: 'center' }}>

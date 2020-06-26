@@ -108,10 +108,10 @@ export default function OrderScreen() {
                               Địa chỉ nhận hàng
                           </Text>
                             <Text style={{ color: Colors.textDark, fontSize: 14, color: Colors.darkGrey }}>
-                              Phạm Tấn Hùng
-                          </Text>
+                              {user.username}
+                            </Text>
                             <Text style={{ color: Colors.textDark, fontSize: 14, color: Colors.darkGrey }}>
-                              (+84) {selectedAddress.phone}
+                              {selectedAddress.phone}
                             </Text>
                             <Text style={{ color: Colors.textDark, fontSize: 14, color: Colors.darkGrey }}>
                               {selectedAddress.address}

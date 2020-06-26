@@ -26,11 +26,12 @@ export default function CreateShop({ navigation }) {
   const [loading, setLoading] = useState(false);
 
   function createShop() {
-    if (!image || !info.name || !info.slogan || !info.phone_number || !info.address || !info.website_url) {
+    if (!image || !info.name || !info.slogan || !info.phone_number || !info.address) {
       Toast.show("Vui lòng nhập đủ thông tin")
       return;
     }
     if (loading) return;
+    setLoading(true);
     callAPI('shop/create-shop', 'post', {
       name: info.name,
       slogan: info.slogan,
@@ -125,8 +126,8 @@ function Information({ info, setInfo }) {
 
         <TextInputControl
           style={_style.textInput}
-          placeholder="Địa chỉ website"
-          miniHint="Địa chỉ website"
+          placeholder="Địa chỉ website (không bắt buộc)"
+          miniHint="Địa chỉ website (không bắt buộc)"
           onChangeText={text => setValue(text, 'website_url')}
           value={info.quarantine_time}
         />

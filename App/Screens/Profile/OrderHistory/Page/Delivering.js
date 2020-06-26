@@ -31,7 +31,7 @@ export default function Delivering() {
       data?.length > 0 ?
         <FlatList
           data={data}
-          renderItem={({ item }) => <OrderHistoryItem item={item} />}
+          renderItem={({ item }) => <OrderHistoryItem loadData={loadData} item={item} />}
           keyExtractor={(item) => item._id}
         />
         : <EmptyView />

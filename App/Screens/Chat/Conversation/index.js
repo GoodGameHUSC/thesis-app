@@ -7,25 +7,25 @@ import { getAttr, toLocaleString } from 'App/Utils/_';
 import { TouchableArea } from 'App/Screens/Component/UIElement';
 import socket from 'App/Shared/WebSocket';
 
-export default function Conversation({ }) {
+export default function Conversation({ conversations }) {
 
-  const [conversations, setConversations] = useState([
-    {
-      name: "shop1233",
-      _id: 'hausfkjsdl'
-    },
-    {
-      name: "shop1233",
-      _id: 'hausfkqewrjsdl'
-    },
-    {
-      name: "shop1233",
-      _id: 'ha234usfkjsdl'
-    }, {
-      name: "shop1233",
-      _id: 'haqưerusfkjsdl'
-    },
-  ])
+  // const [conversations, setConversations] = useState([
+  //   {
+  //     name: "shop1233",
+  //     _id: 'hausfkjsdl'
+  //   },
+  //   {
+  //     name: "shop1233",
+  //     _id: 'hausfkqewrjsdl'
+  //   },
+  //   {
+  //     name: "shop1233",
+  //     _id: 'ha234usfkjsdl'
+  //   }, {
+  //     name: "shop1233",
+  //     _id: 'haqưerusfkjsdl'
+  //   },
+  // ])
 
   return (
     conversations.length == 0 ?

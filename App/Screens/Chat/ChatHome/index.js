@@ -1,44 +1,63 @@
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import SplashScreen from 'App/Screens/SplashScreen/SplashScreen';
+import { useFocusEffect } from '@react-navigation/native';
 import Colors from 'App/Theme/Colors';
-import React from 'react';
+import React, { useState } from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import Animated from 'react-native-reanimated';
-import IconFontAwesome from 'react-native-vector-icons/FontAwesome5';
-import IconFontisto from 'react-native-vector-icons/Fontisto';
-import BotChatScreen from '../BotChatScreen';
-import Conversation from '../Conversation';
 import ChatHelper from '../ChatHelper';
+import Conversation from '../Conversation';
+import { useAPICreator } from 'App/Shared/API';
 
 const Tab = createMaterialTopTabNavigator();
-export default class HomeChatScreen extends React.Component {
-  render() {
-    return (
-      <Tab.Navigator
-        tabBarOptions={{
-          activeTintColor: Colors.magazineBlue,
-          labelStyle: { fontSize: 14, fontWeight: 'bold' },
-          style: {
-            backgroundColor: 'white',
-            position: 'relative',
-            shadowOpacity: 0,
-            elevation: 0,
-            borderBottomWidth: 0,
-          },
+export default function HomeChatScreen({ route, navigation }) {
 
-        }}
-        swipeEnabled={false}
-      >
-        <Tab.Screen name="Buy" options={{
-          tabBarLabel: 'Mua Hàng',
-        }} component={Conversation} />
-        <Tab.Screen name="Sell" options={{
-          tabBarLabel: 'Bán Hàng',
-        }} component={ChatHelper} />
-      </Tab.Navigator>
+  const [chats, setChats] = useState([]);
+  const [info, setInfo] = useState({});
+  const [loading, setLoading] = useState(true);
 
-    )
-  }
+
+  const fetchData = useAPICreator(`conversation/all-of-customer`, (response) => {
+    console.log(response);
+    setChats(response.data);
+    setLoading(false)
+  }, 'get')
+
+  // useFocusEffect(
+  //   React.useCallback(() => {
+  //     setLoading(true)
+  //     fetchData();
+  //     return () => {
+  //       setChats([]);
+  //       setLoading(true)
+  //     };
+  //   })
+  // );
+
+  return (
+    <Tab.Navigator
+      tabBarOptions={{
+        activeTintColor: Colors.magazineBlue,
+        labelStyle: { fontSize: 14, fontWeight: 'bold' },
+        style: {
+          backgroundColor: 'white',
+          position: 'relative',
+          shadowOpacity: 0,
+          elevation: 0,
+          borderBottomWidth: 0,
+        },
+
+      }}
+      swipeEnabled={false}
+    >
+      <Tab.Screen name="Buy" options={{
+        tabBarLabel: 'Mua Hàng',
+      }} component={() => <Conversation conversations={chats} />} />
+      <Tab.Screen name="Sell" options={{
+        tabBarLabel: 'Bán Hàng',
+      }} component={ChatHelper} />
+    </Tab.Navigator>
+
+  )
 }
 
 

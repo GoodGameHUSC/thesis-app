@@ -1,13 +1,7 @@
 import Colors from 'App/Theme/Colors';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { RefreshControl, ScrollView } from 'react-native';
 import { useAPICreator } from '../../../Shared/API';
-import CarouselBanner from './Component/CarouselBanner';
-import CategoryList from './Component/CategoryList';
-import HomeProducts from './Component/HomeProducts';
-import HottestProduct from './Component/HottestProduct';
-import QuickService from './Component/QuickService';
-import TopLiveVideo from './Component/TopLiveVideo';
 
 export default function IndexScreen() {
 

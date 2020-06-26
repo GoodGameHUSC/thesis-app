@@ -1,11 +1,13 @@
 import { useFocusEffect } from '@react-navigation/native';
 import LoadingScreen from 'App/Screens/Component/Screen/LoadingScreen';
-import { useAPICreator } from 'App/Shared/API';
+import { useAPICreator, callAPI } from 'App/Shared/API';
 import React, { useState } from 'react';
-import { RefreshControl, ScrollView, View } from 'react-native';
+import { RefreshControl, ScrollView, View, Text } from 'react-native';
 import Colors from '../../../Theme/Colors';
 import ProductGallery from '../Component/ProductGallery';
 import { BasicInfo, Describe, Feature, Rating } from './Partials';
+import { TouchableArea } from 'App/Screens/Component/UIElement';
+import { Toast } from 'App/Screens/Component/UIElement';
 
 export default function ProductDetailIndex({ route, navigation }) {
   const [refreshing, setRefreshing] = useState(false);
@@ -33,6 +35,20 @@ export default function ProductDetailIndex({ route, navigation }) {
     }, [route.params.id])
   );
 
+  const deleteProduct = () => {
+    setLoading(true)
+    callAPI('shop/remove-product', 'post', {
+      "shop_id": product?.shop?._id,
+      "product_id": product?._id
+    }, () => {
+      setLoading(false)
+      Toast.show("Xoá sản phẩm thành công")
+      navigation.goBack();
+    }, () => {
+      setLoading(false)
+      Toast.show("Chức năng này hiện không khả dụng")
+    })
+  }
 
   const onRefresh = React.useCallback(() => {
     // setRefreshing(true);
@@ -58,17 +74,17 @@ export default function ProductDetailIndex({ route, navigation }) {
           <View style={{ position: 'relative' }}>
             <ProductGallery gallery={product.gallery} />
             <BasicInfo product={product} />
-            <Feature product={product} />
+            {/* <Feature product={product} /> */}
             <Rating product={product} />
             {/* <QnA product={product} /> */}
             <Describe product={product} />
-            <View>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-around', backgroundColor: Colors.white, padding: 20 }}>
               <TouchableArea>
                 <Text style={[style.icon_text, { color: Colors.primary, fontSize: 14, marginRight: 10, padding: 10 }]}>
                   Cập Nhật
                 </Text>
               </TouchableArea>
-              <TouchableArea>
+              <TouchableArea onPress={deleteProduct}>
                 <Text style={[style.icon_text, { color: Colors.redOrange, fontSize: 14, padding: 10 }]}>
                   Xoá
                 </Text>

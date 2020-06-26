@@ -34,7 +34,7 @@ export default function UploadProduct() {
   const [loading, setLoading] = useState(false);
 
   function createShop() {
-    console.log(info)
+
     if (!images[1].source || !info.name
       || !info.brand || !info.description
       || !info.price_real || !info.discount
@@ -44,10 +44,20 @@ export default function UploadProduct() {
       Toast.show("Vui lòng nhập đủ thông tin")
       return;
     }
-    if (loading) return;
-
-    debugger;
+    // if (loading) return;
     const data = new FormData();
+    if (images)
+      images.slice(1, images.length).forEach(
+        image => {
+          const file = {
+            name: image.source.fileName,
+            type: image.source.type,
+            uri: Platform.OS === "android" ? image.source.uri : image.source.uri.replace("file://", "")
+          }
+          data.append("images", file)
+        }
+      );
+
     data.append("name", info.name)
     data.append("brand", info.brand)
     data.append("description", info.description)
@@ -56,29 +66,21 @@ export default function UploadProduct() {
     data.append("amount", info.amount)
     data.append("net", info.net)
     data.append("category_id", category._id)
-    debugger;
-    if (images)
-      data.append("images",
-        images.slice(1, images.length - 1).map(image => ({
-          name: image.fileName,
-          type: image.type,
-          uri: Platform.OS === "android" ? image.uri : image.uri.replace("file://", "")
-        }))
-      );
 
-    debugger;
-    postWithFormData('shop/create-product', data)
-      .then((data) => {
+    setLoading(true);
+    postWithFormData('shop/create-product', data,
+      (data) => {
+        setLoading(false)
         Toast.show("Tạo sản phẩm thành công")
         navigation.goBack();
         UserBehavior.refresh();
-      })
-      .catch((err) => {
+      }, (err) => {
+        setLoading(false)
         console.log(err.message)
         Toast.show("Tạo cửa hàng thất bại")
         Toast.show(err.message)
       })
-      .finally(() => setLoading(false))
+
   }
 
   return (
@@ -219,7 +221,8 @@ function AddPhoto({ images, setImages }) {
       } else if (response.customButton) {
         console.log('User tapped custom button: ', response.customButton);
       } else {
-        const source = { uri: response.uri };
+        const source = { uri: response.uri, type: response.type, fileName: response.fileName };
+        console.log(source)
         setImages([...images, { source, id: Math.round(Math.random() * 100) }]);
       }
     });
@@ -273,6 +276,9 @@ function PickCategory({ categories, category, setCategory }) {
 
   const [isShowMenu, setIsShowMenu] = useState(false);
 
+  // cl(categories)
+  console.log(categories)
+  console.log(isShowMenu)
   const onPick = (category) => {
     setCategory(category);
     setIsShowMenu(false)
