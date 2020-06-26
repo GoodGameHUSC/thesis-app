@@ -62,11 +62,18 @@ export default function BasicInfo() {
           {user ? user.username : 'Đăng nhập/Đăng kí'}
         </Text>
         {user ?
-          <View>
-            <Text style={{ fontSize: 13, color: Colors.white }}>
-              Khách Hàng Mới
-                  </Text>
-          </View>
+          user.shop ?
+            <View>
+              <Text style={{ fontSize: 13, color: Colors.white }}>
+                Người Bán Hàng
+            </Text>
+            </View>
+            :
+            <View>
+              <Text style={{ fontSize: 13, color: Colors.white }}>
+                Khách Hàng
+            </Text>
+            </View>
           :
           <Text style={{ fontSize: 13, color: Colors.white }}>
             Bắt đầu trải nghiệm ứng dụng

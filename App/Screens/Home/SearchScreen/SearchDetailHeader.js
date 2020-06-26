@@ -34,7 +34,7 @@ export default function SearchDetailHeader({ text, setText, loading, onSubmit })
         />
         <IconFeather name="list"
           style={style.actionButton}
-          onPress={() => set_is_open_recording(!is_open_recording)}
+          onPress={() => { }}
         />
         {/* <IconIonicons name="ios-qr-scanner" style={style.actionButton} /> */}
       </View>

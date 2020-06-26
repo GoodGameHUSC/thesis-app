@@ -2,11 +2,13 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 import { useAPICreator } from 'App/Shared/API';
 import Colors from 'App/Theme/Colors';
 import React, { useState, useEffect } from 'react';
-import { ScrollView, View, Text } from 'react-native';
+import { ScrollView, View, Text, FlatList } from 'react-native';
 import SearchDetailHeader from './SearchDetailHeader';
 import SearchResult from './SearchResult';
 import { BarIndicator } from 'react-native-indicators';
 import { ScreenHeight } from 'App/Theme/Dimension';
+import { useSelector } from 'react-redux';
+import { TouchableArea } from 'App/Screens/Component/UIElement';
 
 export default function SearchScreen() {
   const route = useRoute();
@@ -35,6 +37,12 @@ export default function SearchScreen() {
     }, 'get', { keyword: default_text })
   }
 
+  function onPickRecommendation(text) {
+    setText(text);
+    setLoading(true)
+    getSearchResult(text)();
+  }
+
   return (
     <ScrollView
       // refreshControl={
@@ -53,26 +61,52 @@ export default function SearchScreen() {
         {
           loading
             ? <Loading />
-            : <Content text={text} results={results} />
+            : <Content text={text} onPickRecommendation={onPickRecommendation} results={results} />
         }
       </View>
     </ScrollView>
   )
 }
 
-function Content({ text, results }) {
+function Content({ text, results, onPickRecommendation }) {
   return (
     text && results.data.length > 0
       ? <SearchResult products={results.data} pagination={results.pagination} />
-      : <Recommendation />
+      : <Recommendation onPickRecommendation={onPickRecommendation} />
   )
 }
 
-function Recommendation({ }) {
+function Recommendation({ onPickRecommendation }) {
+  const interested = useSelector(state => state?.user?.user?.interested);
   return (
-    <View style={{ padding: 20 }}>
-      <Text>Top từ khoá được tìm kiếm: áo, quần, giày bitis,..</Text>
-    </View>
+    <>
+      <View style={{ paddingHorizontal: 8, backgroundColor: 'white' }}>
+        <FlatList
+          data={interested}
+          renderItem={({ item }) =>
+            <TouchableArea onPress={() => onPickRecommendation(item.keyword)}>
+              <View style={{
+                backgroundColor: Colors.lynxWhite,
+                padding: 5,
+                overflow: 'hidden',
+                borderRadius: 5,
+                // color: 'black',
+                marginVertical: 3,
+                marginHorizontal: 5,
+                borderBottomWidth: 0,
+
+              }}>
+                <Text style={{ fontSize: 12, fontWeight: 'bold' }}>{item.keyword}</Text>
+              </View>
+            </TouchableArea>
+          }
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
+          keyExtractor={item => item.id}
+        />
+      </View>
+
+    </>
   )
 }
 

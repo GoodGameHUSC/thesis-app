@@ -74,7 +74,6 @@ class Item extends React.Component {
   }
   render() {
     const { item } = this.props;
-    console.log(item)
     return (
       <TouchableOpacity
         style={[style.icon_container, { backgroundColor: Colors.white }]}

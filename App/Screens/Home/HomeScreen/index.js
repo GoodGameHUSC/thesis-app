@@ -8,6 +8,8 @@ import HomeProducts from './Component/HomeProducts';
 import HottestProduct from './Component/HottestProduct';
 import QuickService from './Component/QuickService';
 import TopLiveVideo from './Component/TopLiveVideo';
+import { useFocusEffect } from '@react-navigation/native';
+import { useSelector } from 'react-redux';
 
 export default function HomeScreen({ navigation, route }) {
 
@@ -17,6 +19,7 @@ export default function HomeScreen({ navigation, route }) {
   const [topProducts, setTopProducts] = useState({ data: [], pagination: {}, loading: false });
   const product_field = 'name gallery price rating discount';
 
+  const user = useSelector(state => state.user?.user)
   const fetchCategory = useAPICreator('category/get', (response) => { setCategories(response.data); }, 'get', { limit: 12 })
 
   const fetchTopProduct = useAPICreator('product/top_product', (response) => {
@@ -36,6 +39,17 @@ export default function HomeScreen({ navigation, route }) {
     load()
     return () => { }
   }, [])
+
+
+  useFocusEffect(
+    React.useCallback(() => {
+      load()
+      return () => {
+        setRefreshing(false)
+      };
+    }, [user])
+  );
+
 
   const load = async () => {
     fetchCategory();

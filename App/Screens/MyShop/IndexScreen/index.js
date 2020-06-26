@@ -20,7 +20,6 @@ export default function ShopDetail({ route, navigation }) {
   const [loading, setLoading] = useState(true);
 
   const { shop } = route.params;
-  console.log(shop);
 
   const user = useSelector(state => state.user.user);
   const navigate = {
@@ -48,10 +47,8 @@ export default function ShopDetail({ route, navigation }) {
     ),
   }
   const fetchDetail = useAPICreator(`shop/view-shop`, (response) => {
-    console.log(response);
     setInfo(response.data.info);
     setProducts(response.data.products);
-    console.log(response)
     setLoading(false)
   }, 'get', { id: shop._id })
 
